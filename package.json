@@ -1,0 +1,9 @@
+{
+  "name": "pfk-app",
+  "description": "An app by Patrick Kirts",
+  "version": "0.0.1",
+  "author": "Patrick Kirts",
+  "email": "patkirts@gmail.com",
+  "dependencies": [],
+  "devDependencies": []
+}
