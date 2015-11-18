@@ -1,4 +1,5 @@
-import foo from './foo';
+import foo from './common/foo';
 
-const message = foo();
+const message = foo("blerg");
+
 console.log(message);
