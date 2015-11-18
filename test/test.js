@@ -8,6 +8,6 @@ describe('foo', () => {
 
         expect(foo()).to.equal('bar');
         expect(foo(string)).to.equal(string);
-        expect(foo(bool)).to.throw(Error);
+        expect(() => foo(bool)).to.throw(Error);
     });
 });
