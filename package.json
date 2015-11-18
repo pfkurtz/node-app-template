@@ -4,10 +4,11 @@
   "description": "An app by Patrick Kirts",
   "author": "Patrick Kirts <patkirts@gmail.com>",
   "scripts": {
+    "build-client": "browserify ./client/index.js -t [ babelify --sourceMapRelative . ] --debug --outfile ./public/index.js",
     "clear": "rm -rf node_modules/",
+    "debug": "nodemon --exec babel-node-debug ./main.js",
     "start": "nodemon --exec babel-node ./main.js",
-    "test": "mocha --compilers js:babel-core/register",
-    "debug": "nodemon --exec babel-node-debug ./main.js"
+    "test": "mocha --compilers js:babel-core/register"
   },
   "main": "main.js",
   "repository": {
@@ -25,13 +26,16 @@
   "devDependencies": {
     "babel-core": "6.1.21",
     "babel-preset-es2015": "6.1.18",
+    "babelify": "7.2.0",
     "chai": "3.4.1",
     "mocha": "2.3.4",
     "node-inspector": "0.12.3",
     "nodemon": "1.8.1"
   },
   "babel": {
-      "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   },
   "private": true
 }
