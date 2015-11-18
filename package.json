@@ -4,6 +4,9 @@
   "version": "0.0.1",
   "author": "Patrick Kirts",
   "email": "patkirts@gmail.com",
-  "dependencies": [],
-  "devDependencies": []
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "clear": "rm -rf node_modules/"
+  }
 }
