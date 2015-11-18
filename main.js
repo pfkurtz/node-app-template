@@ -1,1 +1,2 @@
-console.log("running");
+import foo from './common/foo';
+console.log(foo("running hot"));
