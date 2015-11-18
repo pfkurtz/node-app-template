@@ -1,12 +1,26 @@
 {
   "name": "pfk-app",
-  "description": "An app by Patrick Kirts",
   "version": "0.0.1",
-  "author": "Patrick Kirts",
-  "email": "patkirts@gmail.com",
+  "description": "An app by Patrick Kirts",
+  "author": "Patrick Kirts <patkirts@gmail.com>",
+  "scripts": {
+    "clear": "rm -rf node_modules/",
+    "start": "nodemon main.js",
+    "test": "jasmine"
+  },
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/patkirts/app-template"
+  },
+  "bugs": {
+    "url": "https://bitbucket.org/patkirts/app-template/issues"
+  },
+  "keywords": [
+    "arangodb",
+    "socketcluster"
+  ],
   "dependencies": {},
   "devDependencies": {},
-  "scripts": {
-    "clear": "rm -rf node_modules/"
-  }
+  "private": true
 }
