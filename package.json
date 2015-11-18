@@ -6,7 +6,8 @@
   "scripts": {
     "clear": "rm -rf node_modules/",
     "start": "nodemon --exec babel-node ./main.js",
-    "test": "jasmine"
+    "test": "jasmine",
+    "debug": "nodemon --exec babel-node-debug ./main.js"
   },
   "main": "main.js",
   "repository": {
