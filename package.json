@@ -21,6 +21,8 @@
     "socketcluster"
   ],
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-preset-es2015": "6.1.18"
+  },
   "private": true
 }
