@@ -26,6 +26,7 @@
   "devDependencies": {
     "babel-core": "6.1.21",
     "babel-preset-es2015": "6.1.18",
+    "babel-preset-react": "6.1.18",
     "babelify": "7.2.0",
     "chai": "3.4.1",
     "mocha": "2.3.4",
@@ -34,7 +35,8 @@
   },
   "babel": {
     "presets": [
-      "es2015"
+      "es2015",
+      "react"
     ]
   },
   "private": true
