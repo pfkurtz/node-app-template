@@ -5,7 +5,7 @@
   "author": "Patrick Kirts <patkirts@gmail.com>",
   "scripts": {
     "clear": "rm -rf node_modules/",
-    "start": "nodemon main.js",
+    "start": "nodemon --exec babel-node ./main.js",
     "test": "jasmine"
   },
   "main": "main.js",
