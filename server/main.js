@@ -1,1 +1,3 @@
-console.log("\n*** STARING THE APP ***\n");
+import settings from './settings';
+
+console.log("\n*** STARTING ***", settings);
