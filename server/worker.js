@@ -14,7 +14,7 @@ export function run(worker) {
     http.on('request', app);
 
     sc.on('connection', (socket) => {
-        console.log(socket);
+        console.log("got a connection");
     });
 
 }
