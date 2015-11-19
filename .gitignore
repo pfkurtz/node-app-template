@@ -1,2 +1,5 @@
 local/
 node_modules/
+
+# compiled files can be ignored
+public/index.js

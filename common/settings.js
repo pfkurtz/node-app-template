@@ -4,10 +4,13 @@
  * Only called by main.js, which attaches it to `global`.
  */
 
-const CSON = require('cson');
-const path = `${process.cwd()}/local/settings.cson`;
+let settings;
 
-let settings = CSON.load(path);
-if (settings instanceof Error) settings = {};
+try {
+    settings = require(`../local/settings.json`);
+} catch (err) {
+    console.error(err);
+    settings = {};
+}
 
 export default settings;

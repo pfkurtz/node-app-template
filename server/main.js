@@ -1,4 +1,4 @@
-import settings from './settings';
+import settings from '../common/settings';
 global.SETTINGS = settings;
 
 console.log("\n*** STARTING ***");

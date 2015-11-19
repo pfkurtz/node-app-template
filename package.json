@@ -16,7 +16,6 @@
   "main": "server/main.js",
   "dependencies": {
     "connect": "^3.4.0",
-    "cson": "^3.0.2",
     "express": "^4.13.3",
     "serve-static": "^1.10.0",
     "socketcluster": "^2.5.3",
