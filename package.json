@@ -4,33 +4,20 @@
   "description": "An app by Patrick Kirts",
   "author": "Patrick Kirts <patkirts@gmail.com>",
   "scripts": {
-    "clear": "rm -rf node_modules/",
-
-    "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run dev'",
-
-    "dev": "nodemon -q -w common -w server -w main.js -x 'babel-node main.js'",
-    "livereload": "livereload public -p 9091",
-
     "build:client-js-dev": "browserify -t babelify -d client/index.js -o public/index.js",
-
+    "clear": "rm -rf node_modules/",
+    "livereload": "livereload public -p 9091",
+    "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run start:dev'",
+    "start:dev": "nodemon -q -w common -w server -w main.js -x 'babel-node main.js'",
+    "test": "mocha --compilers js:babel-core/register",
     "watch": "npm run watch:client-js-dev",
-    "watch:client-js-dev": "nodemon -q -e js -w common -w client -x 'npm run build:client-js-dev'",
-
-    "test": "mocha --compilers js:babel-core/register"
+    "watch:client-js-dev": "nodemon -q -e js -w common -w client -x 'npm run build:client-js-dev'"
   },
   "main": "main.js",
-  "repository": {
-    "type": "git",
-    "url": "https://bitbucket.org/patkirts/app-template"
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "minimist": "^1.2.0"
   },
-  "bugs": {
-    "url": "https://bitbucket.org/patkirts/app-template/issues"
-  },
-  "keywords": [
-    "arangodb",
-    "socketcluster"
-  ],
-  "dependencies": {},
   "devDependencies": {
     "babel-core": "latest",
     "babel-preset-es2015": "latest",
@@ -49,5 +36,17 @@
       "react"
     ]
   },
-  "private": true
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/patkirts/app-template"
+  },
+  "bugs": {
+    "url": "https://bitbucket.org/patkirts/app-template/issues"
+  },
+  "keywords": [
+    "arangodb",
+    "socketcluster"
+  ],
+  "private": true,
+  "readMeFileName": "README.md"
 }
