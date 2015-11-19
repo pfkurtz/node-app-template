@@ -3,7 +3,7 @@ import {SocketCluster} from 'socketcluster';
 import settings from './settings';
 //global.SETTINGS = settings;
 
-console.log("\n*** STARTING ***", process.env.NODE_EN);
+console.log("\n*** STARTING ***\n");
 //console.dir(global.SETTINGS);
 
 const socketCluster = new SocketCluster({
@@ -25,5 +25,5 @@ if (!settings.production) {
         // amazingly this step allows for a smooth restart
         // hacky, but fine for this purpose
         throw new Error("Error to restart socketcluster.");
-    });    
+    });
 }
