@@ -4,12 +4,19 @@
   "description": "An app by Patrick Kirts",
   "author": "Patrick Kirts <patkirts@gmail.com>",
   "scripts": {
-    "start": "nodemon -x 'babel-node main.js'",
-    "test": "mocha --compilers js:babel-core/register",
-    "livereload": "live-reload --port 9091 ",
     "clear": "rm -rf node_modules/",
-    "build-client-js": "browserify -t babelify -d client/index.js -o public/index.js",
-    "watch-client-js": "nodemon -e js -w common -w client -x 'npm run build-client-js'"
+
+    "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run dev'",
+
+    "dev": "nodemon -q -w common -w server -w main.js -x 'babel-node main.js'",
+    "livereload": "livereload public -p 9091",
+
+    "build:client-js-dev": "browserify -t babelify -d client/index.js -o public/index.js",
+
+    "watch": "npm run watch:client-js-dev",
+    "watch:client-js-dev": "nodemon -q -e js -w common -w client -x 'npm run build:client-js-dev'",
+
+    "test": "mocha --compilers js:babel-core/register"
   },
   "main": "main.js",
   "repository": {
