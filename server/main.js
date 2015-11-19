@@ -3,7 +3,7 @@ import {SocketCluster} from 'socketcluster';
 import settings from './settings';
 //global.SETTINGS = settings;
 
-console.log("\n*** STARTING ***");
+console.log("\n*** STARTING ***", process.env.NODE_EN);
 //console.dir(global.SETTINGS);
 
 const socketCluster = new SocketCluster({
@@ -16,3 +16,14 @@ const socketCluster = new SocketCluster({
     socketChannelLimit: settings.socketChannelLimit || 1000,
     rebootWorkerOnCrash: settings.rebootWorkerOnCrash || true
 });
+
+if (!settings.production) {
+    // This allows socketCluster to restart with nodemon
+    process.on('SIGUSR2', () => {
+        socketCluster.killWorkers();
+        socketCluster.killBrokers();
+        // amazingly this step allows for a smooth restart
+        // hacky, but fine for this purpose
+        throw new Error("Error to restart socketcluster.");
+    });    
+}

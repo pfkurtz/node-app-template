@@ -8,11 +8,12 @@ export function run(worker) {
     const sc = worker.scServer;
     const app = express();
 
-    app.use(serveStatic(`${process.cwd()}/public}`));
+    app.use(serveStatic(`../public/}`));
 
     http.on('request', app);
 
     sc.on('connection', (socket) => {
         console.log(socket);
     });
+
 }
