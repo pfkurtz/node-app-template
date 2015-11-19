@@ -1,2 +1,2 @@
 import foo from '../common/foo';
-console.log(foo("bazzy"));
+console.log(foo("brackishwise i wroghtlich"));

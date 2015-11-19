@@ -6,8 +6,9 @@
   "scripts": {
     "start": "nodemon -x 'babel-node main.js'",
     "test": "mocha --compilers js:babel-core/register",
+    "livereload": "live-reload --port 9091 ",
     "clear": "rm -rf node_modules/",
-    "build-client-js": "browserify -t [babelify] -d client/index.js > public/index.js",
+    "build-client-js": "browserify -t babelify -d client/index.js -o public/index.js",
     "watch-client-js": "nodemon -e js -w common -w client -x 'npm run build-client-js'"
   },
   "main": "main.js",
@@ -28,7 +29,9 @@
     "babel-preset-es2015": "6.1.18",
     "babel-preset-react": "6.1.18",
     "babelify": "7.2.0",
+    "browserify": "12.0.1",
     "chai": "3.4.1",
+    "live-reload": "1.1.0",
     "mocha": "2.3.4",
     "nodemon": "1.8.1"
   },
