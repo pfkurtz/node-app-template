@@ -8,15 +8,19 @@
     "clear": "rm -rf node_modules/",
     "livereload": "livereload public -p 9091",
     "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run start:dev'",
-    "start:dev": "nodemon -q -w common -w server -x 'babel-node server/main.js'",
+    "start:dev": "nodemon -q -e js -w common -w server -x 'babel-node server/main.js'",
     "test": "mocha --compilers js:babel-core/register",
     "watch": "npm run watch:client-js-dev",
     "watch:client-js-dev": "nodemon -q -e js -w common -w client -x 'npm run build:client-js-dev'"
   },
   "main": "server/main.js",
   "dependencies": {
-    "lodash": "^3.10.1",
-    "minimist": "^1.2.0"
+    "connect": "^3.4.0",
+    "express": "^4.13.3",
+    "minimist": "^1.2.0",
+    "serve-static": "^1.10.0",
+    "socketcluster": "^2.5.3",
+    "socketcluster-client": "^2.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.2.0",
@@ -35,6 +39,10 @@
       "react"
     ]
   },
+  "keywords": [
+    "arangodb",
+    "socketcluster"
+  ],
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/patkirts/app-template"
@@ -42,10 +50,6 @@
   "bugs": {
     "url": "https://bitbucket.org/patkirts/app-template/issues"
   },
-  "keywords": [
-    "arangodb",
-    "socketcluster"
-  ],
   "private": true,
   "readMeFileName": "README.md"
 }
