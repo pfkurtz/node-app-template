@@ -1,3 +1,1 @@
-import foo from './common/foo';
-
-console.log(foo("running hot"));
+console.log("\n*** STARING THE APP ***\n");
