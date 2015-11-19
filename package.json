@@ -5,17 +5,12 @@
   "author": "Patrick Kirts <patkirts@gmail.com>",
   "scripts": {
     "clear": "rm -rf node_modules/",
-
     "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run dev'",
-
     "dev": "nodemon -q -w common -w server -w main.js -x 'babel-node main.js'",
     "livereload": "livereload public -p 9091",
-
     "build:client-js-dev": "browserify -t babelify -d client/index.js -o public/index.js",
-
     "watch": "npm run watch:client-js-dev",
     "watch:client-js-dev": "nodemon -q -e js -w common -w client -x 'npm run build:client-js-dev'",
-
     "test": "mocha --compilers js:babel-core/register"
   },
   "main": "main.js",
@@ -30,7 +25,14 @@
     "arangodb",
     "socketcluster"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "connect": "^3.4.0",
+    "express": "^4.13.3",
+    "minimist": "^1.2.0",
+    "serve-static": "^1.10.0",
+    "socketcluster": "^2.5.3",
+    "socketcluster-client": "^2.4.1"
+  },
   "devDependencies": {
     "babel-core": "latest",
     "babel-preset-es2015": "latest",
