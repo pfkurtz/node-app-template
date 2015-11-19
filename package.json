@@ -8,11 +8,12 @@
     "clear": "rm -rf node_modules/",
     "livereload": "livereload public -p 9091",
     "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run start:dev'",
-    "start:dev": "nodemon -q -w common -w server -w main.js -x 'babel-node main.js'",
+    "start:dev": "nodemon -q -w common -w server -x 'babel-node server/main.js'",
     "test": "mocha --compilers js:babel-core/register",
     "watch": "npm run watch:client-js-dev",
     "watch:client-js-dev": "nodemon -q -e js -w common -w client -x 'npm run build:client-js-dev'"
   },
+  "main": "server/main.js",
   "dependencies": {
     "connect": "^3.4.0",
     "express": "^4.13.3",
