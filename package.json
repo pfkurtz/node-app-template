@@ -8,7 +8,7 @@
     "clear": "rm -rf node_modules/",
     "livereload": "livereload public -p 9091",
     "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run start:dev'",
-    "start:dev": "nodemon -q -e js -w common -w server -w local/settings.cson -x 'babel-node server/main.js'",
+    "start:dev": "nodemon -q -e js -w common -w server -x 'babel-node server/main.js'",
     "test": "mocha --recursive --compilers js:babel-core/register",
     "watch": "npm run watch:client-js-dev",
     "watch:client-js-dev": "nodemon -q -e js -w common -w client -x 'npm run build:client-js-dev'"
@@ -23,8 +23,8 @@
   },
   "devDependencies": {
     "babel-core": "^6.2.0",
+    "babel-plugin-globals": "^1.0.1",
     "babel-preset-es2015": "^6.1.18",
-    "babel-preset-react": "^6.1.18",
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
     "chai": "^3.4.1",
@@ -34,8 +34,7 @@
   },
   "babel": {
     "presets": [
-      "es2015",
-      "react"
+      "es2015"
     ]
   },
   "keywords": [

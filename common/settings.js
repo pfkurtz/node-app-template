@@ -1,7 +1,6 @@
 /**
- * Loads, parses, exports local settings.cson file,
+ * Loads local settings.json file,
  * Or a plain object if it doesn't load.
- * Only called by main.js, which attaches it to `global`.
  */
 
 let settings;
