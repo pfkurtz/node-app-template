@@ -1,2 +1,2 @@
-import settings from '../common/settings'
-console.log("settings", settings)
+import settings from '../common/settings';
+console.log("SETTINGS", settings);
