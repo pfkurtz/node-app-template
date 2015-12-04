@@ -5,13 +5,15 @@
   "author": "Patrick Kirts <patkirts@gmail.com>",
   "scripts": {
     "build:client-js-dev": "browserify -t babelify -d client/index.js -o public/index.js",
+    "build:html": "echo 'Rebuilding Client HTML' && vulcanize client/index.html > public/index.html",
     "clear": "rm -rf node_modules/",
     "livereload": "livereload public -p 9091",
     "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run start:dev'",
     "start:dev": "nodemon -q -e js -w common -w server -x 'babel-node server/main.js'",
     "test": "mocha --recursive --compilers js:babel-core/register",
-    "watch": "npm run watch:client-js-dev",
-    "watch:client-js-dev": "nodemon -q -e js -w common -w client -x 'npm run build:client-js-dev'"
+    "watch": "parallelshell 'npm run watch:client-js' 'npm run watch:html'",
+    "watch:client-js": "nodemon -q -e js -w common -w client -x 'npm run build:client-js-dev'",
+    "watch:html": "nodemon -e html -w client -x 'npm run build:html'"
   },
   "main": "server/main.js",
   "dependencies": {
@@ -31,7 +33,8 @@
     "chai": "^3.4.1",
     "mocha": "^2.3.4",
     "nodemon": "^1.8.1",
-    "parallelshell": "^2.0.0"
+    "parallelshell": "^2.0.0",
+    "vulcanize": "^1.14.0"
   },
   "babel": {
     "presets": [
