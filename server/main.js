@@ -8,3 +8,14 @@ function foo(bar: Foo): Foo {
 }
 
 foo(42);
+
+const bar = {
+    number: 42
+};
+
+const baz = {
+    ...bar,
+    number2: 33
+};
+
+console.log(baz);
