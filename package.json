@@ -4,16 +4,19 @@
   "description": "An app by Patrick Kirts",
   "author": "Patrick Kirts <patkirts@gmail.com>",
   "scripts": {
-    "build:client-js-dev": "browserify -t babelify -d client/index.js -o public/index.js",
-    "build:html": "echo 'Rebuilding Client HTML' && vulcanize client/index.html > public/index.html",
+    "build:js-client-dev": "echo 'Building Client Javascript' && browserify -t babelify -d client/index.js -o public/index.js",
+    "build:js-client-prod": "echo 'No production build command yet for client JS'",
+    "build:html-dev": "echo 'Building Client HTML' && vulcanize client/index.html > public/index.html",
     "clear": "rm -rf node_modules/",
     "livereload": "livereload public -p 9091",
+    "node:dev": "echo '*** (RE)STARTING SERVER ***' && babel-node server/main.js",
     "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run start:dev'",
-    "start:dev": "nodemon -q -e js -w common -w server -x 'babel-node server/main.js'",
-    "test": "mocha --recursive --compilers js:babel-core/register",
+    "prestart": "echo '*** STARTING APPLICATION ***\n'",
+    "start:dev": "nodemon -q -e js -w common -w server -x 'npm run node:dev'",
+    "test": "echo 'Running Tests\n' mocha --recursive --compilers js:babel-core/register",
     "watch": "parallelshell 'npm run watch:client-js' 'npm run watch:html'",
-    "watch:client-js": "nodemon -q -e js -w common -w client -x 'npm run build:client-js-dev'",
-    "watch:html": "nodemon -e html -w client -x 'npm run build:html'"
+    "watch:client-js": "nodemon -q -e js -w common -w client -x 'npm run build:js-client-dev'",
+    "watch:html": "nodemon -q -e html -w client -x 'npm run build:html-dev'"
   },
   "main": "server/main.js",
   "dependencies": {
@@ -27,7 +30,11 @@
   "devDependencies": {
     "babel-core": "^6.2.0",
     "babel-plugin-globals": "^1.0.1",
+    "babel-plugin-syntax-flow": "^6.3.13",
+    "babel-plugin-transform-flow-strip-types": "^6.3.13",
+    "babel-plugin-typecheck": "^3.4.4",
     "babel-preset-es2015": "^6.1.18",
+    "babel-preset-stage-0": "^6.3.13",
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
     "chai": "^3.4.1",
@@ -37,8 +44,14 @@
     "vulcanize": "^1.14.0"
   },
   "babel": {
+    "plugins": [
+      "typecheck",
+      "syntax-flow",
+      "transform-flow-strip-types"
+    ],
     "presets": [
-      "es2015"
+      "es2015",
+      "stage-0"
     ]
   },
   "keywords": [
