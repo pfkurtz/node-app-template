@@ -1,3 +1,2 @@
 import settings from '../common/settings';
-
-console.log("\n*** STARTING ***\nsettings:", settings);
+console.log("\n*** Starting Main Node Program ***\nsettings:", settings);
