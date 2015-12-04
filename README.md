@@ -1,5 +1,5 @@
 # This is a template for building apps
 
-For development: `npm install -g babel-cli browserify livereload nodemon`
+For development: `npm run install-globals`.
 
 Run with `npm start`.

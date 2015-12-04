@@ -3,15 +3,13 @@
 <html>
 
     <head lang="en">
+        <title>PFK App Template</title>
         <meta charset="UTF-8">
 
-        <!-- DEV ONLY -->
-        <script>
-            // HOT CODE PUSH with `livereload` package
-            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
-            ':9091/livereload.js?snipver=1"></' + 'script>')
-        </script>
-        <!-- END DEV ONLY -->
+        <!-- @DEV_ONLY -->
+        <!-- @TODO strip @DEV_ONLY in production build process -->
+        <link rel="import" href="dev/livereload.html">
+        <!-- @END_DEV_ONLY -->
 
         <script src="index.js"></script>
     </head>
