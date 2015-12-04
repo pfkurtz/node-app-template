@@ -1,5 +1,5 @@
 import settings from '../common/settings';
-console.log("\n*** Starting Main Node Program ***\nsettings:", settings);
+console.log("\nsettings:", settings);
 
 type Foo = string|number;
 function foo(bar: Foo): Foo {
