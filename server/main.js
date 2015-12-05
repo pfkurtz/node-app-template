@@ -22,3 +22,8 @@ if (!settings.production) {
         throw new Error("Error to restart socketcluster.");
     });
 }
+
+const foo = (bar: string): string => {
+    return bar;
+}
+console.log(foo('bar'));
