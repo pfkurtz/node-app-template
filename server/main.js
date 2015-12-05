@@ -1,21 +1,24 @@
+import {SocketCluster} from 'socketcluster';
 import settings from '../common/settings';
-console.log("\nsettings:", settings);
 
-type Foo = string|number;
-function foo(bar: Foo): Foo {
-    console.log(`foo: ${bar}`);
-    return bar;
+const socketCluster = new SocketCluster({
+    workers: Number(settings.numberWorkers) || 1,
+    brokers: Number(settings.numberBrokers) || 1,
+    port: Number(settings.port) || 3000,
+    appName: settings.name || null,
+    workerController: `${__dirname}/worker.js`,
+    brokerController: `${__dirname}/broker.js`,
+    socketChannelLimit: settings.socketChannelLimit || 1000,
+    rebootWorkerOnCrash: settings.rebootWorkerOnCrash || true
+});
+
+if (!settings.production) {
+    // This allows socketCluster to restart with nodemon
+    process.on('SIGUSR2', () => {
+        socketCluster.killWorkers();
+        socketCluster.killBrokers();
+        // amazingly this step allows for a smooth restart
+        // hacky, but fine for this purpose
+        throw new Error("Error to restart socketcluster.");
+    });
 }
-
-foo(42);
-
-const bar = {
-    number: 42
-};
-
-const baz = {
-    ...bar,
-    number2: 33
-};
-
-console.log(baz);
