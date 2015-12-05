@@ -3,7 +3,7 @@
 import settings from '../common/settings';
 console.log("SETTINGS", settings);
 
-// websockets connection
+// Websockets connection
 
 const socket = socketCluster.connect();
 
@@ -19,21 +19,6 @@ socket.on('connect', () => {
 // State (redux store)
 
 import { createStore } from 'redux';
+import { todosApp } from './components/todos';
 
-function todos (state = []: array, action: Object): array {
-    let newState;
-
-    // return new state (no mutations) using action
-    // or return current state
-
-    switch (action.type) {
-        case 'ADD_TODO':
-            return [...state].push({ text: '' });
-        default:
-            return state;
-    }
-
-
-};
-
-const store = createStore(todos);
+const store = createStore(todosApp);

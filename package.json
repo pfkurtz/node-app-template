@@ -14,7 +14,7 @@
     "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run start:dev'",
     "prestart": "echo '*** STARTING APPLICATION ***\n'",
     "start:dev": "nodemon -q -e js -w common -w server -w package.json -x 'npm run node:dev'",
-    "test": "echo '*** RUNNING TESTS***\n' mocha --recursive --compilers js:babel-core/register",
+    "test": "echo '*** RUNNING TESTS***\n' && mocha --recursive --compilers js:babel-core/register",
     "validate:html-dev": "html-validator --file=public/index.html",
     "validate:html-prod": "echo 'Not yet implemented'",
     "watch": "parallelshell 'npm run watch:client-js' 'npm run watch:html'",

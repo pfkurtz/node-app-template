@@ -1,5 +1,5 @@
-import {expect} from 'chai';
-import settings from '../../server/settings';
+import { expect } from 'chai';
+import settings from '../../common/settings';
 
 describe("Local settings", () => {
     it("should be an object", () => {
