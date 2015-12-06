@@ -8,7 +8,7 @@
     "build:js-client-prod": "echo 'No production build command yet for client JS'",
     "build:html-dev": "echo 'Building Client HTML' && vulcanize --exclude /*.js client/index.html > public/index.html && npm run validate:html-dev",
     "clear": "rm -rf node_modules/",
-    "install-globals": "npm install -g babel-cli browserify html-validator-cli livereload nodemon vulcanize",
+    "install-globals": "npm install -g babel-cli browserify html-validator-cli livereload nodemon parallelshell vulcanize",
     "livereload": "livereload public -p 9091",
     "node:dev": "echo '*** (RE)STARTING SERVER ***' && babel-node server/main.js",
     "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run start:dev'",

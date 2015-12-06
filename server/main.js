@@ -1,4 +1,4 @@
-import {SocketCluster} from 'socketcluster';
+import { SocketCluster } from 'socketcluster';
 import settings from '../common/settings';
 
 const socketCluster = new SocketCluster({
@@ -19,11 +19,6 @@ if (!settings.production) {
         socketCluster.killBrokers();
         // amazingly this step allows for a smooth restart
         // hacky, but fine for this purpose
-        throw new Error("Error to restart socketcluster.");
+        throw new Error("*** RESTARTING SOCKETCLUSTER (not a real Error) ***");
     });
 }
-
-const foo = (bar: string): string => {
-    return bar;
-}
-console.log(foo('bar'));
