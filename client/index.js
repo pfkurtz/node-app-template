@@ -27,6 +27,4 @@ import { todosUI } from './components/todos/todos';
 
 document.addEventListener('DOMContentLoaded', () => {
     todosUI();
-    console.log("todosUI instantiated");
-
 });
