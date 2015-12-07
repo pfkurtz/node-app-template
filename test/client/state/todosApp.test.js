@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { todosApp } from '../../../client/components/todos/todos';
+import { todosApp } from '../../../client/state/todosApp/todosApp';
 
 describe('todosApp', () => {
     it('should return a non-empty array', () => {

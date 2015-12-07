@@ -17,6 +17,16 @@ socket.on('connect', () => {
 // State (redux store)
 
 import { createStore } from 'redux';
-import { todosApp } from './components/todos/todos';
+import { todosApp } from './state/todosApp/todosApp';
 
 const store = createStore(todosApp);
+
+// UI (polymer)
+
+import { todosUI } from './components/todos/todos';
+
+document.addEventListener('DOMContentLoaded', () => {
+    todosUI();
+    console.log("todosUI instantiated");
+
+});

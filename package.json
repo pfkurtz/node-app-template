@@ -6,11 +6,11 @@
   "scripts": {
     "build:js-client-dev": "echo 'Building Client Javascript' && browserify -t [ babelify ] -d client/index.js -o public/index.js",
     "build:js-client-prod": "echo 'No production build command yet for client JS'",
-    "build:html-dev": "echo 'Building Client HTML' && vulcanize --exclude /*.js client/index.html > public/index.html && npm run validate:html-dev",
+    "build:html-dev": "echo 'Building Client HTML' && vulcanize --exclude /*.js client/index.html > public/index.html",
     "clear": "rm -rf node_modules/",
     "init": "./init.sh",
-    "install-globals": "npm install -g babel-cli bower browserify html-validator-cli livereload nodemon parallelshell vulcanize",
-    "livereload": "livereload public -p 9091",
+    "install-globals": "npm install -g babel-cli bower browserify html-validator-cli livereloadx nodemon parallelshell vulcanize",
+    "livereload": "livereloadx public --exclude *.html -s -p 9091",
     "node:dev": "echo '*** (RE)STARTING SERVER ***' && babel-node server/main.js",
     "start": "parallelshell 'npm run watch' 'npm run livereload' 'npm run start:dev'",
     "prestart": "echo '*** STARTING APPLICATION ***\n'",
@@ -24,10 +24,6 @@
   },
   "main": "server/main.js",
   "dependencies": {
-    "babel-core": "^6.3.15",
-    "babel-plugin-transform-flow-strip-types": "^6.3.15",
-    "babel-plugin-typecheck": "^3.4.6",
-    "babel-preset-es2015": "^6.3.13",
     "connect": "^3.4.0",
     "deep-freeze": "0.0.1",
     "express": "^4.13.3",
@@ -39,10 +35,6 @@
   },
   "devDependencies": {
     "babel-core": "^6.2.0",
-    "babel-plugin-globals": "^1.0.1",
-    "babel-plugin-syntax-flow": "^6.3.13",
-    "babel-plugin-transform-flow-strip-types": "^6.3.13",
-    "babel-plugin-typecheck": "^3.4.4",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-stage-0": "^6.3.13",
     "babelify": "^7.2.0",
@@ -54,11 +46,6 @@
     "vulcanize": "^1.14.0"
   },
   "babel": {
-    "plugins": [
-      "typecheck",
-      "syntax-flow",
-      "transform-flow-strip-types"
-    ],
     "presets": [
       "es2015",
       "stage-0"
@@ -66,7 +53,6 @@
   },
   "keywords": [
     "babel",
-    "flowtype",
     "livereload",
     "mocha",
     "polymer",
