@@ -15,7 +15,10 @@ const UPDATE_TODO = 'UPDATE_TODO';
  * @param  {object} [action=addTodoAction] - A todo action, consisting of type {string}, payload {object} and [error] {boolean}.
  * @return {array} List of todos.
  */
-export function todosApp (state = [], action = addTodoAction) {
+export function todosApp (
+    state = []: Array<object>,
+    action = addTodoAction
+): Array<object> {
     // return new state (no mutations) using action
     // or return current state
 
