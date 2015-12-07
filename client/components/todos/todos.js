@@ -1,5 +1,3 @@
 export function todosUI() {
-    return Polymer({
-        is: 'todos-ui'
-    });
+    return console.log('todosUI called');
 }
