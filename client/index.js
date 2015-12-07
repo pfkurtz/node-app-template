@@ -17,6 +17,6 @@ socket.on('connect', () => {
 // State (redux store)
 
 import { createStore } from 'redux';
-import { todosApp } from './components/todos';
+import { todosApp } from './components/todos/todos';
 
 const store = createStore(todosApp);
