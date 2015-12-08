@@ -21,10 +21,15 @@ import { todosApp } from './state/todosApp/todosApp';
 
 const store = createStore(todosApp);
 
-// UI (polymer)
+// UI (react)
 
-import { todosUI } from './components/todos/todos';
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+
+import AddTodo from './components/todos/AddTodo';
 
 document.addEventListener('DOMContentLoaded', () => {
-    todosUI();
+    const main = document.getElementById('main');
+    render(<AddTodo />, main);
 });
