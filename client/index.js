@@ -31,5 +31,7 @@ import AddTodo from './components/todos/AddTodo';
 
 document.addEventListener('DOMContentLoaded', () => {
     const main = document.getElementById('main');
-    render(<AddTodo />, main);
+    render(
+      <AddTodo />
+    );
 });
