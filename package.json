@@ -24,21 +24,17 @@
   },
   "main": "server/main.js",
   "dependencies": {
-    "babel-core": "^6.4.5",
-    "browserify": "^12.0.2",
     "connect": "^3.4.1",
     "deep-freeze": "0.0.1",
     "express": "^4.13.4",
-    "mocha": "^2.4.4",
     "path": "^0.12.7",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.0.6",
     "redux": "^3.0.6",
     "serve-static": "^1.10.2",
-    "socketcluster": "^2.5.3",
-    "socketcluster-client": "^2.4.1",
-    "vulcanize": "^1.14.5"
+    "socketcluster": "^4.3.1",
+    "socketcluster-client": "^4.1.6"
   },
   "devDependencies": {
     "babel-core": "^6.2.0",
@@ -46,9 +42,8 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "babelify": "^7.2.0",
-    "browserify": "^12.0.1",
+    "browserify": "^13.0.0",
     "chai": "^3.4.1",
-    "mocha": "^2.3.4",
     "nodemon": "^1.8.1",
     "parallelshell": "^2.0.0",
     "vulcanize": "^1.14.0"
