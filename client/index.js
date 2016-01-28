@@ -17,9 +17,9 @@ socket.on('connect', () => {
 // State (redux store)
 
 import { createStore } from 'redux';
-import { todosApp } from './state/todosApp/todosApp';
+import app from './reducers';
 
-const store = createStore(todosApp);
+const store = createStore(app);
 
 // UI (react)
 
@@ -27,11 +27,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
-import AddTodo from './components/todos/AddTodo';
+import App from './components';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const main = document.getElementById('main');
-    render(
-      <AddTodo />
-    );
+  const main = document.getElementById('main');
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    main
+  )
 });
