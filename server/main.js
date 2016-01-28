@@ -1,22 +1,21 @@
 import { SocketCluster } from 'socketcluster';
-import settings from '../common/settings';
 
-const socketCluster = new SocketCluster({
-    workers: Number(settings.numberWorkers) || 1,
-    brokers: Number(settings.numberBrokers) || 1,
-    port: Number(settings.port) || 3000,
-    appName: settings.name || null,
+const cluster = new SocketCluster({
+    workers: process.env.NUMBER_WORKERS || 1,
+    brokers: process.env.NUMBER_BROKERS || 1,
+    port: process.env.PORT || 3000,
+    appName: process.env.APP_NAME || null,
     workerController: `${__dirname}/worker.js`,
     brokerController: `${__dirname}/broker.js`,
-    socketChannelLimit: settings.socketChannelLimit || 1000,
-    rebootWorkerOnCrash: settings.rebootWorkerOnCrash || true
+    socketChannelLimit: process.env.SOCKET_CHANNEL_LIMIT || 1000,
+    rebootWorkerOnCrash: true
 });
 
-if (!settings.production) {
-    // This allows socketCluster to restart with nodemon
+if (process.env.NODE_ENV = 'development') {
+    // This allows cluster to restart with nodemon
     process.on('SIGUSR2', () => {
-        socketCluster.killWorkers();
-        socketCluster.killBrokers();
+        cluster.killWorkers();
+        cluster.killBrokers();
         // amazingly this step allows for a smooth restart
         // hacky, but fine for this purpose
         throw new Error("*** RESTARTING SOCKETCLUSTER (not a real Error) ***");

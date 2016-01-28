@@ -2,8 +2,6 @@ import express from 'express';
 import path from 'path';
 import serveStatic from 'serve-static';
 
-console.log("ENV", process.env.NODE_ENV);
-
 export function run(worker) {
     console.log(`   >> SC Worker PID: ${process.pid}`);
 
