@@ -1,11 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import { PROD } from '../../common/constants/env';
 
-class App extends Component {
-    render() {
-        return (
-            <h1>Hello world</h1>
-        );
-    }
+if (process.env.NODE_ENV === PROD) {
+  module.exports = require('./App/App.prod');
+} else {
+  module.exports = require('./App/App.dev');
 }
-
-export default App;

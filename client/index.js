@@ -7,26 +7,19 @@ socket.on('error', (err) => {
 });
 
 socket.on('connect', () => {
-    console.log("CONNECTED", socket);
+    //console.log("CONNECTED", socket);
 });
-
-if (process.env.NODE_ENV === 'development') {
-  console.log("ENV", process.env.NODE_ENV);
-}
 
 // State (redux store)
 
-import { createStore } from 'redux';
-import app from './reducers';
-
-const store = createStore(app);
+import setupStore from './setup/store';
+const store = setupStore();
 
 // UI (react)
 
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-
 import App from './components';
 
 document.addEventListener('DOMContentLoaded', () => {
