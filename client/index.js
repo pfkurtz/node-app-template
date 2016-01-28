@@ -13,6 +13,9 @@ socket.on('connect', () => {
     console.log("CONNECTED", socket);
 });
 
+if (process.env.NODE_ENV === 'development') {
+  console.log("ENV", process.env.NODE_ENV);
+}
 
 // State (redux store)
 
