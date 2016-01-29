@@ -14,6 +14,7 @@ socket.on('connect', () => {
 
 import setupStore from './setup/store';
 const store = setupStore();
+// TODO check `store` is what it should be
 
 // UI (react)
 
