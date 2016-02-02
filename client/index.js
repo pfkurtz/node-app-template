@@ -10,7 +10,7 @@ socket.on('connect', () => {
   console.log("CONNECTED", socket.getAuthToken(), socket.getSignedAuthToken());
 
   const credentials = {
-    username: 'patkirts1',
+    username: 'patkirts',
     password: 'letmein'
   };
 
@@ -37,6 +37,7 @@ socket.on('connect', () => {
 
 import setupStore from './setup/store';
 const store = setupStore();
+console.log("STORE", store);
 // TODO check `store` is what it should be
 
 // UI (react)

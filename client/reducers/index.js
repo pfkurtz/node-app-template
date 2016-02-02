@@ -1,4 +1,7 @@
-export default function app(state = {count:0}, action) {
+export default function app(
+  state = { count: 0 },
+  action = { type: undefined }
+) {
   console.log("app reducer!", state, action);
   if (action.type === 'ADD_COUNT') {
     const count = state.count + 1;
