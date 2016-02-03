@@ -52,8 +52,6 @@
     "nodemon": "^1.8.1",
     "parallelshell": "^2.0.0",
     "react-addons-test-utils": "^0.14.7",
-    "react-shallow-render": "^1.0.1",
-    "react-shallow-renderer": "^1.1.4",
     "react-shallow-testutils": "^0.7.1",
     "react-transform-catch-errors": "^1.0.1",
     "react-transform-hmr": "^1.0.1",
