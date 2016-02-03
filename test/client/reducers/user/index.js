@@ -12,7 +12,7 @@ describe('REDUCER: user', () => {
       username: 'patkirts'
     };
 
-    const reducedUser = user();
+    const reducedUser = user(USER);
 
     expect(reducedUser).to.equal(USER);
   });
