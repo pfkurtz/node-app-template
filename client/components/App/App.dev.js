@@ -3,14 +3,16 @@ import React, { PropTypes } from 'react';
 import Counter from '../Counter';
 import DevTools from './DevTools';
 
-const App = props => (
-  <div>
-    <Counter
-      count={props.count}
-      onClick={action => props.dispatch(action)} />
-    <DevTools />
-  </div>
-);
+const App = props => {
+  return (
+    <div>
+      <Counter
+        count={props.count}
+        onClick={action => props.dispatch(action)} />
+      <DevTools />
+    </div>
+  );
+}
 
 // Most of these will be names of top-level reducers
 App.propTypes = {
