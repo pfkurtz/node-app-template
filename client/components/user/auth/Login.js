@@ -9,3 +9,9 @@ const Login = props => (
     <button type="submit">Login</button>
   </form>
 );
+
+Login.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};
+
+export default Login;
