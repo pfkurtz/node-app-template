@@ -44,14 +44,22 @@ console.log("STORE", store);
 
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import App from './components';
+
+function props(state) {
+  return {
+    count: state.count
+  };
+}
+
+const RootComponent = connect(props)(App);
 
 document.addEventListener('DOMContentLoaded', () => {
   const main = document.getElementById('main');
   render(
     <Provider store={store}>
-      <App />
+      <RootComponent />
     </Provider>,
     main
   )
