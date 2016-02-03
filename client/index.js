@@ -18,18 +18,18 @@ socket.on('connect', () => {
     if (err) throw new Error(err);
 
     setTimeout(() => {
-    console.log("!!!authToken 3 seconds after deauthenticate()", socket.getAuthToken(), socket.getSignedAuthToken());
+      console.log("!!!authToken 3 seconds after deauthenticate()", socket.getAuthToken(), socket.getSignedAuthToken());
 
-    socket.emit('login', credentials, (err) => {
-      if (err) {
-        console.log("ERROR", err);
-      } else {
-        setTimeout(() => {
-        console.log("Successful login:", socket.getAuthToken(),  socket.getSignedAuthToken());
-      },3000);
-      }
-    });
-  }, 2000);
+      socket.emit('login', credentials, (err) => {
+        if (err) {
+          console.log("ERROR", err);
+        } else {
+          setTimeout(() => {
+            console.log("Successful login:", socket.getAuthToken(),  socket.getSignedAuthToken());
+          }, 3000);
+        }
+      });
+    }, 2000);
   });
 });
 
