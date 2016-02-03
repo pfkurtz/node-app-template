@@ -1,3 +1,5 @@
+import { DEV } from '../common/constants/env';
+
 // Websockets connection
 
 const socket = socketCluster.connect();
@@ -37,7 +39,12 @@ socket.on('connect', () => {
 
 import setupStore from './setup/store';
 const store = setupStore();
-console.log("STORE", store);
+
+if (process.env.NODE_ENV === DEV) {
+  window.STORE = store;
+  console.log("STORE", store);
+}
+
 // TODO check `store` is what it should be
 
 // UI (react)

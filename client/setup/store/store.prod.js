@@ -1,10 +1,12 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import app from '../../reducers';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import * as reducers from '../../reducers';
 
 const finalCreateStore = compose(
   //applyMiddleware(...)
 )(createStore);
 
+const reducer = combineReducers(reducers);
+
 export default function setupStore(initialState) {
-  return finalCreateStore(app, initialState);
+  return finalCreateStore(reducer, initialState);
 }

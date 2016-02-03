@@ -1,7 +1,7 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { persistState } from 'redux-devtools';
 
-import app from '../../reducers';
+import * as reducers from '../../reducers';
 import DevTools from '../../components/App/DevTools';
 
 const finalCreateStore = compose(
@@ -16,8 +16,10 @@ function getSessionDebugKey() {
   return (matches && matches.length > 0) ? matches[1] : null;
 }
 
+const reducer = combineReducers(reducers);
+
 export default function setupStore(initialState) {
-  const store = finalCreateStore(app, initialState);
+  const store = finalCreateStore(reducer, initialState);
 
   if (module.hot) {
     module.hot.accept('../../reducers', () =>
