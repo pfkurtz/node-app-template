@@ -14,7 +14,7 @@
     "start": "export NODE_ENV=development; export PORT=3000; parallelshell 'npm run watch' 'npm run start:dev'",
     "prestart": "echo '*** STARTING APPLICATION ***\n'",
     "start:dev": "nodemon -q -e js -w common -w server -w package.json -w public/index.html -x ' npm run node:dev'",
-    "test": "echo '*** RUNNING TESTS***\n'; mocha --recursive --compilers js:babel-core/register",
+    "test": "echo '*** RUNNING TESTS***\n'; NODE_ENV=test mocha --recursive --compilers js:babel-core/register",
     "validate:html-dev": "html-validator --file=public/index.html",
     "validate:html-prod": "echo 'Not yet implemented'",
     "watch": "parallelshell 'npm run watch:client-js' 'npm run watch:html'",
@@ -52,6 +52,9 @@
     "nodemon": "^1.8.1",
     "parallelshell": "^2.0.0",
     "react-addons-test-utils": "^0.14.7",
+    "react-shallow-render": "^1.0.1",
+    "react-shallow-renderer": "^1.1.4",
+    "react-shallow-testutils": "^0.7.1",
     "react-transform-catch-errors": "^1.0.1",
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.2.0",
@@ -62,43 +65,6 @@
     "ud": "^3.0.0",
     "vulcanize": "^1.14.0",
     "watchify": "^3.7.0"
-  },
-  "babel": {
-    "presets": [
-      "es2015",
-      "stage-0",
-      "react"
-    ],
-    "plugins": [
-      "transform-runtime"
-    ],
-    "env": {
-      "development": {
-        "plugins": [
-          "react-transform",
-          {
-            "transforms": [
-              {
-                "transform": "react-transform-hmr",
-                "imports": [
-                  "react"
-                ],
-                "locals": [
-                  "module"
-                ]
-              },
-              {
-                "transform": "react-transform-catch-errors",
-                "imports": [
-                  "react",
-                  "redbox-react"
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    }
   },
   "browserify": {
     "transform": [

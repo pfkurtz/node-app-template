@@ -1,5 +1,5 @@
 import { expect, AssertionError } from 'chai';
-import app, { initialProperties } from '../../../client/reducers';
+import app from '../../../client/reducers';
 
 describe('REDUCER: app', () => {
   const appState = app();

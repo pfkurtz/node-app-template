@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <h1>Hello world</h1>
-    );
-  }
-}
+const Test = props => (
+  <span>{props.foo}</span>
+);
+
+const App = props => (
+  <h1 onClick={props.onClick} foo={props.foo}>Hello <Test foo={props.foo} /></h1>
+);
 
 export default App;
