@@ -1,5 +1,5 @@
 import { expect, AssertionError } from 'chai';
-import expectStateCollection from '../../test-utils/expectStateCollectionCollection.dev';
+import expectStateCollection from '../../test-utils/expectStateCollection.dev';
 
 describe('expectStateCollection', () => {
   it('should return `true` if supplied { ids[], dict{} }', () => {
