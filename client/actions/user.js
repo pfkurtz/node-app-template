@@ -1,8 +1,9 @@
 import { LOGIN, LOGOUT } from '../constants/actions';
 
-export function login() {
+export function login(user) {
   return {
-    type: LOGIN
+    type: LOGIN,
+    payload: user
   };
 }
 

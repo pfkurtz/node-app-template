@@ -1,4 +1,9 @@
-import { DEV } from '../common/constants/env';
+import { expect } from 'chai';
+import EventEmitter from 'eventemitter3';
+window.EE = new EventEmitter()
+
+import { DEV, PROD } from '../common/constants/env';
+import { LOGIN } from './constants/actions';
 
 // Websockets connection
 
@@ -11,28 +16,37 @@ socket.on('error', (err) => {
 socket.on('connect', () => {
   console.log("CONNECTED", socket.getAuthToken(), socket.getSignedAuthToken());
 
-  const credentials = {
-    username: 'patkirts',
-    password: 'letmein'
-  };
+  EE.on(LOGIN, (credentials, cb) => {
+    if (process.env.NODE_ENV !== PROD) {
+      expect(credentials).to.be.an('object');
+      expect(cb).to.be.a('function');
+    }
 
-  socket.deauthenticate((err) => {
-    if (err) throw new Error(err);
+    console.log("EVENT HANDLER", this);
+  }, socket);
 
-    setTimeout(() => {
-      console.log("!!!authToken 3 seconds after deauthenticate()", socket.getAuthToken(), socket.getSignedAuthToken());
-
-      socket.emit('login', credentials, (err) => {
-        if (err) {
-          console.log("ERROR", err);
-        } else {
-          setTimeout(() => {
-            console.log("Successful login:", socket.getAuthToken(),  socket.getSignedAuthToken());
-          }, 3000);
-        }
-      });
-    }, 2000);
-  });
+  // const credentials = {
+  //   username: 'patkirts',
+  //   password: 'letmein'
+  // };
+  //
+  // socket.deauthenticate((err) => {
+  //   if (err) throw new Error(err);
+  //
+  //   setTimeout(() => {
+  //     console.log("!!!authToken 3 seconds after deauthenticate()", socket.getAuthToken(), socket.getSignedAuthToken());
+  //
+  //     socket.emit('login', credentials, (err) => {
+  //       if (err) {
+  //         console.log("ERROR", err);
+  //       } else {
+  //         setTimeout(() => {
+  //           console.log("Successful login:", socket.getAuthToken(),  socket.getSignedAuthToken());
+  //         }, 3000);
+  //       }
+  //     });
+  //   }, 2000);
+  // });
 });
 
 // State (redux store)

@@ -1,8 +1,8 @@
-import { expect } from 'chai';
 import React, { PropTypes } from 'react';
 import getFormData from 'get-form-data';
 
 import { login } from '../../../actions/user';
+import { LOGIN } from '../../../constants/actions';
 import { PROD } from '../../../../common/constants/env';
 
 /**
@@ -12,13 +12,9 @@ import { PROD } from '../../../../common/constants/env';
  *
  * @param  {SyntheticEvent} e - React form event
  * @param  {function} submitCallback - callback taking action object
- * @returns {function} calls callback
+ * @returns {event} LOGIN
  */
 function handleSubmit(e, submitCallback) {
-  if (process.env.NODE_ENV !== PROD) {
-    expect(submitCallback).to.be.a('function');
-  }
-
   e.preventDefault();
 
   const formData = getFormData(e.currentTarget);
@@ -28,7 +24,13 @@ function handleSubmit(e, submitCallback) {
   // just "required" in the HTML right now
 
   // this will dispatch the action
-  return submitCallback(login(formData));
+  // so it really needs to be at the end of the callback
+  // to the socket login event
+  // `submitCallback` get passed as a parameter
+  // but the socket callback decides the action
+  // so how do we call this shit?
+
+  return EE.emit(LOGIN, formData, submitCallback)
 }
 
 const Login = props => (
