@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import getFormData from 'get-form-data';
 
-import { login } from '../../../actions/user';
 import { LOGIN } from '../../../constants/actions';
 import { PROD } from '../../../../common/constants/env';
 
 /**
  * Handles the onSubmit event for the form,
- * validates the form data,
- * and returns the callback with the correct action.
+ * @TODO validates the form data,
+ * and emits the login action
+ * with form data and callback.
  *
  * @param  {SyntheticEvent} e - React form event
  * @param  {function} submitCallback - callback taking action object
@@ -22,7 +22,7 @@ function handleSubmit(e, submitCallback) {
   const formData = getFormData(form, { trim: true });
   console.log("form data", formData);
 
-  // @TODO validation
+  /* @TODO validation */
   // just "required" in the HTML right now
 
   // emit the login action with the form data and callback
