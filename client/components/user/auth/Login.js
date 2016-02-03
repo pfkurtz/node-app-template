@@ -17,20 +17,16 @@ import { PROD } from '../../../../common/constants/env';
 function handleSubmit(e, submitCallback) {
   e.preventDefault();
 
-  const formData = getFormData(e.currentTarget);
+  // Get the data from the form
+  const form = e.currentTarget;
+  const formData = getFormData(form, { trim: true });
   console.log("form data", formData);
 
   // @TODO validation
   // just "required" in the HTML right now
 
-  // this will dispatch the action
-  // so it really needs to be at the end of the callback
-  // to the socket login event
-  // `submitCallback` get passed as a parameter
-  // but the socket callback decides the action
-  // so how do we call this shit?
-
-  return EE.emit(LOGIN, formData, submitCallback)
+  // emit the login action with the form data and callback
+  return EE.emit(LOGIN, formData, submitCallback);
 }
 
 const Login = props => (
