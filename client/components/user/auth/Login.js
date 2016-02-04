@@ -16,6 +16,7 @@ import { PROD } from '../../../../common/constants/env';
  */
 function handleSubmit(e, submitCallback) {
   e.preventDefault();
+  e.stopPropagation();
 
   // Get the data from the form
   const form = e.currentTarget;
@@ -25,12 +26,12 @@ function handleSubmit(e, submitCallback) {
   /* @TODO validation */
   // just "required" in the HTML right now
 
-  // emit the login action with the form data and callback
+  // emit the LOGIN event with the form data and callback
   return EE.emit(LOGIN, formData, submitCallback);
 }
 
 const Login = props => (
-  <form onSubmit={(e) => handleSubmit(e, props.onSubmit)}>
+  <form onSubmit={e => handleSubmit(e, props.onSubmit)}>
     <input type="text" name="username" placeholder="username"
       required />
     <input type="password" name="password" placeholder="pass phrase"

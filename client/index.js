@@ -1,9 +1,10 @@
 import { expect } from 'chai';
 import EventEmitter from 'eventemitter3';
+
 window.EE = new EventEmitter()
 
 import { DEV, PROD } from '../common/constants/env';
-import { LOGIN } from './constants/actions';
+import { LOGIN, LOGOUT } from './constants/actions';
 
 // Websockets connection
 
@@ -14,39 +15,54 @@ socket.on('error', (err) => {
 });
 
 socket.on('connect', () => {
-  console.log("CONNECTED", socket.getAuthToken(), socket.getSignedAuthToken());
+  let authToken = socket.getAuthToken();
+  console.log("CONNECTED", authToken, socket.getSignedAuthToken());
 
-  EE.on(LOGIN, (credentials, cb) => {
-    if (process.env.NODE_ENV !== PROD) {
-      expect(credentials).to.be.an('object');
-      expect(cb).to.be.a('function');
+  // just to help until we get a logout button
+  socket.deauthenticate();
+
+  EE.on(LOGIN, function(credentials, cb) {
+    // ultimately, we don't want to be listening for LOGIN
+    // if the user is already logged in
+    // if we go the EventEmitter route
+    // but we're trying it that way for the moment
+    // probably want a user-logged-in saga, though
+    if (authToken) {
+      throw new Error(
+      `LOGIN triggered but user is already logged in.`);
     }
 
-    console.log("EVENT HANDLER", this);
+    if (process.env.NODE_ENV !== PROD) {
+      expect(credentials).to.be.an('object');
+      /* @TODO username/pw expectations */
+      expect(cb).to.be.a('function');
+      /* @TODO expect this to be a socket */
+    }
+
+    console.log("LOGIN EVENT HANDLER", this);
+
+    this.emit('login', credentials, (err, res) => {
+      if (err) {
+        console.error("LOGIN SOCKET ERROR", err);
+
+        return cb({
+          type: 'LOGIN_FAILURE'
+        });
+
+      } else {
+        console.log(`SUCCESS! ${credentials.username} logged in`);
+
+        return cb({
+          type: 'LOGIN_SUCCESS',
+          payload: {
+            username: credentials.username
+          }
+        });
+      }
+    });
+
   }, socket);
 
-  // const credentials = {
-  //   username: 'patkirts',
-  //   password: 'letmein'
-  // };
-  //
-  // socket.deauthenticate((err) => {
-  //   if (err) throw new Error(err);
-  //
-  //   setTimeout(() => {
-  //     console.log("!!!authToken 3 seconds after deauthenticate()", socket.getAuthToken(), socket.getSignedAuthToken());
-  //
-  //     socket.emit('login', credentials, (err) => {
-  //       if (err) {
-  //         console.log("ERROR", err);
-  //       } else {
-  //         setTimeout(() => {
-  //           console.log("Successful login:", socket.getAuthToken(),  socket.getSignedAuthToken());
-  //         }, 3000);
-  //       }
-  //     });
-  //   }, 2000);
-  // });
 });
 
 // State (redux store)
