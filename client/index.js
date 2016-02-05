@@ -9,6 +9,7 @@ import { LOGIN, LOGOUT } from './constants/actions';
 // Websockets connection
 
 const socket = socketCluster.connect();
+window.SOCKET = socket;
 
 socket.on('error', (err) => {
   throw 'Socket error - !' + err;
@@ -43,10 +44,12 @@ socket.on('connect', () => {
 
     this.emit('login', credentials, (err, res) => {
       if (err) {
-        console.error("LOGIN SOCKET ERROR", err);
+        console.warn("!!! Login failure:", err);
+
+        // @TODO there are 2 cases in here now
 
         return cb({
-          type: 'LOGIN_FAILURE'
+          type: 'LOGIN_FAILURE_CREDENTIALS'
         });
 
       } else {
@@ -86,7 +89,8 @@ import App from './components';
 
 function props(state) {
   return {
-    count: state.count
+    count: state.count,
+    userRecord: state.user
   };
 }
 
@@ -99,5 +103,5 @@ document.addEventListener('DOMContentLoaded', () => {
       <RootComponent />
     </Provider>,
     main
-  )
+  );
 });
