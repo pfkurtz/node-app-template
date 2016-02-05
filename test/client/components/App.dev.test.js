@@ -8,10 +8,15 @@ import App from '../../../client/components/App/App.dev';
 import DevTools from '../../../client/components/App/DevTools';
 
 describe('COMPONENT: App.dev', () => {
+  const renderer = createRenderer();
+
+  /* @TODO really spec this shit out */
   it('woo', () => {
-    const renderer = createRenderer();
-    renderer.render(<App dispatch={() => {}} count={0} />);
+    renderer.render(<App dispatch={() => {}} count={0}
+      userRecord={{ user: {} }} />);
     const app = renderer.getRenderOutput();
-    expect(app.props.children[1].type).to.equal(DevTools);
+
+    expect(app.props.children[app.props.children.length-1].type)
+      .to.equal(DevTools);
   });
 });

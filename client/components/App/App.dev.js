@@ -11,6 +11,9 @@ const App = props => {
     return (
       <div>
         <Login onSubmit={action => props.dispatch(action)} />
+        <Counter
+          count={props.count}
+          onClick={action => props.dispatch(action)} />
         <DevTools />
       </div>
     );

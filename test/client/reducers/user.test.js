@@ -9,11 +9,11 @@ import {
   UPDATE_USER
 } from '../../../client/constants/actions';
 
-import user from '../../../client/reducers/user';
+import userRecord from '../../../client/reducers/userRecord';
 
-describe('REDUCER: user', () => {
+describe('REDUCER: userRecord', () => {
   it('should return null without params', () => {
-    
+
   });
 
   it('should return the user in the state param', () => {

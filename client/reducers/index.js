@@ -1,5 +1,5 @@
 import _count from './count';
 export const count = _count;
 
-import _user from './user';
-export const user = _user;
+import _userRecord from './userRecord';
+export const userRecord = _userRecord;

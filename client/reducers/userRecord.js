@@ -19,7 +19,7 @@ const defaultState = {
  * Actions' payloads should always be undefined,
  * or objects with user record properties.
  */
-export default function user(
+export default function userRecord(
   state = defaultState,
   action = { type: undefined }
 ) {
@@ -73,6 +73,6 @@ export default function user(
       };
 
     default:
-      return defaultState;
+      return state;
   }
 }

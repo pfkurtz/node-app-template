@@ -9,7 +9,9 @@ import { LOGIN, LOGOUT } from './constants/actions';
 // Websockets connection
 
 const socket = socketCluster.connect();
-window.SOCKET = socket;
+if (process.env.NODE_ENV === DEV) {
+  window.SOCKET = socket;
+}
 
 socket.on('error', (err) => {
   throw 'Socket error - !' + err;
@@ -30,7 +32,7 @@ socket.on('connect', () => {
     // probably want a user-logged-in saga, though
     if (authToken) {
       throw new Error(
-      `LOGIN triggered but user is already logged in.`);
+      `LOGIN triggered but user is already logged in. ${authToken}`);
     }
 
     if (process.env.NODE_ENV !== PROD) {
@@ -39,8 +41,6 @@ socket.on('connect', () => {
       expect(cb).to.be.a('function');
       /* @TODO expect this to be a socket */
     }
-
-    console.log("LOGIN EVENT HANDLER", this);
 
     this.emit('login', credentials, (err, res) => {
       if (err) {
@@ -75,7 +75,6 @@ const store = setupStore();
 
 if (process.env.NODE_ENV === DEV) {
   window.STORE = store;
-  console.log("STORE", store);
 }
 
 // TODO check `store` is what it should be
@@ -90,7 +89,7 @@ import App from './components';
 function props(state) {
   return {
     count: state.count,
-    userRecord: state.user
+    userRecord: state.userRecord
   };
 }
 
