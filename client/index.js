@@ -25,6 +25,7 @@ socket.on('connect', () => {
   socket.deauthenticate();
 
   EE.on(LOGIN, function(credentials, cb) {
+    authToken = socket.getAuthToken();
     // ultimately, we don't want to be listening for LOGIN
     // if the user is already logged in
     // if we go the EventEmitter route

@@ -11,6 +11,7 @@ const App = props => {
     return (
       <div>
         <Login onSubmit={action => props.dispatch(action)} />
+        <hr />
         <Counter
           count={props.count}
           onClick={action => props.dispatch(action)} />

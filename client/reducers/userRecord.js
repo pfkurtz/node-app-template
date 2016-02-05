@@ -10,7 +10,7 @@ import {
 import { NO_USER_RECORD } from '../constants/errors';
 
 const defaultState = {
-  userState: LOGOUT,
+  status: LOGOUT,
   user: null
 };
 
@@ -28,31 +28,31 @@ export default function userRecord(
 
     case LOGIN_REQUEST:
       return {
-        userState: USER_LOGIN_REQUESTED,
+        status: USER_LOGIN_REQUESTED,
         user: null
       };
 
     case LOGIN_FAILURE_ERROR:
       return {
-        userState: LOGIN_FAILURE_ERROR,
+        status: LOGIN_FAILURE_ERROR,
         user: null
       };
 
     case LOGIN_FAILURE_CREDENTIALS:
       return {
-        userState: LOGIN_FAILURE_CREDENTIALS,
+        status: LOGIN_FAILURE_CREDENTIALS,
         user: null
       };
 
     case LOGIN_SUCCESS:
       return {
-        userState: LOGIN_SUCCESS,
+        status: LOGIN_SUCCESS,
         user: action.payload,
       };
 
     case LOGOUT:
       return {
-        userState: LOGOUT,
+        status: LOGOUT,
         user: null
       };
 
@@ -68,7 +68,7 @@ export default function userRecord(
       const user = Object.assign({}, state.user, action.payload);
 
       return {
-        userState: LOGIN_SUCCESS,
+        status: LOGIN_SUCCESS,
         user
       };
 
