@@ -7,6 +7,18 @@ export function login(user) {
   };
 }
 
+export function loginSuccess() {
+
+}
+
+export function loginFailureError() {
+
+}
+
+export function loginFailureCredentials() {
+
+}
+
 export function logout() {
   return {
     type: LOGOUT

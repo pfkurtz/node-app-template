@@ -1,10 +1,15 @@
 import { expect, AssertionError } from 'chai';
 
 import { LOGIN, LOGOUT } from '../../../client/constants/actions';
-import { login, logout } from '../../../client/actions/user';
+import {
+  login,
+  loginSucess,
+  loginFailure,
+  logout
+} from '../../../client/actions/user';
 
 describe('ACTIONS: login', () => {
-  it('should have type LOGOUT', () => {
+  it('should have type LOGIN', () => {
     expect(login().type).to.equal(LOGIN);
   });
 });

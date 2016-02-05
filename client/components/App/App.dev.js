@@ -8,8 +8,11 @@ import Login from '../user/auth/Login';
 const App = props => {
   if(!props.user) {
     return (
-      <Login onSubmit={action => props.dispatch(action)} />
-    )
+      <div>
+        <Login onSubmit={action => props.dispatch(action)} />
+        <DevTools />
+      </div>
+    );
   }
 
   return (
