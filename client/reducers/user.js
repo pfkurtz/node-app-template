@@ -4,34 +4,29 @@ import {
   LOGIN_FAILURE_CREDENTIALS,
   LOGIN_SUCCESS,
   LOGOUT,
+  UPDATE_USER
+} from '../constants/actions';
 
-} from '../../constants/actions';
-
-import { NO_USER_RECORD } from '../../constants/errors';
+import { NO_USER_RECORD } from '../constants/errors';
 
 const defaultState = {
   userState: LOGOUT,
   user: null
 };
 
-/**
+/*
  * Reducer for the 'user' store.
  * Actions' payloads should always be undefined,
  * or objects with user record properties.
- *
- * @param  {object} state  =             defaultState [description]
- * @param  {object} action =             {            type:         undefined } [description]
- * @return {object}        [description]
  */
 export default function user(
   state = defaultState,
   action = { type: undefined }
 ) {
+  // Each imported action is a case
   switch (action.type) {
+
     case LOGIN_REQUEST:
-      // this is the submitting request case
-      // @TODO this should run ASA user submits
-      // or ASA
       return {
         userState: USER_LOGIN_REQUESTED,
         user: null
@@ -66,6 +61,8 @@ export default function user(
         throw new Error(NO_USER_RECORD +
           "trying to update local user record");
       }
+
+      /* @TODO validate payload here? */
 
       // create fresh, updated user record
       const user = Object.assign({}, state.user, action.payload);
