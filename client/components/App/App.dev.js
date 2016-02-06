@@ -4,10 +4,10 @@ import Counter from '../Counter';
 import DevTools from './DevTools';
 
 import Login from '../user/auth/Login';
+import Logout from '../user/auth/Logout';
 
 const App = props => {
   /* @TODO refactor with JSX control structures */
-  console.log('App (RootComponent) props:', props);
   if(!props.userRecord.user) {
     return (
       <div>
@@ -23,6 +23,9 @@ const App = props => {
   } else {
     return (
       <div>
+        <Logout onClick={action => props.dispatch(action)}
+          username={props.userRecord.user.username} />
+        <hr />
         <Counter
           count={props.count}
           onClick={action => props.dispatch(action)} />

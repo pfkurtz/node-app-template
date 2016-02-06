@@ -5,6 +5,12 @@ window.EE = new EventEmitter()
 
 import { DEV, PROD } from '../common/constants/env';
 import { LOGIN_REQUEST, LOGOUT } from './constants/actions';
+import {
+  loginSuccess,
+  loginFailureCredentials,
+  loginFailureError,
+  logout
+} from './actions/user';
 
 // Websockets connection
 
@@ -48,21 +54,35 @@ socket.on('connect', () => {
         console.warn("!!! Login failure:", err);
 
         // @TODO there are 2 cases in here now
-
-        return cb({
-          type: 'LOGIN_FAILURE_CREDENTIALS'
-        });
+        return cb(loginFailureCredentials());
 
       } else {
-        console.log(`SUCCESS! ${credentials.username} logged in`);
-
-        return cb({
-          type: 'LOGIN_SUCCESS',
-          payload: {
-            username: credentials.username
-          }
-        });
+        console.log(`SUCCESS! ${credentials.username} logged in.`);
+        return cb(loginSuccess({ username: credentials.username }));
       }
+    });
+
+  }, socket);
+
+  EE.on(LOGOUT, function(cb) {
+    authToken = socket.getAuthToken();
+    if (!authToken) {
+      throw new Error(`LOGOUT triggered without user logged in.`);
+    }
+
+    if (process.env.NODE_ENV !== PROD) {
+      expect(cb).to.be.a('function');
+      /* @TODO expect this to be a socket */
+    }
+
+    this.deauthenticate((err) => {
+      if (err) {
+        console.error(err);
+        return; /* @TODO: what in this case? --> logout error payload */
+      }
+
+      console.log(`${authToken.username} logged out.`);
+      return cb(logout());
     });
 
   }, socket);
