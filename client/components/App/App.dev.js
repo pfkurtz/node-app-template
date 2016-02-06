@@ -6,6 +6,7 @@ import DevTools from './DevTools';
 import Login from '../user/auth/Login';
 
 const App = props => {
+  /* @TODO refactor with JSX control structures */
   console.log('App (RootComponent) props:', props);
   if(!props.userRecord.user) {
     return (

@@ -12,11 +12,5 @@ import {
 import userRecord from '../../../client/reducers/userRecord';
 
 describe('REDUCER: userRecord', () => {
-  it('should return null without params', () => {
-
-  });
-
-  it('should return the user in the state param', () => {
-
-  });
+  
 });

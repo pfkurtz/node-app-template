@@ -1,3 +1,4 @@
+
 import {
   LOGIN_REQUEST,
   LOGIN_FAILURE_ERROR,
@@ -28,7 +29,7 @@ export default function userRecord(
 
     case LOGIN_REQUEST:
       return {
-        status: USER_LOGIN_REQUESTED,
+        status: LOGIN_REQUEST,
         user: null
       };
 

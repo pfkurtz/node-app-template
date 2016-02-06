@@ -4,7 +4,7 @@ import EventEmitter from 'eventemitter3';
 window.EE = new EventEmitter()
 
 import { DEV, PROD } from '../common/constants/env';
-import { LOGIN, LOGOUT } from './constants/actions';
+import { LOGIN_REQUEST, LOGOUT } from './constants/actions';
 
 // Websockets connection
 
@@ -24,7 +24,7 @@ socket.on('connect', () => {
   // just to help until we get a logout button
   socket.deauthenticate();
 
-  EE.on(LOGIN, function(credentials, cb) {
+  EE.on(LOGIN_REQUEST, function(credentials, cb) {
     authToken = socket.getAuthToken();
     // ultimately, we don't want to be listening for LOGIN
     // if the user is already logged in

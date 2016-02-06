@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
 import getFormData from 'get-form-data';
 
-import { LOGIN } from '../../../constants/actions';
+import { LOGIN_REQUEST } from '../../../constants/actions';
 import { PROD } from '../../../../common/constants/env';
+
+import loginRequest from '../../../actions/user';
 
 /**
  * Handles the onSubmit event for the form,
@@ -26,8 +28,14 @@ function handleSubmit(e, submitCallback) {
   /* @TODO validation */
   // just "required" in the HTML right now
 
-  // emit the LOGIN event with the form data and callback
-  return EE.emit(LOGIN, formData, submitCallback);
+  // update the app state
+  submitCallback({
+    type: LOGIN_REQUEST,
+    payload: formData
+  });
+
+  // emit LOGIN_REQUEST event with form data and callback
+  return EE.emit(LOGIN_REQUEST, formData, submitCallback);
 }
 
 const Login = props => (
