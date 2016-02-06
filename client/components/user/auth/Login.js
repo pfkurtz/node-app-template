@@ -13,7 +13,7 @@ import loginRequest from '../../../actions/user';
  * with form data and callback.
  *
  * @param  {SyntheticEvent} e - React form event
- * @param  {function} submitCallback - callback taking action object
+ * @param  {function} submitCallback - callback taking action
  * @returns {event} LOGIN
  */
 function handleSubmit(e, submitCallback) {
@@ -23,15 +23,21 @@ function handleSubmit(e, submitCallback) {
   // Get the data from the form
   const form = e.currentTarget;
   const formData = getFormData(form, { trim: true });
-  console.log("form data", formData);
 
   /* @TODO validation */
   // just "required" in the HTML right now
 
   // update the app state
+  // NB this gets called to update store (latency compensation)
+  // and passed on to the event handler,
+  // to be called when server responds
   submitCallback({
     type: LOGIN_REQUEST,
-    payload: formData
+    payload: {
+      // drop the password because action logs persist
+      // even if the reducer didn't put it in the store
+      username: formData.username
+    }
   });
 
   // emit LOGIN_REQUEST event with form data and callback
