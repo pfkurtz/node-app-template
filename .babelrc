@@ -15,7 +15,8 @@
               "imports": ["react", "redbox-react"]
             }
           ]
-        }]
+        }],
+        "jsx-control-statements"
       ]
     }
   }

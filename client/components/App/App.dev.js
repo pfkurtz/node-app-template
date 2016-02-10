@@ -13,6 +13,7 @@ const App = props => {
       <div>
         <Login onSubmit={action => props.dispatch(action)} />
         <hr />
+        <If condition={true}>TRUE! </If>
         <Counter
           count={props.count}
           onClick={action => props.dispatch(action)} />
