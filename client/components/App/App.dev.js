@@ -18,7 +18,7 @@ const App = props => (
     </If>
 
     <hr />
-    
+
     <Counter
       count={props.count}
       onClick={action => props.dispatch(action)} />

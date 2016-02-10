@@ -18,6 +18,9 @@
         }],
         "jsx-control-statements"
       ]
+    },
+    "test": {
+      "plugins": ["jsx-control-statements"]
     }
   }
 }
