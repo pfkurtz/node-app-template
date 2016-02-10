@@ -18,7 +18,7 @@ import {
   updateUser
 } from '../../../client/actions/user';
 
-describe('ACTIONS: loginRequest', () => {
+describe('ACTION: loginRequest', () => {
   const goodCredentials = {
     username: 'foo',
     password: 'bar'
@@ -53,19 +53,19 @@ describe('ACTIONS: loginRequest', () => {
   });
 });
 
-describe('ACTIONS: loginFailureError', () => {
+describe('ACTION: loginFailureError', () => {
   it('should have type LOGIN_FAILURE_ERROR', () => {
     expect(loginFailureError().type).to.equal(LOGIN_FAILURE_ERROR);
   });
 });
 
-describe('ACTIONS: loginFailureCredentials', () => {
+describe('ACTION: loginFailureCredentials', () => {
   it('should have type LOGIN_FAILURE_CREDENTIALS', () => {
     expect(loginFailureCredentials().type).to.equal(LOGIN_FAILURE_CREDENTIALS);
   });
 });
 
-describe('ACTIONS: loginSuccess', () => {
+describe('ACTION: loginSuccess', () => {
   it('should have type LOGIN_SUCCESS', () => {
     expect(loginSuccess({
       username: 'foo'
@@ -82,13 +82,13 @@ describe('ACTIONS: loginSuccess', () => {
   });
 });
 
-describe('ACTIONS: logout', () => {
+describe('ACTION: logout', () => {
   it('should have type LOGOUT', () => {
     expect(logout().type).to.equal(LOGOUT);
   });
 });
 
-describe('ACTIONS: updateUser', () => {
+describe('ACTION: updateUser', () => {
   const value = updateUser({});
 
   it('should have type UPDATE_USER', () => {
