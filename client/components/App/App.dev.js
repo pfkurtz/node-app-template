@@ -6,36 +6,26 @@ import DevTools from './DevTools';
 import Login from '../user/auth/Login';
 import Logout from '../user/auth/Logout';
 
-const App = props => {
-  /* @TODO refactor with JSX control structures */
-  if(!props.userRecord.user) {
-    return (
-      <div>
-        <Login onSubmit={action => props.dispatch(action)} />
-        <hr />
-        <If condition={true}>TRUE! </If>
-        <Counter
-          count={props.count}
-          onClick={action => props.dispatch(action)} />
-        <DevTools />
-      </div>
-    );
+const App = props => (
+  <div>
+    <If condition={props.userRecord.user}>
+      <Logout onClick={action =>
+        props.dispatch(action)}
+        username={props.userRecord.user.username} />
+    <Else />
+      <Login onSubmit={action =>
+        props.dispatch(action)} />
+    </If>
 
-  } else {
-    return (
-      <div>
-        <Logout onClick={action => props.dispatch(action)}
-          username={props.userRecord.user.username} />
-        <hr />
-        <Counter
-          count={props.count}
-          onClick={action => props.dispatch(action)} />
-        <DevTools />
-      </div>
-    );
-  }
+    <hr />
+    
+    <Counter
+      count={props.count}
+      onClick={action => props.dispatch(action)} />
 
-}
+    <DevTools />
+  </div>
+);
 
 // Most of these will be names of top-level reducers
 App.propTypes = {
