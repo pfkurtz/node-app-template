@@ -1,7 +1,7 @@
 import { expect, AssertionError } from 'chai';
 import expectStateCollection from '../../test-utils/expectStateCollection.dev';
 
-describe('expectStateCollection', () => {
+describe('TEST_UTIL: expectStateCollection', () => {
   it('should return `true` if supplied { ids[], dict{} }', () => {
     const param = { ids: [], dict: {} };
     expect(expectStateCollection(param)).to.be.true;

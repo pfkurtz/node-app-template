@@ -70,7 +70,7 @@ describe('COMPONENT: App.dev with user', () => {
   const appWithUser = renderer.getRenderOutput();
   const children = appWithUser.props.children;
 
-  it('should  render Logout', () => {
+  it('should render Logout as first child', () => {
     expect(children[0].type).to.equal(Logout);
   });
 
