@@ -35,8 +35,11 @@ const App = proxyquire('../../../client/components/App/App.dev', {
 describe('COMPONENT: App.dev without user', () => {
   const renderer = createRenderer();
 
-  renderer.render(<App dispatch={() => {}} count={0}
-    userRecord={{}} />);
+  renderer.render(
+    <App dispatch={() => {}}
+      count={0}
+      userRecord={{}} />
+  );
 
   const appWithoutUser = renderer.getRenderOutput();
   const children = appWithoutUser.props.children;

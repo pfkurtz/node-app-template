@@ -9,5 +9,6 @@ import handleLogout from '../../../../../../client/components/user/auth/helpers/
 
 describe('COMPONENT EVENT: handleLogout', () => {
 
+  // EventEmitter global var needs to be purged before these functions can be tested
 
 });
