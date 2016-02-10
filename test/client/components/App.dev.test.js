@@ -1,9 +1,6 @@
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 import proxyquire from 'proxyquire';
-import React, { Component } from 'react';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-
+import React from 'react';
 import { createRenderer } from 'react-addons-test-utils';
 
 chai.use(sinonChai);
