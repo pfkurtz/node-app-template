@@ -3,8 +3,6 @@ import proxyquire from 'proxyquire';
 import React from 'react';
 import { createRenderer } from 'react-addons-test-utils';
 
-chai.use(sinonChai);
-
 // Child Component stubs
 const Counter = () => <div />;
 const DevTools = () => <div />;
