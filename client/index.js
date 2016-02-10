@@ -1,7 +1,6 @@
 import { expect } from 'chai';
-import EventEmitter from 'eventemitter3';
 
-window.EE = new EventEmitter()
+import EE from './setup/events';
 
 import { DEV, PROD } from '../common/constants/env';
 import { LOGIN_REQUEST, LOGOUT } from './constants/actions';
@@ -25,13 +24,10 @@ socket.on('error', (err) => {
 
 socket.on('connect', () => {
   let authToken = socket.getAuthToken();
-  console.log("CONNECTED", authToken, socket.getSignedAuthToken());
-
-  // just to help until we get a logout button
-  socket.deauthenticate();
+  //console.log("CONNECTED", authToken, socket.getSignedAuthToken());
 
   EE.on(LOGIN_REQUEST, function(credentials, cb) {
-    authToken = socket.getAuthToken();
+    authToken = this.getAuthToken();
     // ultimately, we don't want to be listening for LOGIN
     // if the user is already logged in
     // if we go the EventEmitter route
@@ -49,6 +45,9 @@ socket.on('connect', () => {
       /* @TODO expect this to be a socket */
     }
 
+    /*
+      Callback to this should be its own module
+     */
     this.emit('login', credentials, (err, res) => {
       if (err) {
         console.warn("!!! Login failure:", err);
@@ -64,8 +63,10 @@ socket.on('connect', () => {
 
   }, socket);
 
+  // each of the events need to be set up with EE
+  // with appropriate `this` (need to expect on required methods)
   EE.on(LOGOUT, function(cb) {
-    authToken = socket.getAuthToken();
+    authToken = this.getAuthToken();
     if (!authToken) {
       throw new Error(`LOGOUT triggered without user logged in.`);
     }
@@ -93,6 +94,8 @@ socket.on('connect', () => {
 
 import setupStore from './setup/store';
 const store = setupStore();
+
+export const dispatch = store.dispatch;
 
 if (process.env.NODE_ENV === DEV) {
   window.STORE = store;

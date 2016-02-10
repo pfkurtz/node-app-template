@@ -1,4 +1,6 @@
 import getFormData from 'get-form-data';
+
+import EE from '../../../../setup/events';
 import { LOGIN_REQUEST } from '../../../../constants/actions';
 
 /**
