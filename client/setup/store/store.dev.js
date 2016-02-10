@@ -19,13 +19,5 @@ function getSessionDebugKey() {
 const reducer = combineReducers(reducers);
 
 export default function setupStore(initialState) {
-  const store = finalCreateStore(reducer, initialState);
-
-  if (module.hot) {
-    module.hot.accept('../../reducers', () =>
-      store.replaceReducer(require('../../reducers'))
-    );
-  }
-
-  return store;
+  return finalCreateStore(reducer, initialState);
 }
