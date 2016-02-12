@@ -1,24 +1,15 @@
 import { expect } from 'chai';
 
-import { DEV, PROD } from '../../common/constants/env';
 import {
   LOGIN_REQUEST,
   LOGOUT
 } from '../constants/actions';
-import {
-  loginSuccess,
-  loginFailureCredentials,
-  loginFailureError,
-  logout
-} from '../actions/user';
+
 import { dispatch } from '../index';
 
 // Websockets connection
 
 const socket = socketCluster.connect();
-if (process.env.NODE_ENV === DEV) {
-  window.SOCKET = socket;
-}
 
 socket.on('error', (err) => {
   throw 'Socket error - !' + err;
@@ -39,3 +30,20 @@ socket.on('connect', () => {
  * login
  * logout
  */
+
+export function getAuthToken() {
+  return socket.getAuthToken();
+}
+
+export function login(credentials) {
+  return new Promise((resolve, reject) => {
+    return socket.emit('login', credentials, (err) => {
+      if (err) return reject(err);
+      return resolve(true);
+    });
+  });
+}
+
+export function socketlogout() {
+  socket.deauthenticate();
+}

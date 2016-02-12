@@ -1,40 +1,68 @@
-import { put, take } from 'redux-saga';
+import { call, put, take } from 'redux-saga';
 
 import {
-  LOGIN_REQUEST
+  LOGIN_REQUEST,
+  LOGOUT
 } from '../constants/actions';
 
-/**
- * Is there a signed JWT?
- *
- * @return {[type]} [description]
- */
+import {
+  loginSuccess,
+  loginFailureCredentials,
+  loginFailureError,
+  logout
+} from '../actions/user';
+
+import { getAuthToken, login, socketlogout } from '../socket';
+
+
 export default function* userSaga() {
-  // is this the best pattern for testability?
-  // ie, call socket api
-  let { authToken } = yield take('CHECK_FOR_SIGNED_JWT', authToken);
-  console.log('In user saga with JWT:', authToken);
+  const { initialToken } = yield take('CHECK_FOR_SIGNED_JWT');
+
+  let username = initialToken ? initialToken.username : null;
+
+  let firstLoop = true;
 
   while(true) {
 
     // furthermore, is this the best pattern,
     // controlling an internal state for the generator with variable?
-    if (authToken) {
+    if (username) {
+
+      if (firstLoop) {
+        // update state
+        yield put(loginSuccess({ username }));
+      }
+
       // wait for a logout event
       yield take(LOGOUT);
-      console.log("LOGOUT request");
-      yield put(LOGOUT);
+      socketlogout();
+      yield put(logout());
+
+      username = null;
 
       // call socket.logout, which should return a promise
 
     } else {
       // OK, no user, wait for a LOGIN_REQUEST
-      const {payload} = yield take(LOGIN_REQUEST, payload);
-      console.log(LOGIN_REQUEST, payload);
+      const { payload } = yield take(LOGIN_REQUEST);
 
       // call socket.login, which should return a promise
       // be sure to set authToken
+      const loggedIn = yield call(login, payload);
+
+      if (loggedIn === true) {
+        yield put(loginSuccess({
+          username: payload.username
+        }));
+        username = payload.username;
+
+      } else {
+        yield put(loginFailureCredentials());
+      }
+
     }
+
+    firstLoop = false;
   }
 
 }
