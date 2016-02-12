@@ -1,8 +1,6 @@
 # This is a template for building Node apps
 
 ### Installation
-`git clone git@bitbucket.org:patkirts/app-template.git`
-`cd app-template`
 `npm run init`
 
 If you want to, change the info in `package.json`. *NB: Installs several global Node modules* &mdash; cf. `init.sh` and `scripts` in `package.json`.
