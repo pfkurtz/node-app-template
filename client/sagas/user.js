@@ -1,7 +1,10 @@
 import { call, put, take } from 'redux-saga';
 
 import {
+  CHECK_FOR_SIGNED_JWT,
   LOGIN_REQUEST,
+  LOGIN_FAILURE_CREDENTIALS,
+  LOGIN_FAILURE_ERROR,
   LOGOUT
 } from '../constants/actions';
 
@@ -12,20 +15,20 @@ import {
   logout
 } from '../actions/user';
 
-import { getAuthToken, login, socketlogout } from '../socket';
-
+import {
+  getAuthToken,
+  socketLogin,
+  socketLogout
+} from '../socket';
 
 export default function* userSaga() {
-  const { initialToken } = yield take('CHECK_FOR_SIGNED_JWT');
+  const { payload } = yield take(CHECK_FOR_SIGNED_JWT);
+  let username = payload ? payload.username : null;
 
-  let username = initialToken ? initialToken.username : null;
-
+  // on the first loop, need to set state for
   let firstLoop = true;
 
   while(true) {
-
-    // furthermore, is this the best pattern,
-    // controlling an internal state for the generator with variable?
     if (username) {
 
       if (firstLoop) {
@@ -35,12 +38,12 @@ export default function* userSaga() {
 
       // wait for a logout event
       yield take(LOGOUT);
-      socketlogout();
+      // server logout resolves itself asynchronously
+      socketLogout();
+      // logout client
       yield put(logout());
 
       username = null;
-
-      // call socket.logout, which should return a promise
 
     } else {
       // OK, no user, wait for a LOGIN_REQUEST
@@ -48,15 +51,14 @@ export default function* userSaga() {
 
       // call socket.login, which should return a promise
       // be sure to set authToken
-      const loggedIn = yield call(login, payload);
+      const loggedIn = yield call(socketLogin, payload);
 
       if (loggedIn === true) {
-        yield put(loginSuccess({
-          username: payload.username
-        }));
         username = payload.username;
+        yield put(loginSuccess({ username }));
 
       } else {
+        /* @TODO  */
         yield put(loginFailureCredentials());
       }
 

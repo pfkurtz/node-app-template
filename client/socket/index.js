@@ -1,10 +1,6 @@
 import { expect } from 'chai';
 
-import {
-  LOGIN_REQUEST,
-  LOGOUT
-} from '../constants/actions';
-
+import { checkForSignedJWT } from '../actions/user';
 import { dispatch } from '../index';
 
 // Websockets connection
@@ -19,10 +15,8 @@ socket.on('connect', () => {
   let authToken = socket.getAuthToken();
   //console.log("CONNECTED", authToken, socket.getSignedAuthToken());
 
-  dispatch({ type: 'CHECK_FOR_SIGNED_JWT', authToken: socket.getAuthToken() });
+  dispatch(checkForSignedJWT(socket.getAuthToken()));
 });
-
-//export default socket;
 
 /**
  * @TODO create api;
@@ -35,7 +29,13 @@ export function getAuthToken() {
   return socket.getAuthToken();
 }
 
-export function login(credentials) {
+/**
+ *
+ *
+ * @param  {object|null} credentials { username, password } or `null`
+ * @return {Promise} resolves login callback
+ */
+export function socketLogin(credentials) {
   return new Promise((resolve, reject) => {
     return socket.emit('login', credentials, (err) => {
       if (err) return reject(err);
@@ -44,6 +44,6 @@ export function login(credentials) {
   });
 }
 
-export function socketlogout() {
+export function socketLogout() {
   socket.deauthenticate();
 }

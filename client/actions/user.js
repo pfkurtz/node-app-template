@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { PROD } from '../../common/constants/env';
 
 import {
+  CHECK_FOR_SIGNED_JWT,
   LOGIN_REQUEST,
   LOGIN_FAILURE_ERROR,
   LOGIN_FAILURE_CREDENTIALS,
@@ -9,6 +10,22 @@ import {
   LOGOUT,
   UPDATE_USER
 } from '../constants/actions';
+
+export function checkForSignedJWT(authToken) {
+  if (process.env.NODE_ENV !== PROD) {
+    if (authToken) {
+      expect(authToken).to.be.an('object');
+      expect(authToken).to.have.property('username');
+    } else {
+      expect(authToken).to.be.null;
+    }
+  }
+
+  return {
+    type: CHECK_FOR_SIGNED_JWT,
+    payload: authToken
+  }
+}
 
 export function loginRequest(credentials) {
   if (process.env.NODE_ENV !== PROD) {
