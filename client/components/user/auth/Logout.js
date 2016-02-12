@@ -2,7 +2,11 @@ import React, { PropTypes } from 'react';
 import getFormData from 'get-form-data';
 
 import { logout } from '../../../actions/user';
-import handleLogout from './helpers/handleLogout';
+
+function handleLogout(e, cb) {
+  e.preventDefault();
+  cb(logout());
+}
 
 const Logout = props => (
   <button onClick={e => handleLogout(e, props.onClick)}>

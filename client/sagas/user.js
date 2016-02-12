@@ -6,22 +6,35 @@ import {
 
 /**
  * Is there a signed JWT?
- * n: yield take(LOGIN_REQUEST);
- * y: yield take(CONNECTED_WITH|OUT_JWT);
- *
- * CONNECTED_WITHOUT -> yield take(LOGIN_REQUEST)
- * there may be puts in between yields, etc
  *
  * @return {[type]} [description]
  */
 export default function* userSaga() {
-  //yield take('CHECK_FOR_SIGNED_JWT');
+  // is this the best pattern for testability?
+  // ie, call socket api
+  let { authToken } = yield take('CHECK_FOR_SIGNED_JWT', authToken);
+  console.log('In user saga with JWT:', authToken);
 
+  while(true) {
 
+    // furthermore, is this the best pattern,
+    // controlling an internal state for the generator with variable?
+    if (authToken) {
+      // wait for a logout event
+      yield take(LOGOUT);
+      console.log("LOGOUT request");
+      yield put(LOGOUT);
 
-  // OK, no user, wait for a LOGIN_REQUEST
-  yield take(LOGIN_REQUEST);
-  console.log(LOGIN_REQUEST + 'in user saga');
+      // call socket.logout, which should return a promise
 
+    } else {
+      // OK, no user, wait for a LOGIN_REQUEST
+      const {payload} = yield take(LOGIN_REQUEST, payload);
+      console.log(LOGIN_REQUEST, payload);
+
+      // call socket.login, which should return a promise
+      // be sure to set authToken
+    }
+  }
 
 }

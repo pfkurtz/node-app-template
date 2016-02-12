@@ -7,10 +7,10 @@ import {
 import { persistState } from 'redux-devtools';
 import createSagaMiddleware from 'redux-saga';
 
-import * as reducers from '../../reducers';
-import DevTools from '../../components/App/DevTools';
+import * as reducers from '../reducers';
+import DevTools from '../components/App/DevTools';
 
-import userSaga from '../../sagas/user';
+import userSaga from '../sagas/user';
 
 const finalCreateStore = compose(
   applyMiddleware(createSagaMiddleware(userSaga)),
