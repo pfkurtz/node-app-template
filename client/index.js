@@ -1,3 +1,9 @@
+import 'babel-polyfill';
+
+/**
+ *
+ */
+
 import { expect } from 'chai';
 
 import EE from './setup/events';
@@ -34,8 +40,7 @@ socket.on('connect', () => {
     // but we're trying it that way for the moment
     // probably want a user-logged-in saga, though
     if (authToken) {
-      throw new Error(
-      `LOGIN triggered but user is already logged in. ${authToken}`);
+      throw new Error(`LOGIN triggered but user is already logged in. ${authToken}`);
     }
 
     if (process.env.NODE_ENV !== PROD) {

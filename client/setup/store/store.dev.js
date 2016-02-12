@@ -1,11 +1,19 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  compose,
+  combineReducers
+} from 'redux';
 import { persistState } from 'redux-devtools';
+import createSagaMiddleware from 'redux-saga';
 
 import * as reducers from '../../reducers';
 import DevTools from '../../components/App/DevTools';
 
+import userSaga from '../../sagas/user';
+
 const finalCreateStore = compose(
-  //applyMiddleware(...),//thunk/promise
+  applyMiddleware(createSagaMiddleware(userSaga)),
   DevTools.instrument(),
   persistState(getSessionDebugKey())
 )(createStore);
