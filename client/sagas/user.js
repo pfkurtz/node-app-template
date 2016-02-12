@@ -5,8 +5,13 @@ import {
   LOGIN_REQUEST,
   LOGIN_FAILURE_CREDENTIALS,
   LOGIN_FAILURE_ERROR,
-  LOGOUT
+  LOGOUT,
+  UPDATE_USER
 } from '../constants/actions';
+
+import {
+  MISSING_VALUE
+} from '../../common/constants/errors';
 
 import {
   loginSuccess,
@@ -37,6 +42,7 @@ export default function* userSaga() {
       }
 
       // wait for a logout event
+      // @TODO race for LOGOUT or UPDATE_USER
       yield take(LOGOUT);
       // server logout resolves itself asynchronously
       socketLogout();
@@ -52,14 +58,20 @@ export default function* userSaga() {
       // call socket.login, which should return a promise
       // be sure to set authToken
       const loggedIn = yield call(socketLogin, payload);
+      console.log("`loggedIn` value", loggedIn);
 
       if (loggedIn === true) {
         username = payload.username;
         yield put(loginSuccess({ username }));
 
-      } else {
-        /* @TODO  */
+      } else if (loggedIn === LOGIN_FAILURE_ERROR) {
+        yield put(loginFailureError());
+
+      } else if (loggedIn === LOGIN_FAILURE_CREDENTIALS) {
         yield put(loginFailureCredentials());
+
+      } else {
+        throw new Error(MISSING_VALUE);
       }
 
     }

@@ -24,7 +24,7 @@ export function checkForSignedJWT(authToken) {
   return {
     type: CHECK_FOR_SIGNED_JWT,
     payload: authToken
-  }
+  };
 }
 
 export function loginRequest(credentials) {
@@ -52,19 +52,19 @@ export function loginSuccess(user) {
   return {
     type: LOGIN_SUCCESS,
     payload: user
-  }
+  };
 }
 
 export function loginFailureError() {
   return {
     type: LOGIN_FAILURE_ERROR
-  }
+  };
 }
 
 export function loginFailureCredentials() {
  return {
    type: LOGIN_FAILURE_CREDENTIALS
- }
+ };
 }
 
 export function logout() {
@@ -81,5 +81,5 @@ export function updateUser(userInfo) {
   return {
     type: UPDATE_USER,
     payload: userInfo
-  }
+  };
 }
