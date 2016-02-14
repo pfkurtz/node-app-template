@@ -32,12 +32,13 @@ const App = proxyquire('../../../client/components/App/App.dev', {
   }
 }).default;
 
+console.log("1", DevTools);
+
 describe('COMPONENT: App.dev without user', () => {
   const renderer = createRenderer();
 
   renderer.render(
-    <App dispatch={() => {}}
-      count={0}
+    <App count={0}
       userRecord={{}} />
   );
 
@@ -64,7 +65,7 @@ describe('COMPONENT: App.dev without user', () => {
 describe('COMPONENT: App.dev with user', () => {
   const renderer = createRenderer();
 
-  renderer.render(<App dispatch={() => {}} count={0}
+  renderer.render(<App count={0}
     userRecord={{ user: {} }} />);
 
   const appWithUser = renderer.getRenderOutput();
