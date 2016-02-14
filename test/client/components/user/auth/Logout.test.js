@@ -1,11 +1,11 @@
-import chai, { expect } from 'chai';
-import React from 'react';
-import { createRenderer, Simulate } from 'react-addons-test-utils';
-import proxyquire from 'proxyquire';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-
-chai.use(sinonChai);
+// import chai, { expect } from 'chai';
+// import React from 'react';
+// import { createRenderer, Simulate } from 'react-addons-test-utils';
+// import proxyquire from 'proxyquire';
+// import sinon from 'sinon';
+// import sinonChai from 'sinon-chai';
+//
+// chai.use(sinonChai);
 
 /*let cb, Logout, sandbox;
 

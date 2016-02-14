@@ -5,6 +5,8 @@ import DevTools from './DevTools';
 import Login from '../user/auth/Login';
 import Logout from '../user/auth/Logout';
 
+console.log("2", DevTools);
+
 const App = props => (
   <div>
     <If condition={props.userRecord.user}>
