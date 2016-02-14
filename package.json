@@ -10,7 +10,7 @@
     "build": "./scripts/build.sh",
     "clear": "rm -rf node_modules/",
     "deploy": "./scripts/deploy.sh",
-    "install-globals-dev": "npm i -g babel-cli browserify html-validator-cli livereloadx nodemon parallelshell vulcanize watchify",
+    "install-globals-dev": "npm i -g babel-cli browserify html-validator-cli livereloadx nodemon parallelshell uglify-js vulcanize watchify",
     "install-globals-prod": "npm i -g babel-cli",
     "livereload": "livereloadx public --exclude *.html -s -p 9091",
     "node:dev": "echo '*** (RE)STARTING SERVER ***' && babel-node server/main.js",
