@@ -4,7 +4,7 @@ rm -rf build
 mkdir build
 mkdir build/public
 
-vulcanize --exclude /*.js client/index.dev.html > build/public/index.html
+vulcanize --exclude /*.js client/index.prod.html > build/public/index.html
 
 browserify -d client/index.js -o build/index.js
 

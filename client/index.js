@@ -6,6 +6,8 @@ import { DEV } from '../common/constants/env';
  * Anything here?
  */
 
+console.log("NODE_ENV:", process.env.NODE_ENV);
+
 // this just sets it up
 import './socket';
 

@@ -2,10 +2,7 @@ import { expect } from 'chai';
 import { PROD } from '../../common/constants/env';
 
 /* @TODO these should be relocated to common/constants */
-import {
-  LOGIN_FAILURE_CREDENTIALS,
-  LOGIN_FAILURE_ERROR
-} from '../../client/constants/actions';
+const LOGIN_FAILURE_CREDENTIALS = 'LOGIN_FAILURE_CREDENTIALS';
 
 export default function setupSocketHandlers(scServer) {
   const sc = scServer;
