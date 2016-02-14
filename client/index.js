@@ -16,6 +16,7 @@ import './socket';
 import setupStore from './store';
 const store = setupStore();
 
+/* @TODO this is a silly place for this */
 export const dispatch = store.dispatch;
 
 if (process.env.NODE_ENV === DEV) {

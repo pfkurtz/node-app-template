@@ -15,7 +15,12 @@ import userSaga from '../sagas/user';
 const finalCreateStore = compose(
   applyMiddleware(createSagaMiddleware(userSaga)),
   DevTools.instrument(),
-  persistState(getSessionDebugKey())
+  persistState(getSessionDebugKey()),
+  
+  // for Chrome Redux DevTools extension
+  // need to comment out `DevTools.instrument()` above
+  // and remove DevTools component from App.dev
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
 function getSessionDebugKey() {
