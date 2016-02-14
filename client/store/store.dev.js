@@ -12,6 +12,9 @@ import DevTools from '../components/App/DevTools';
 
 import userSaga from '../sagas/user';
 
+/**
+ * Wrapper for `createStore`
+ */
 const finalCreateStore = compose(
   applyMiddleware(createSagaMiddleware(userSaga)),
   DevTools.instrument(),
@@ -23,6 +26,7 @@ const finalCreateStore = compose(
   //window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
+// cf Redux DevTools documentation
 function getSessionDebugKey() {
   const debugQuerystring = /[?&]debug_session=([^&]+)\b/;
   const matches = window.location.href.match(debugQuerystring);
@@ -31,6 +35,25 @@ function getSessionDebugKey() {
 
 const reducer = combineReducers(reducers);
 
-export default function setupStore(initialState) {
-  return finalCreateStore(reducer, initialState);
-}
+/**
+ * Initial state of the Redux store.
+ *
+ * @TODO populate from localStorage
+ * (different from `persistState`, because we don't want the whole history)
+ *
+ * @type {Object}
+ */
+const initialState = {};
+
+/**
+ * Redux store.
+ * @type {Object}
+ */
+const store = finalCreateStore(reducer, initialState);
+export default store;
+
+/**
+ * For ease of access from components, etc.
+ * @type {function}
+ */
+export const dispatch = store.dispatch;
