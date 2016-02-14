@@ -48,7 +48,7 @@ export default function userRecord(
     case LOGIN_SUCCESS:
       return {
         status: LOGIN_SUCCESS,
-        user: action.payload,
+        user: action.payload
       };
 
     case LOGOUT:
