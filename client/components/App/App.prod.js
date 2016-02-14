@@ -1,11 +1,27 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 
-const Test = props => (
-  <span>{props.foo}</span>
-);
+import Counter from '../Counter';
+import Login from '../user/auth/Login';
+import Logout from '../user/auth/Logout';
 
 const App = props => (
-  <h1 onClick={props.onClick} foo={props.foo}>Hello <Test foo={props.foo} /></h1>
+  <div>
+    <If condition={props.userRecord.user}>
+      <Logout username={props.userRecord.user.username} />
+    <Else />
+      <Login />
+    </If>
+
+    <hr />
+
+    <Counter count={props.count} />
+  </div>
 );
+
+// Most of these will be names of top-level reducers
+App.propTypes = {
+  count: PropTypes.number.isRequired,
+  userRecord: PropTypes.object.isRequired
+};
 
 export default App;

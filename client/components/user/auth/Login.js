@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import getFormData from 'get-form-data';
 
+import { dispatch } from '../../../store';
 import { LOGIN_REQUEST } from '../../../constants/actions';
 import { loginRequest } from '../../../actions/user';
 
@@ -11,10 +12,9 @@ import { loginRequest } from '../../../actions/user';
  * with form data and callback.
  *
  * @param  {SyntheticEvent} e - React form event
- * @param  {function} cb - callback taking action
- * @return {function} calls callback with formData
+ * @return {Object} dispatches loginRequest with formData
  */
-export default function handleLogin(e, cb) {
+export default function handleLogin(e) {
   e.preventDefault();
   e.stopPropagation();
 
@@ -26,11 +26,11 @@ export default function handleLogin(e, cb) {
   // just "required" in the HTML right now
 
   // update the app state
-  return cb(loginRequest(formData));
+  return dispatch(loginRequest(formData));
 }
 
 const Login = props => (
-  <form onSubmit={e => handleLogin(e, props.onSubmit)}>
+  <form onSubmit={e => handleLogin(e)}>
     <input type="text" name="username" placeholder="username"
       required />
     <input type="password" name="password" placeholder="pass phrase"
@@ -39,8 +39,8 @@ const Login = props => (
   </form>
 );
 
-Login.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-};
+// Login.propTypes = {
+//
+// };
 
 export default Login;
