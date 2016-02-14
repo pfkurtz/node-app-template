@@ -11,6 +11,11 @@ If you want to, change the info in `package.json`. *NB: Installs several global 
 ### Run
 `npm start`
 
+### Build
+`npm run build`
+
+Creates a `build/` directory where client files are uglified and server files are compiled with Babel, ready to be installed on your server.
+
 ### Browser
 Go to [http://localhost:3000](http://localhost:3000 "Visit in browser") once it's running, or whatever other `$PORT` environment variable you've specified.
 
