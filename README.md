@@ -1,7 +1,7 @@
 # This is a template for building Node apps
 
 ### Installation
-`npm install`..
+`npm install`  
 `npm run install-globals-dev`
 
 If you want to, change the info in `package.json`. *NB: Installs several global Node modules* &mdash; cf. `scripts` in `package.json`.
