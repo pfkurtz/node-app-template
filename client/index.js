@@ -43,6 +43,7 @@ const RootComponent = connect(props)(App);
 
 document.addEventListener('DOMContentLoaded', () => {
   const main = document.getElementById('main');
+
   render(
     <Provider store={store}>
       <RootComponent />

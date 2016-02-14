@@ -2,7 +2,7 @@
   "name": "pfk-app",
   "version": "0.0.1",
   "description": "A template for building Node apps",
-  "author": "Patrick Kirts <patkirts@gmail.com>",
+  "author": "Patrick Kirts <pat@pats.website>",
   "scripts": {
     "app": "PORT=3000 NODE_ENV=production babel-node server/main.js",
     "build:html-dev": "echo 'Building Client HTML'; vulcanize --exclude /*.js client/index.dev.html > public/index.html && npm run validate:html-dev",
