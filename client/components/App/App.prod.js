@@ -14,6 +14,15 @@ const App = props => (
 
     <hr />
 
+    <p>Route: {props.location.pathname}</p>
+
+    {props.children}
+
+    <hr />
+    <p>
+      Classic counter example.
+    </p>
+
     <Counter count={props.count} />
   </div>
 );
