@@ -6,23 +6,14 @@ import Logout from '../user/auth/Logout';
 
 const App = props => (
   <div>
-    <If condition={props.userRecord.user}>
-      <Logout username={props.userRecord.user.username} />
-    <Else />
-      <Login />
-    </If>
-
+    <Header userRecord={props.userRecord} />
     <hr />
 
-    <p>Route: {props.location.pathname}</p>
-
-    {props.children}
+    <main>
+      {props.children}
+    </main>
 
     <hr />
-    <p>
-      Classic counter example.
-    </p>
-
     <Counter count={props.count} />
   </div>
 );

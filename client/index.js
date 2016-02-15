@@ -23,8 +23,7 @@ import {
 import reactRouter from 'react-router';
 
 import App from './components';
-import Foo from './components/Foo';
-import FooLink from './components/Foo/Link';
+import Home from './components/Home';
 import NotFound from './components/errors/NotFound';
 
 /**
@@ -40,7 +39,6 @@ function props(state) {
   };
 }
 
-/* @TODO this becomes RouteComponent next */
 const RootComponent = connect(props)(App);
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -48,12 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
     <Provider store={store}>
       <Router history={browserHistory}>
         <Route path="/" component={RootComponent}>
-          <IndexRoute component={FooLink} />
-          <Route path="foo" component={Foo} />
+          <IndexRoute component={Home} />
           <Route path="*" component={NotFound} />
         </Route>
       </Router>
     </Provider>,
-    document.getElementById('main')
+    document.getElementById('app')
   );
 });

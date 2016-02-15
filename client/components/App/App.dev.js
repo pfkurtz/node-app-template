@@ -3,29 +3,18 @@ import { Link } from 'react-router';
 
 import Counter from '../Counter';
 import DevTools from './DevTools';
-import Login from '../user/auth/Login';
-import Logout from '../user/auth/Logout';
+import Header from '../layout/Header';
 
 const App = props => (
   <div>
-    <If condition={props.userRecord.user}>
-      <Logout username={props.userRecord.user.username} />
-    <Else />
-      <Login />
-    </If>
-
+    <Header userRecord={props.userRecord} />
     <hr />
 
-    <p>Route: {props.location.pathname}</p>
-
-    {props.children}
+    <main>
+      {props.children}
+    </main>
 
     <hr />
-    <p>
-      This is the classic counter example.<br />
-      It's the second-to-last component in the `App` component. There's a test for that.
-    </p>
-    
     <Counter count={props.count} />
 
     <DevTools />
