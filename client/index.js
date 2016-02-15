@@ -21,6 +21,8 @@ import {
 } from 'react-router';
 
 import App from './components';
+import Foo from './components/Foo';
+import FooLink from './components/Foo/Link';
 
 /**
  * `props` for `RootComponent` (`App`)
@@ -30,6 +32,7 @@ import App from './components';
 function props(state) {
   return {
     count: state.count,
+    location: state.routing.location,
     userRecord: state.userRecord
   };
 }
@@ -42,7 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     <Provider store={store}>
       <Router history={browserHistory}>
         <Route path="/" component={RootComponent}>
-
+          <IndexRoute component={FooLink} />
+          <Route path="foo" component={Foo} />
         </Route>
       </Router>
     </Provider>,

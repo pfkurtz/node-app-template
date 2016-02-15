@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 import Counter from '../Counter';
 import DevTools from './DevTools';
@@ -15,6 +16,11 @@ const App = props => (
 
     <hr />
 
+    <p>Route: {props.location.pathname}</p>
+
+    {props.children}
+
+    <hr />
     <Counter count={props.count} />
 
     <DevTools />
@@ -24,6 +30,7 @@ const App = props => (
 // Most of these will be names of top-level reducers
 App.propTypes = {
   count: PropTypes.number.isRequired,
+  location: PropTypes.object.isRequired,
   userRecord: PropTypes.object.isRequired
 };
 
