@@ -4,13 +4,22 @@ import {
   compose,
   combineReducers
 } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { browserHistory } from 'react-router';
+import { syncHistory, routeReducer } from 'react-router-redux';
+
 import * as reducers from '../reducers';
+import userSaga from '../sagas/user';
 
-const finalCreateStore = compose(
-  //applyMiddleware(...)
-)(createStore);
+const finalCreateStore = compose(applyMiddleware(
+  createSagaMiddleware(userSaga),
+  syncHistory(browserHistory)
+))(createStore);
 
-const reducer = combineReducers(reducers);
+const reducer = combineReducers({
+  ...reducers,
+  routing: routeReducer
+});
 
 /**
  * Initial state of the Redux store.
