@@ -6,12 +6,7 @@ import {
 } from 'redux';
 import { persistState } from 'redux-devtools';
 import createSagaMiddleware from 'redux-saga';
-import {
-  Router,
-  Route,
-  IndexRoute,
-  browserHistory
-} from 'react-router';
+import { browserHistory } from 'react-router';
 import { syncHistory, routeReducer } from 'react-router-redux';
 
 import * as reducers from '../reducers';

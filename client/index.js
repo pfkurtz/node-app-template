@@ -13,6 +13,13 @@ import store from './store';
 import React from 'react';
 import { render } from 'react-dom';
 import { connect, Provider } from 'react-redux';
+import {
+  Router,
+  Route,
+  IndexRoute,
+  browserHistory
+} from 'react-router';
+
 import App from './components';
 
 /**
@@ -31,12 +38,14 @@ function props(state) {
 const RootComponent = connect(props)(App);
 
 document.addEventListener('DOMContentLoaded', () => {
-  const main = document.getElementById('main');
-
   render(
     <Provider store={store}>
-      <RootComponent />
+      <Router history={browserHistory}>
+        <Route path="/" component={RootComponent}>
+
+        </Route>
+      </Router>
     </Provider>,
-    main
+    document.getElementById('main')
   );
 });
