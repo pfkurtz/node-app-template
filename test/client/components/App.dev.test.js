@@ -32,8 +32,6 @@ const App = proxyquire('../../../client/components/App/App.dev', {
   }
 }).default;
 
-console.log("1", DevTools);
-
 describe('COMPONENT: App.dev without user', () => {
   const renderer = createRenderer();
 
