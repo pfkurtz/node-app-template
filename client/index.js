@@ -20,9 +20,12 @@ import {
   browserHistory
 } from 'react-router';
 
+import reactRouter from 'react-router';
+
 import App from './components';
 import Foo from './components/Foo';
 import FooLink from './components/Foo/Link';
+import NotFound from './components/errors/NotFound';
 
 /**
  * `props` for `RootComponent` (`App`)
@@ -47,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <Route path="/" component={RootComponent}>
           <IndexRoute component={FooLink} />
           <Route path="foo" component={Foo} />
+          <Route path="*" component={NotFound} />
         </Route>
       </Router>
     </Provider>,
