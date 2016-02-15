@@ -21,6 +21,11 @@ const App = props => (
     {props.children}
 
     <hr />
+    <p>
+      This is the classic counter example.<br />
+      It's the second-to-last component in the `App` component. There's a test for that.
+    </p>
+    
     <Counter count={props.count} />
 
     <DevTools />

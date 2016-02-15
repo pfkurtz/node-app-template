@@ -14,6 +14,12 @@ export function run(worker) {
 
   app.use(serveStatic(path.resolve(process.cwd(), 'public')));
 
+  // I don't know how we do this when start isomorphic stage,
+  // but this allows the client app to handle all routes for now
+  app.get('*', (req, res) => {
+    res.sendFile(process.cwd()+'/public/index.html');
+  });
+
   http.on('request', app);
 
   setupSocketHandlers(sc);
