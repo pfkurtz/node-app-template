@@ -6,6 +6,8 @@ import {
 } from 'redux';
 import { persistState } from 'redux-devtools';
 import createSagaMiddleware from 'redux-saga';
+import { browserHistory } from 'react-router';
+import { syncHistory, routeReducer } from 'react-router-redux';
 
 import * as reducers from '../reducers';
 import DevTools from '../components/App/DevTools';
@@ -16,7 +18,10 @@ import userSaga from '../sagas/user';
  * Wrapper for `createStore`
  */
 const finalCreateStore = compose(
-  applyMiddleware(createSagaMiddleware(userSaga)),
+  applyMiddleware(
+    createSagaMiddleware(userSaga),
+    syncHistory(browserHistory)
+  ),
   DevTools.instrument(),
   persistState(getSessionDebugKey()),
 
@@ -33,7 +38,10 @@ function getSessionDebugKey() {
   return (matches && matches.length > 0) ? matches[1] : null;
 }
 
-const reducer = combineReducers(reducers);
+const reducer = combineReducers({
+  ...reducers,
+  routing: routeReducer
+});
 
 /**
  * Initial state of the Redux store.
