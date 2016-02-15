@@ -1,7 +1,9 @@
 import React from 'react';
 
-const Foo = props => (
-  <h2>bar</h2>
+const Home = props => (
+  <div>
+    <h1>This is the home page</h1>
+  </div>
 );
 
-export default Foo;
+export default Home;
