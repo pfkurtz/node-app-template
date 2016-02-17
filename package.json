@@ -29,6 +29,7 @@
     "connect": "^3.4.1",
     "deep-freeze": "0.0.1",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "get-form-data": "^1.2.5",
     "path": "^0.12.7",
     "react": "^0.14.7",
@@ -37,7 +38,9 @@
     "react-router-redux": "^3.0.0",
     "redux": "^3.3.1",
     "redux-saga": "^0.7.0",
+    "rethinkdb": "^2.2.1",
     "serve-static": "^1.10.2",
+    "session-rethinkdb": "^2.0.0",
     "socketcluster": "^4.3.2",
     "socketcluster-client": "^4.3.3"
   },
