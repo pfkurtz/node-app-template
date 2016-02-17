@@ -39,6 +39,7 @@
     "redux": "^3.3.1",
     "redux-saga": "^0.7.0",
     "rethinkdb": "^2.2.1",
+    "rethinkdbdash": "^2.2.18",
     "serve-static": "^1.10.2",
     "session-rethinkdb": "^2.0.0",
     "socketcluster": "^4.3.2",
