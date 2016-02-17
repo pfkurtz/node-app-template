@@ -10,6 +10,10 @@ export function run(worker) {
 
   const http = worker.httpServer;
   const sc = worker.scServer;
+  const AuthEngine = worker.auth;
+  const verifyToken = AuthEngine.verifyToken;
+  // console.log("verifyToken:", !!AuthEngine.verifyToken);
+
   const app = express();
 
   app.use(serveStatic(path.resolve(process.cwd(), 'public')));

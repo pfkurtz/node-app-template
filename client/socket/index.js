@@ -7,7 +7,8 @@ const socket = socketCluster.connect();
 
 socket.on('connect', () => {
   // First step in the user saga, at this point
-  dispatch(checkForSignedJWT(socket.getAuthToken()));
+  const authToken = socket.getAuthToken();
+  dispatch(checkForSignedJWT(authToken));
 });
 
 socket.on('error', (err) => {
@@ -49,4 +50,6 @@ export function socketLogin(credentials) {
  */
 export function socketLogout() {
   socket.deauthenticate();
+  /* @TODO delete cookie, but put it back if deauthenticate fails, right? */
+  delete document.cookie;
 }
