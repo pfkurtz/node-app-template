@@ -19,7 +19,7 @@ describe('COMPONENT: Logout', () => {
 
     cb = sinon.spy();
 
-    Logout = proxyquire('../../../../../client/components/user/auth/Logout', {
+    Logout = proxyquire('../../../../../src/client/components/user/auth/Logout', {
       './helpers/handleLogout': {
         __esModule: true,
         '@noCallThru': true,

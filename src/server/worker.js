@@ -2,8 +2,7 @@ import express from 'express';
 import path from 'path';
 import serveStatic from 'serve-static';
 
-import { PROD } from '../common/constants/env';
-import setupSocketHandlers from './sockets';
+import setupSocketHandlers from './socket';
 
 export function run(worker) {
   console.log(`   >> SC Worker PID: ${process.pid}`);
