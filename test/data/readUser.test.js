@@ -29,7 +29,7 @@ describe("DATA API: readUser", () => {
     expect(streamUser.called).to.be.true;
   });
 
-  it('should call it with idstring', () => {
+  it('should call it with "idstring"', () => {
     readUser(idstring);
     expect(streamUser.calledWith(idstring)).to.be.true;
   });
