@@ -8,6 +8,7 @@ import r from './index';
  * @return {Promise} - get() Promise
  */
 export default function get(table, id) {
+  // @TODO expect
   return r.table(table)
     .get(id)
     .run();
