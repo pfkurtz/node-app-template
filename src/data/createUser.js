@@ -34,6 +34,8 @@ export default function createUser(userData) {
     return Promise.resolve(PASSWORD_VALIDATION_ERROR);
   }
 
+  /* @TODO check for uniqueness of username, email */
+
   const userDoc = {
     username: userData.username,
     password: userData.password

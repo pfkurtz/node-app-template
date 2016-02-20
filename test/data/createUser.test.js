@@ -49,9 +49,9 @@ describe("DATA API: createUser", () => {
 
   it(`should resolve to ${USERNAME_VALIDATION_ERROR} if passed an invalid username`, () => {
     createUser(userWithBadUsername)
-      .then(result => {
-        expect(result).to.equal(USERNAME_VALIDATION_ERROR);
-      });
+    .then(result => {
+      expect(result).to.equal(USERNAME_VALIDATION_ERROR);
+    });
   });
 
   const userWithBadPassWord = { username, password: 'bad' };
@@ -64,8 +64,8 @@ describe("DATA API: createUser", () => {
 
   it(`should resolve to ${PASSWORD_VALIDATION_ERROR} if passed an invalid password`, () => {
     createUser(userWithBadPassWord)
-      .then(result => {
-        exxpect(result).to.equal(PASSWORD_VALIDATION_ERROR);
-      });
+    .then(result => {
+      exxpect(result).to.equal(PASSWORD_VALIDATION_ERROR);
+    });
   });
 });
