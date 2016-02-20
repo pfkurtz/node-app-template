@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 
 import insert from '../rethink/insert';
-import staticPromise from '../utils/staticPromise';
 
 import { USERS_TABLE } from '../common/constants/tables';
 import { PROD } from '../common/constants/env';
@@ -29,10 +28,10 @@ export default function createUser(userData) {
 
   // validation @TODO own module
   if (!userData.username.match(USERNAME_VALIDATION_PATTERN)) {
-    return staticPromise(USERNAME_VALIDATION_ERROR);
+    return Promise.resolve(USERNAME_VALIDATION_ERROR);
 
   } else if (!userData.password.match(PASSWORD_VALIDATION_PATTERN)) {
-    return staticPromise(PASSWORD_VALIDATION_ERROR);
+    return Promise.resolve(PASSWORD_VALIDATION_ERROR);
   }
 
   const userDoc = {
