@@ -96,11 +96,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/patkirts/app-template"
+    "url": "https://github.com/pfkurtz/node-app-template"
   },
   "bugs": {
-    "url": "https://bitbucket.org/patkirts/app-template/issues"
+    "url": "https://github.com/pfkurtz/node-app-template/issues"
   },
-  "private": true,
   "readMeFileName": "README.md"
 }
