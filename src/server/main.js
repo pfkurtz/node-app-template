@@ -2,7 +2,6 @@ import { SocketCluster } from 'socketcluster';
 
 // RethinkDB is running, this call probably won't stay here
 import '../rethink';
-import '../rethink/insert';
 
 const cluster = new SocketCluster({
   workers: process.env.NUMBER_WORKERS || 1,
