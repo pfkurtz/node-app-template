@@ -7,7 +7,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   UPDATE_USER
-} from '../../../client/constants/actions';
+} from '../../../src/client/constants/actions';
 
 import {
   loginRequest,
@@ -16,7 +16,7 @@ import {
   loginFailureCredentials,
   logout,
   updateUser
-} from '../../../client/actions/user';
+} from '../../../src/client/actions/user';
 
 describe('ACTION: loginRequest', () => {
   const goodCredentials = {

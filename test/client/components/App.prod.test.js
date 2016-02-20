@@ -2,7 +2,7 @@
 // import React from 'react';
 // import { createRenderer } from 'react-addons-test-utils';
 //
-// import App from '../../../client/components/App/App.prod';
+// import App from '../../../src/client/components/App/App.prod';
 //
 //
 // describe('COMPONENT: App.prod', () => {

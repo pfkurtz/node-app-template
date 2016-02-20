@@ -6,10 +6,9 @@ import { createRenderer } from 'react-addons-test-utils';
 // Child Component stubs
 const Counter = () => <div />;
 const DevTools = () => <div />;
-const Login = () => <div />;
-const Logout = () => <div />;
+const Header = () => <div />;
 
-const App = proxyquire('../../../client/components/App/App.dev', {
+const App = proxyquire('../../../src/client/components/App/App.dev', {
   '../Counter': {
     __esModule: true,
     '@noCallThru': true,
@@ -20,19 +19,14 @@ const App = proxyquire('../../../client/components/App/App.dev', {
     '@noCallThru': true,
     default: DevTools
   },
-  '../user/auth/Login': {
+  '../layout/Header': {
     __esModule: true,
     '@noCallThru': true,
-    default: Login
-  },
-  '../user/auth/Logout': {
-    __esModule: true,
-    '@noCallThru': true,
-    default: Logout
+    default: Header
   }
 }).default;
 
-describe('COMPONENT: App.dev without user', () => {
+describe('COMPONENT: App.dev', () => {
   const renderer = createRenderer();
 
   renderer.render(
@@ -43,8 +37,8 @@ describe('COMPONENT: App.dev without user', () => {
   const appWithoutUser = renderer.getRenderOutput();
   const children = appWithoutUser.props.children;
 
-  it('should render Login as first child', () => {
-    expect(children[0].type).to.equal(Login);
+  it('should render Header as first child', () => {
+    expect(children[0].type).to.equal(Header);
   });
 
   it('should render Counter second to last', () => {
@@ -52,33 +46,6 @@ describe('COMPONENT: App.dev without user', () => {
       .to.equal(Counter);
   });
 
-  /* @TODO really spec this shit out */
-  it('should have a last child of type DevTools', () => {
-    expect(children[children.length-1].type)
-      .to.equal(DevTools);
-  });
-
-});
-
-describe('COMPONENT: App.dev with user', () => {
-  const renderer = createRenderer();
-
-  renderer.render(<App count={0} location={{ pathname: '/' }}
-    userRecord={{ user: {} }} />);
-
-  const appWithUser = renderer.getRenderOutput();
-  const children = appWithUser.props.children;
-
-  it('should render Logout as first child', () => {
-    expect(children[0].type).to.equal(Logout);
-  });
-
-  it('should render Counter second to last', () => {
-    expect(children[children.length-2].type)
-      .to.equal(Counter);
-  });
-
-  /* @TODO really spec this shit out */
   it('should have a last child of type DevTools', () => {
     expect(children[children.length-1].type)
       .to.equal(DevTools);

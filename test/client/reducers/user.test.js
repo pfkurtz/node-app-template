@@ -7,10 +7,10 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   UPDATE_USER
-} from '../../../client/constants/actions';
+} from '../../../src/client/constants/actions';
 
-import userRecord from '../../../client/reducers/userRecord';
+import userRecord from '../../../src/client/reducers/userRecord';
 
 describe('REDUCER: userRecord', () => {
-  
+
 });
