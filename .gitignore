@@ -1,7 +1,7 @@
 build/
 local/
 node_modules
-npm-debug.log
+npm-debug.*
 public/index.*
 rethinkdb_data
 .tern-project
