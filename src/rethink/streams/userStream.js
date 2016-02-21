@@ -9,7 +9,7 @@ import { PROD } from '../../constants/env';
  * @param  {string} id - user doc id
  * @return {Promise} - user stream
  */
-export default function streamUser(id) {
+export default function userStream(id) {
   if (process.env.NODE_ENV !== PROD) {
     expect(id).to.be.a('string');
   }

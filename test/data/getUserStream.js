@@ -2,22 +2,20 @@ import { expect, AssertionError } from 'chai';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
 
-import { USERS_TABLE } from  '../../src/constants/tables';
-
-describe("DATA API: readUser", () => {
-  let readUser, _get;
+describe("DATA API: getUserStream", () => {
+  let readUser, userStream;
   const idstring = 'idstring';
 
   beforeEach(() => {
-    _get = sinon.spy(function(table, id) {
+    userStream = sinon.spy((table, id) => {
       return Promise.resolve({});
     });
 
-    readUser = proxyquire('../../src/data/readUser', {
-      '../rethink/get': {
+    readUser = proxyquire('../../src/data/getUserStream', {
+      '../rethink/streams/userStream': {
         __esModule: true,
         '@noCallThru': true,
-        default: _get
+        default: userStream
       }
     }).default;
   });
@@ -26,14 +24,14 @@ describe("DATA API: readUser", () => {
     expect(() => readUser()).to.throw(AssertionError);
   });
 
-  it('should call _get', () => {
+  it('should call userStream', () => {
     readUser(idstring);
-    expect(_get.called).to.be.true;
+    expect(userStream.called).to.be.true;
   });
 
   it('should call it with "idstring"', () => {
     readUser(idstring);
-    expect(_get.calledWith(USERS_TABLE, idstring)).to.be.true;
+    expect(userStream.calledWith(idstring)).to.be.true;
   });
 
   it('should return a Promise that resolves to an object', () => {

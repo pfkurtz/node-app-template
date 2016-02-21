@@ -1,3 +1,7 @@
+/*
+@TODO sinon on `insert`
+ */
+
 import { expect, AssertionError } from 'chai';
 import proxyquire from 'proxyquire';
 
