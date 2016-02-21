@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import Counter from '../Counter';
-import Login from '../user/auth/Login';
-import Logout from '../user/auth/Logout';
+import Header from '../layout/Header';
 
 const App = props => (
   <div>

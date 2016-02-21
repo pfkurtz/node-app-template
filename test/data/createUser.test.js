@@ -4,7 +4,7 @@ import proxyquire from 'proxyquire';
 import {
   PASSWORD_VALIDATION_ERROR,
   USERNAME_VALIDATION_ERROR
-} from '../../src/common/constants/validation';
+} from '../../src/constants/validation';
 
 
 function insert(table, id) {

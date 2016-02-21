@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
 import r from './index';
-import { USERS_TABLE } from '../../common/constants/tables';
-import { PROD } from '../../common/constants/env';
+import { USERS_TABLE } from '../../constants/tables';
+import { PROD } from '../../constants/env';
 
 /**
  * Promise for a document stream in RethinkDB.

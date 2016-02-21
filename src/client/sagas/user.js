@@ -7,18 +7,18 @@ import {
   LOGIN_FAILURE_ERROR,
   LOGOUT,
   UPDATE_USER
-} from '../constants/actions';
+} from '../../constants/actions';
 
 import {
   MISSING_VALUE
-} from '../../common/constants/errors';
+} from '../../constants/errors';
 
 import {
   loginSuccess,
   loginFailureCredentials,
   loginFailureError,
   logout
-} from '../actions/user';
+} from '../../actions/user';
 
 import {
   getAuthToken,

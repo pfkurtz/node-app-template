@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import getFormData from 'get-form-data';
 
-import { dispatch } from '../../../store';
+import { dispatch } from '../../store';
 import { LOGIN_REQUEST } from '../../../constants/actions';
 import { loginRequest } from '../../../actions/user';
 

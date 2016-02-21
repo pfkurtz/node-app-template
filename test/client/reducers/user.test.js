@@ -7,7 +7,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   UPDATE_USER
-} from '../../../src/client/constants/actions';
+} from '../../../src/constants/actions';
 
 import userRecord from '../../../src/client/reducers/userRecord';
 

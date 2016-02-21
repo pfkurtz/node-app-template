@@ -6,9 +6,9 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   UPDATE_USER
-} from '../constants/actions';
+} from '../../constants/actions';
 
-import { NO_USER_RECORD } from '../constants/errors';
+import { NO_USER_RECORD } from '../../constants/errors';
 
 const defaultState = {
   status: LOGOUT,

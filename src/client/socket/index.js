@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { checkForSignedJWT } from '../actions/user';
+import { checkForSignedJWT } from '../../actions/user';
 import { dispatch } from '../store';
 
 const socket = socketCluster.connect();

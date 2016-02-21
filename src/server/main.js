@@ -1,4 +1,5 @@
 import { SocketCluster } from 'socketcluster';
+import { DEV } from '../constants/env';
 
 // RethinkDB is running, this call probably won't stay here
 import '../rethink';
@@ -14,7 +15,7 @@ const cluster = new SocketCluster({
   rebootWorkerOnCrash: true
 });
 
-if (process.env.NODE_ENV = 'development') {
+if (process.env.NODE_ENV = DEV) {
   // This allows cluster to restart with nodemon
   process.on('SIGUSR2', () => {
     cluster.killWorkers();

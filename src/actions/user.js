@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { PROD } from '../../common/constants/env';
+import { PROD } from '../constants/env';
 
 import {
   CHECK_FOR_SIGNED_JWT,

@@ -1,0 +1,2 @@
+export const MISSING_VALUE = 'MISSING_VALUE';
+export const NO_USER_RECORD = 'NO_USER_RECORD';

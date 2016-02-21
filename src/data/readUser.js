@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import streamUser from '../rethink/streams/streamUser';
-import { PROD } from '../common/constants/env';
+import { PROD } from '../constants/env';
 
 /**
  * Promise to get a user document from rethink.

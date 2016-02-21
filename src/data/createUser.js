@@ -2,14 +2,14 @@ import { expect } from 'chai';
 
 import insert from '../rethink/insert';
 
-import { USERS_TABLE } from '../common/constants/tables';
-import { PROD } from '../common/constants/env';
+import { USERS_TABLE } from '../constants/tables';
+import { PROD } from '../constants/env';
 import {
   PASSWORD_VALIDATION_ERROR,
   PASSWORD_VALIDATION_PATTERN,
   USERNAME_VALIDATION_ERROR,
   USERNAME_VALIDATION_PATTERN
-} from '../common/constants/validation';
+} from '../constants/validation';
 
 /**
  * Validate new user data and return promise from  rethink api,
