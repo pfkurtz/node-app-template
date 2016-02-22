@@ -1,11 +1,25 @@
 import express from 'express';
-import path from 'path';
 import serveStatic from 'serve-static';
 
+import { PROD } from '../constants/env';
+
+/**
+ * Initialize, set up, and return an Express app.
+ * @return {object} Express app
+ */
 export default function app() {
   const app = express();
 
-  app.use(serveStatic(path.resolve(process.cwd(), 'src/public')));
+  let publicPath;
+  if (process.env.NODE_ENV === PROD) {
+    publicPath = '/public';
+  } else {
+    publicPath = '/src/public';
+  }
+
+  app.use(serveStatic(process.cwd() + publicPath));
+
+  /* @TODO routes in own modules */
 
   // Public/Universal JS routes will be like this
   app.get('/universal', (req, res) => {
@@ -16,7 +30,7 @@ export default function app() {
   // Any SPA route is covered by this,
   // because the client has enough data for page's state
   app.all('*', (req, res) => {
-    res.sendFile(process.cwd()+'/src/public/index.html');
+    res.sendFile(process.cwd() + publicPath + '/index.html');
   });
 
   return app;
