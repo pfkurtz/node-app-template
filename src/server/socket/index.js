@@ -3,47 +3,42 @@ import { expect } from 'chai';
 import { PROD } from '../../constants/env';
 import LOGIN_FAILURE_CREDENTIALS from '../../constants/errors';
 
-export default function setupSocketHandlers(scServer) {
-  const sc = scServer;
+export default function socket(socket) {
+  const initialAuthToken = socket.getAuthToken();
+  console.log("got a connection:", initialAuthToken ?
+    initialAuthToken.username : " Somebodye, dunnowhoo");
 
-  sc.on('connection', function(socket) {
-    const head = socket.request.headers;
+  socket.on('login', (credentials, respond) => {
+    if (process.env.NODE_ENV !== PROD) {
+      expect(credentials).to.be.an('object');
+      /* @TODO username/pw expectations */
+    }
+
     const authToken = socket.getAuthToken();
 
-    console.log("got a connection:", authToken ? authToken.username : " Somebodye, dunnowhoo");
+    if (authToken) {
+      /* @TODO replace string with err constant
+       * Normal client interactions shouldn't get here, so wherever this is after all the refactoring should set off bells and whistles */
+      respond('User already logged in.');
+      return false;
+    }
 
-    socket.on('login', (credentials, respond) => {
-      if (process.env.NODE_ENV !== PROD) {
-        expect(credentials).to.be.an('object');
-        /* @TODO username/pw expectations */
-      }
+    if (credentials.password === 'letmein') {
+      respond();
 
-      const authToken = socket.getAuthToken();
+      socket.setAuthToken({
+        username: credentials.username
+      });
 
-      if (authToken) {
-        /* @TODO replace string with err constant
-         * Normal client interactions shouldn't get here, so wherever this is after all the refactoring should set off bells and whistles */
-        respond('User already logged in.');
-        return false;
-      }
+      console.log(`${socket.getAuthToken().username} logged in.`);
+      return true;
 
-      if (credentials.password === 'letmein') {
-        respond();
-
-        socket.setAuthToken({
-          username: credentials.username
-        });
-
-        console.log(`${socket.getAuthToken().username} logged in.`);
-        return true;
-
-      } else {
-        console.log(`Login failed for ${credentials.username}`);
-        /* @TODO replace string with err constant */
-        respond(LOGIN_FAILURE_CREDENTIALS);
-        return false;
-      }
-    });
+    } else {
+      console.log(`Login failed for ${credentials.username}`);
+      /* @TODO replace string with err constant */
+      respond(LOGIN_FAILURE_CREDENTIALS);
+      return false;
+    }
   });
 
 }
