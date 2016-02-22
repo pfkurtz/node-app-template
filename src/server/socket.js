@@ -12,10 +12,13 @@ export default function socket(scSocket) {
   console.log("got a connection:", initialAuthToken ?
     initialAuthToken.username : " Somebodye, dunnowhoo");
 
-  console.log(listeners);
-
+  // Initialize all the event listeners for the scSocket
   forEach(listeners, listener => {
     scSocket.on(listener.eventName, listener(scSocket));
   });
+
+  // @TODO
+  // database streams
+  // channels (chat)
 
 }

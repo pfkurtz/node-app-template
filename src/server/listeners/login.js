@@ -4,7 +4,13 @@ import { PROD } from '../../constants/env';
 import { LOGIN_FAILURE_CREDENTIALS } from '../../constants/errors';
 import { USER_ALREADY_LOGGED_IN } from '../../constants/failures';
 
+/**
+ * Return a 'login' event handler that knows a `scSocket`.
+ * @param  {[type]} scSocket [description]
+ * @return {[type]}          [description]
+ */
 function login(scSocket) {
+  // @TODO expectation on `scSocket`
 
   /**
    * Handler for built-in SocketCluster 'login' event.
