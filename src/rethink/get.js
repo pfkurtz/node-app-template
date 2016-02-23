@@ -1,5 +1,6 @@
-import { expect } from 'chai';
 import r from './index';
+import envIsProduction from '../utils/envIsProduction';
+import expectString from '../expectations/expectString';
 
 /**
  * Promise for a document get in RethinkDB.
@@ -8,7 +9,11 @@ import r from './index';
  * @return {Promise} - get() Promise
  */
 export default function get(table, id) {
-  // @TODO expect
+  if (!envIsProduction()) {
+    expectString(table);
+    expectString(id);
+  }
+
   return r.table(table)
     .get(id)
     .run();
