@@ -10,7 +10,8 @@ import {
 } from '../../constants/actions';
 
 import {
-  MISSING_VALUE
+  MISSING_VALUE,
+  SOCKET_EMIT_ERROR
 } from '../../constants/errors';
 
 import {
@@ -22,10 +23,15 @@ import {
 
 import {
   getAuthToken,
-  socketLogin,
-  socketLogout
+  emitLogin,
+  emitLogout
 } from '../socket';
 
+/**
+ * Infinite generator for user state.
+ * @TODO tests
+ * @return {undefined} NA
+ */
 export default function* userSaga() {
   const { payload } = yield take(CHECK_FOR_SIGNED_JWT);
   let username = payload ? payload.username : null;
@@ -45,7 +51,7 @@ export default function* userSaga() {
       // @TODO race for LOGOUT or UPDATE_USER
       yield take(LOGOUT);
       // server logout resolves itself asynchronously
-      socketLogout();
+      emitLogout();
       // logout client
       yield put(logout());
 
@@ -56,19 +62,20 @@ export default function* userSaga() {
       const { payload } = yield take(LOGIN_REQUEST);
 
       // call socket.login, which should return a promise
-      // be sure to set authToken
-      const loggedIn = yield call(socketLogin, payload);
-      console.log("`loggedIn` value", loggedIn);
+      const loggedIn = yield call(emitLogin, payload);
+      
+      /* @TODO set authToken */
 
+      /* @TODO make this not ugly */
       if (loggedIn === true) {
         username = payload.username;
         yield put(loginSuccess({ username }));
 
-      } else if (loggedIn === LOGIN_FAILURE_ERROR) {
-        yield put(loginFailureError());
-
       } else if (loggedIn === LOGIN_FAILURE_CREDENTIALS) {
         yield put(loginFailureCredentials());
+
+      } else if (loggedIn === LOGIN_FAILURE_ERROR || loggedIn === SOCKET_EMIT_ERROR) {
+        yield put(loginFailureError());
 
       } else {
         throw new Error(MISSING_VALUE);

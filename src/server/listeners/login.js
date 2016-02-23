@@ -7,7 +7,11 @@ import {
   LOGIN_FAILURE_CREDENTIALS,
   LOGIN_FAILURE_ERROR
 } from '../../constants/failures';
-import { USER_ALREADY_LOGGED_IN } from '../../constants/errors';
+
+import {
+  MISSING_VALUE,
+  USER_ALREADY_LOGGED_IN
+} from '../../constants/errors';
 
 /**
  * Return a 'login' handler with `scSocket` dependecy injected.
@@ -38,6 +42,7 @@ function login(scSocket) {
       return;
     }
 
+    // @TODO try/catch
     readUser(credentials.username, true)
     .then(res => {
       const user = res[0];
@@ -53,7 +58,7 @@ function login(scSocket) {
 
       } else {
         console.log(`Login failed for ${user.username}`);
-        return respond('LOGIN_FAILURE_CREDENTIALS');
+        return respond(LOGIN_FAILURE_CREDENTIALS);
       }
     })
     .catch(err => {

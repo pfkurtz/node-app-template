@@ -12,7 +12,7 @@
     "deploy": "./scripts/deploy.sh",
     "install-globals-dev": "npm i -g babel-cli browserify html-validator-cli livereloadx nodemon parallelshell uglify-js vulcanize watchify",
     "install-globals-prod": "npm i -g forever",
-    "livereload": "livereloadx public --exclude *.html -s -p 9091",
+    "livereload": "livereloadx src/public --exclude *.html -s -p 9091",
     "node:dev": "echo '*** (RE)STARTING SERVER ***' && babel-node src/server/main.js",
     "start": "export NODE_ENV=development; export PORT=3000; parallelshell 'npm run watch' 'npm run livereload' 'npm run start:dev'",
     "prestart": "echo '*** STARTING APPLICATION ***\n'",
