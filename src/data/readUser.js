@@ -20,6 +20,6 @@ export default function readUser(identifier, username) {
     if (username !== undefined) expectBoolean(username);
   }
 
-  if (username) return getUserByUsername(username);
+  if (username) return getUserByUsername(identifier);
   return _get(USERS_TABLE, identifier);
 }
