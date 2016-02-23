@@ -13,6 +13,8 @@ import {
   USER_ALREADY_LOGGED_IN
 } from '../../constants/errors';
 
+import { SOCKET_LOGIN } from '../../constants/sockets';
+
 /**
  * Return a 'login' handler with `scSocket` dependecy injected.
  * @TODO tests
@@ -26,11 +28,12 @@ function login(scSocket) {
    * Handler for built-in SocketCluster 'login' event.
    * @param  {object} credentials - { username|email, password }
    * @param  {object} respond - built-in SocketCluster callback
-   * @return {undefined} NA
+   * @return {object} call to `respond`
    */
-  const handler = (credentials, respond) => {
+  return async function handler(credentials, respond) {
     if (!envIsProduction()) {
       expectUserCredentials(credentials);
+      //expect respond function
     }
 
     const authToken = scSocket.getAuthToken();
@@ -42,11 +45,9 @@ function login(scSocket) {
       return;
     }
 
-    // @TODO try/catch
-    readUser(credentials.username, true)
-    .then(res => {
-      const user = res[0];
-      console.log("GOT USER BY USERNAME", user);
+    try {
+      const results = await readUser(credentials.username, true);
+      const user = results[0];
 
       if (credentials.password === user.password) {
         console.log(`${user.username} authenticated`);
@@ -60,17 +61,14 @@ function login(scSocket) {
         console.log(`Login failed for ${user.username}`);
         return respond(LOGIN_FAILURE_CREDENTIALS);
       }
-    })
-    .catch(err => {
+
+    } catch (err) {
       console.log("readUser error:", err);
       return respond(LOGIN_FAILURE_ERROR);
-    });
-
+    }
   }
-
-  return handler;
 }
 
-login.eventName = 'login';
+login.eventName = SOCKET_LOGIN;
 
 export default login;
