@@ -6,8 +6,8 @@ import expectUserCredentials from '../../expectations/expectUserCredentials';
 import {
   LOGIN_FAILURE_CREDENTIALS,
   LOGIN_FAILURE_ERROR
-} from '../../constants/errors';
-import { USER_ALREADY_LOGGED_IN } from '../../constants/failures';
+} from '../../constants/failures';
+import { USER_ALREADY_LOGGED_IN } from '../../constants/errors';
 
 /**
  * Return a 'login' handler with `scSocket` dependecy injected.
@@ -53,7 +53,7 @@ function login(scSocket) {
 
       } else {
         console.log(`Login failed for ${user.username}`);
-        return respond(LOGIN_FAILURE_CREDENTIALS);
+        return respond('LOGIN_FAILURE_CREDENTIALS');
       }
     })
     .catch(err => {

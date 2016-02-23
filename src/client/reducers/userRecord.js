@@ -8,7 +8,7 @@ import {
   UPDATE_USER
 } from '../../constants/actions';
 
-import { NO_USER_RECORD } from '../../constants/errors';
+import { NO_USER_RECORD } from '../../constants/failures';
 
 const defaultState = {
   status: LOGOUT,

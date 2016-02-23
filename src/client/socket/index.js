@@ -37,7 +37,9 @@ export function getAuthToken() {
  */
 export function socketLogin(credentials) {
   return new Promise((resolve, reject) => {
-    return socket.emit('login', credentials, (err) => {
+    // @TODO promise pattern
+    return socket.emit('login', credentials, (err, data) => {
+      console.log("login emit callback", err);
       if (err) return resolve(err);
       return resolve(true);
     });
