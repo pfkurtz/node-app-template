@@ -60,8 +60,6 @@ describe("DATA API: createUser", () => {
 
   const userWithBadPassWord = { username, password: 'bad' };
 
-  console.log(createUser(userWithBadPassWord).then(res => res));
-
   it('should return a Promise with invalid password', () => {
     expect(createUser(userWithBadPassWord)).to.be.a('promise')
   });

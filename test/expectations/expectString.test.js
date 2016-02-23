@@ -5,10 +5,10 @@ describe("EXPECTATION: expectString", () => {
   const goodValues = ['a', 'Garion becomes Belgarion'];
   const badValues = [
     goodValues,
-    {},
+    { foo: 'bar' },
     null,
     true,
-    Promise.resolve(() => undefined)
+    new Promise(() => undefined)
   ];
 
   goodValues.forEach((value) => {
