@@ -8,7 +8,7 @@ import { PROD } from '../constants/env';
  * @param  {string} identifier - id, username, or email
  * @return {Promise} Promise for user doc
  */
-export default function readUser(identifier) {
+export default function getUserStream(identifier) {
   if (process.env.NODE_ENV !== PROD) {
     expect(identifier).to.be.a('string');
   }

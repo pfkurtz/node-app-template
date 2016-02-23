@@ -4,6 +4,8 @@ import { PROD } from '../../constants/env';
 import { LOGIN_FAILURE_CREDENTIALS } from '../../constants/errors';
 import { USER_ALREADY_LOGGED_IN } from '../../constants/failures';
 
+import readUser from '../../data/readUser'
+
 /**
  * Return a 'login' event handler that knows a `scSocket`.
  * @param  {[type]} scSocket [description]
@@ -46,7 +48,6 @@ function login(scSocket) {
 
     } else {
       console.log(`Login failed for ${credentials.username}`);
-      /* @TODO replace string with err constant */
       respond(LOGIN_FAILURE_CREDENTIALS);
       return false;
     }
