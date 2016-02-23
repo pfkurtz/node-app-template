@@ -3,7 +3,7 @@ import proxyquire from 'proxyquire';
 import sinon from 'sinon';
 
 describe("DATA API: getUserStream", () => {
-  let readUser, userStream;
+  let getUserStream, userStream;
   const idstring = 'idstring';
 
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe("DATA API: getUserStream", () => {
       return Promise.resolve({});
     });
 
-    readUser = proxyquire('../../src/data/getUserStream', {
+    getUserStream = proxyquire('../../src/data/getUserStream', {
       '../rethink/streams/userStream': {
         __esModule: true,
         '@noCallThru': true,
@@ -21,21 +21,21 @@ describe("DATA API: getUserStream", () => {
   });
 
   it('should throw AssertionError if not passed <string>identifier', () => {
-    expect(() => readUser()).to.throw(AssertionError);
+    expect(() => getUserStream()).to.throw(AssertionError);
   });
 
   it('should call userStream', () => {
-    readUser(idstring);
+    getUserStream(idstring);
     expect(userStream.called).to.be.true;
   });
 
   it('should call it with "idstring"', () => {
-    readUser(idstring);
+    getUserStream(idstring);
     expect(userStream.calledWith(idstring)).to.be.true;
   });
 
   it('should return a Promise that resolves to an object', () => {
-    readUser(idstring)
+    getUserStream(idstring)
     .then(result => {
       expect(result).to.be.an('object');
     });

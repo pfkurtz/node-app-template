@@ -1,56 +1,66 @@
-import { expect } from 'chai';
-
-import { PROD } from '../../constants/env';
-import { LOGIN_FAILURE_CREDENTIALS } from '../../constants/errors';
-import { USER_ALREADY_LOGGED_IN } from '../../constants/failures';
-
 import readUser from '../../data/readUser'
 
+import envIsProduction from '../../utils/envIsProduction';
+import expectUserCredentials from '../../expectations/expectUserCredentials';
+
+import {
+  LOGIN_FAILURE_CREDENTIALS,
+  LOGIN_FAILURE_ERROR
+} from '../../constants/errors';
+import { USER_ALREADY_LOGGED_IN } from '../../constants/failures';
+
 /**
- * Return a 'login' event handler that knows a `scSocket`.
- * @param  {[type]} scSocket [description]
- * @return {[type]}          [description]
+ * Return a 'login' handler with `scSocket` dependecy injected.
+ * @TODO tests
+ * @param  {object} scSocket - SocketCluster server socket
+ * @return {function} event handler
  */
 function login(scSocket) {
-  // @TODO expectation on `scSocket`
+  /* @TODO expectation on `scSocket` */
 
   /**
    * Handler for built-in SocketCluster 'login' event.
    * @param  {object} credentials - { username|email, password }
-   * @param  {[type]} respond - built-in SocketCluster callback
-   * @return {boolean} whether the login is successful
+   * @param  {object} respond - built-in SocketCluster callback
+   * @return {undefined} NA
    */
   const handler = (credentials, respond) => {
-    if (process.env.NODE_ENV !== PROD) {
-      expect(credentials).to.be.an('object');
-      /* @TODO username/pw expectations */
+    if (!envIsProduction()) {
+      expectUserCredentials(credentials);
     }
 
     const authToken = scSocket.getAuthToken();
 
     if (authToken) {
       // Normal client interactions shouldn't get here,
-      // so if it does it should set off alarms
+      // so if it does it should set off alarms, or at least error logging.
       respond(USER_ALREADY_LOGGED_IN);
-      return false;
+      return;
     }
 
-    /* @TODO connect to database */
+    readUser(credentials.username, true)
+    .then(res => {
+      const user = res[0];
+      console.log("GOT USER BY USERNAME", user);
 
-    if (credentials.password === 'letmein') {
-      scSocket.setAuthToken({
-        username: credentials.username
-      });
-      console.log(`${scSocket.getAuthToken().username} logged in.`);
+      if (credentials.password === user.password) {
+        console.log(`${user.username} authenticated`);
 
-      respond();
-      return true;
+        scSocket.setAuthToken({
+          username: user.username
+        });
+        return respond();
 
-    } else {
-      console.log(`Login failed for ${credentials.username}`);
-      respond(LOGIN_FAILURE_CREDENTIALS);
-      return false;
-    }
+      } else {
+        console.log(`Login failed for ${user.username}`);
+        return respond(LOGIN_FAILURE_CREDENTIALS);
+      }
+    })
+    .catch(err => {
+      console.log("readUser error:", err);
+      return respond(LOGIN_FAILURE_ERROR);
+    });
+
   }
 
   return handler;

@@ -1,7 +1,6 @@
-import { expect } from 'chai';
-
 import userStream from '../rethink/streams/userStream';
-import { PROD } from '../constants/env';
+import envIsProduction from '../utils/envIsProduction';
+import expectString from '../expectations/expectString';
 
 /**
  * Promise to get a user document from rethink with changes().
@@ -9,8 +8,8 @@ import { PROD } from '../constants/env';
  * @return {Promise} Promise for user doc
  */
 export default function getUserStream(identifier) {
-  if (process.env.NODE_ENV !== PROD) {
-    expect(identifier).to.be.a('string');
+  if (!envIsProduction()) {
+    expectString(identifier);
   }
   return userStream(identifier);
 }
