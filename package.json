@@ -8,7 +8,7 @@
     "precompile:html": "echo 'Building Client HTML'",
     "postcompile:html": "npm run validate-html",
     "compile:js": "node node_modules/watchify -d src/client/index.js -o src/public/index.js",
-    "precomple:js": "echo 'Building Client Javascript'",
+    "precompile:js": "echo 'Building Client Javascript'",
     "build": "./scripts/build.sh",
     "clear": "rm -rf node_modules/ build/",
     "livereload": "node node_modules/livereloadx/bin/livereloadx src/public --exclude *.html -s -p 9091",
