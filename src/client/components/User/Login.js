@@ -14,7 +14,7 @@ import { loginRequest } from '../../../actions/user';
  * @param  {SyntheticEvent} e - React form event
  * @return {Object} dispatches loginRequest with formData
  */
-export default function handleLogin(e) {
+export function handleLogin(e) {
   e.preventDefault();
   e.stopPropagation();
 

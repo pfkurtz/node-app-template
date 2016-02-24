@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
-import Login from '../user/Login';
-import Logout from '../user/Logout';
+import Login from '../User/Login';
+import Logout from '../User/Logout';
 
 const logoutStyle = {
   float: 'right'

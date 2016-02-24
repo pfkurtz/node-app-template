@@ -7,7 +7,7 @@
     "compile:html": "./node_modules/vulcanize/bin/vulcanize --exclude /*.js src/client/index.dev.html > src/public/index.html",
     "precompile:html": "echo 'Building Client HTML'",
     "postcompile:html": "npm run validate-html",
-    "compile:js": "node node_modules/watchify -d src/client/index.js -o src/public/index.js",
+    "compile:js": "node node_modules/watchify/bin/cmd -d src/client/index.js -o src/public/index.js",
     "precompile:js": "echo 'Building Client Javascript'",
     "build": "./scripts/build.sh",
     "clear": "rm -rf node_modules/ build/",
