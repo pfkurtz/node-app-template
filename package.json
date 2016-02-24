@@ -71,7 +71,7 @@
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "uglify-js": "^2.6.2",
-    "vulcanize": "^1.14.5",
+    "vulcanize": "^1.14.6",
     "watchify": "^3.7.0"
   },
   "browserify": {
