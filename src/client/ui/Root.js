@@ -33,17 +33,17 @@ const ConnectedUser = connect(userProps)(User);
 const Root = props => (
   <Provider store={props.store}>
     <Router history={browserHistory}>
-    <Route path="/" component={ConnectedApp}>
-      <IndexRoute component={Home} />
+      <Route path="/" component={ConnectedApp}>
+        <IndexRoute component={Home} />
 
-      <Route path=":username" component={ConnectedUser}
-        onEnter={function(_props) {
-          const user = props.store.getState().userRecord.user;
-          if (!user) this.component = NotFound;
-        }} />
+        <Route path=":username" component={ConnectedUser}
+          onEnter={function(_props) {
+            const user = props.store.getState().userRecord.user;
+            if (!user) this.component = NotFound;
+          }} />
 
-      <Route path="*" component={NotFound} />
-    </Route>
+        <Route path="*" component={NotFound} />
+      </Route>
     </Router>
   </Provider>
 );
