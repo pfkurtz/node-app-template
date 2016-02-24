@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 export NODE_ENV=production
 
 # clear our build directory
@@ -12,9 +11,12 @@ vulcanize --exclude /*.js src/client/index.prod.html > build/public/index.html
 
 # compile production client js
 node node_modules/browserify/bin/cmd src/client/index.js -o build/public/index.js
+
+# uglfigy compliled code, overwriting file
 node node_modules/uglify-js/bin/uglifyjs -cm -o build/public/index.js -- build/public/index.js
 
 # compile server files
+# @TODO DRY
 node node_modules/babel-cli/bin/babel src/actions -d build/actions
 node node_modules/babel-cli/bin/babel src/constants -d build/constants
 node node_modules/babel-cli/bin/babel src/data -d build/data
