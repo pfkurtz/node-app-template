@@ -54,6 +54,7 @@
     "browserify": "^13.0.0",
     "chai": "^3.5.0",
     "envify": "^3.4.0",
+    "html-validator-cli": "^2.0.0",
     "jsx-control-statements": "^3.1.0",
     "livereloadx": "^0.3.9",
     "mocha": "^2.4.5",
