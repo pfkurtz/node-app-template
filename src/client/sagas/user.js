@@ -63,7 +63,7 @@ export default function* userSaga() {
 
       // call socket.login, which should return a promise
       const loggedIn = yield call(emitLogin, payload);
-      
+
       /* @TODO set authToken */
 
       /* @TODO make this not ugly */

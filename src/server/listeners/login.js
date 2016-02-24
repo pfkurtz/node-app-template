@@ -41,8 +41,7 @@ function login(scSocket) {
     if (authToken) {
       // Normal client interactions shouldn't get here,
       // so if it does it should set off alarms, or at least error logging.
-      respond(USER_ALREADY_LOGGED_IN);
-      return;
+      return respond(USER_ALREADY_LOGGED_IN);
     }
 
     try {
