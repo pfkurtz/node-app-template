@@ -13,9 +13,6 @@ const App = props => (
       {props.children}
     </main>
 
-    <hr />
-    <Counter count={props.count} />
-
     <DevTools />
   </div>
 );
