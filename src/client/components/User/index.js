@@ -6,6 +6,7 @@ import UserNotFound from '../errors/UserNotFound';
 
 const User = props => (
   <div>
+  {console.log("props", props)}
     <Choose>
       <When condition={props.user && props.user.username === props.currentUsername/* && no "?public_profile"*/}>
         <OwnUserProfile user={props.user} />
@@ -16,15 +17,11 @@ const User = props => (
       </When>
 
       <Otherwise>
-        <UserNotFound />
+        <UserNotFound username={props.params.username} />
       </Otherwise>
     </Choose>
   </div>
 );
-
-User.componentWillMount = function() {
-  console.log(this.props);
-}
 
 User.propTypes = {
   user: PropTypes.object,

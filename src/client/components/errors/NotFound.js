@@ -3,10 +3,7 @@ import { Link } from 'react-router';
 
 const NotFound = props => (
   <div>
-    <p>
-      <strong>Nothing Found at this Route.</strong>
-    </p>
-
+    <h1>404</h1>
     <Link to="/">home</Link>
   </div>
 );
