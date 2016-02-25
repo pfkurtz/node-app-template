@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 import Counter from '../Counter';
 import DevTools from './DevTools';
@@ -12,6 +13,9 @@ const App = props => (
     <main>
       {props.children}
     </main>
+
+    <hr />
+    <Counter count={props.count} />
 
     <DevTools />
   </div>
