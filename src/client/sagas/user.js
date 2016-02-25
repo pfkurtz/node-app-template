@@ -1,3 +1,4 @@
+import { refresh } from 'react-router';
 import { call, put, take } from 'redux-saga';
 
 import {
@@ -35,6 +36,7 @@ import {
 export default function* userSaga() {
   const { payload } = yield take(CHECK_FOR_SIGNED_JWT);
   let username = payload ? payload.username : null;
+  // console.log("saga USERNAME:", username);
 
   // on the first loop, need to set state for
   let firstLoop = true;
@@ -47,6 +49,7 @@ export default function* userSaga() {
         yield put(loginSuccess({ username }));
       }
 
+      /* @TODO own module logoutSaga */
       // wait for a logout event
       // @TODO race for LOGOUT or UPDATE_USER
       yield take(LOGOUT);
@@ -58,6 +61,8 @@ export default function* userSaga() {
       username = null;
 
     } else {
+      /* @TODO own module loginSaga */
+
       // OK, no user, wait for a LOGIN_REQUEST
       const { payload } = yield take(LOGIN_REQUEST);
 
@@ -70,6 +75,7 @@ export default function* userSaga() {
       if (loggedIn === true) {
         username = payload.username;
         yield put(loginSuccess({ username }));
+        refresh();
 
       } else if (loggedIn === LOGIN_FAILURE_CREDENTIALS) {
         yield put(loginFailureCredentials());

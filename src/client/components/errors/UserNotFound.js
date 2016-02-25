@@ -3,10 +3,7 @@ import { Link } from 'react-router';
 
 const UserNotFound = props => (
   <div>
-    <p>
-      <strong>Nobody with that username.</strong>
-    </p>
-
+    <h1>Nobody with that username.</h1>
     <Link to="/">home</Link>
   </div>
 );

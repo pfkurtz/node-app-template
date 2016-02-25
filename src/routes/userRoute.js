@@ -9,7 +9,9 @@ import store from '../client/store';
 
 function userProps(state) {
   return {
-    user: state.userRecord
+    user: state.userRecord.user,
+    currentUsername: state.userRecord.user ?
+      state.userRecord.user.username : null
   };
 }
 
@@ -17,12 +19,7 @@ const ConnectedUser = connect(userProps)(User);
 
 const userRoute = {
   path: 'user/:username',
-  component: ConnectedUser,
-  onEnter(props) {
-    const user = store.getState().userRecord.user;
-    if (!user) this.component = UserNotFound;
-    console.log("UserRoute onEnter", props, this);
-  }
+  component: ConnectedUser
 };
 
 export default userRoute;
