@@ -25,10 +25,10 @@ export default function emitLogin(scSocket) {
     }
 
     try {
-      const failureReason = await scSocket.emit(SOCKET_LOGIN, credentials);
-      return failureReason || true;
+      return await scSocket.emit(SOCKET_LOGIN, credentials);
 
     } catch (err) {
+      console.warn(err);
       return SOCKET_EMIT_ERROR;
     }
   }

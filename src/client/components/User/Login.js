@@ -26,6 +26,7 @@ export function handleLogin(e) {
   // just "required" in the HTML right now
 
   // update the app state
+  console.log(formData)
   return dispatch(loginRequest(formData));
 }
 

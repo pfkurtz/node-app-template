@@ -6,7 +6,7 @@ import Header from '../layout/Header';
 
 const App = props => (
   <div>
-    <Header userRecord={props.userRecord} />
+    <Header user={props.user} />
     <hr />
 
     <main>
@@ -19,9 +19,8 @@ const App = props => (
 
 // Most of these will be names of top-level reducers
 App.propTypes = {
-  count: PropTypes.number.isRequired,
   location: PropTypes.object.isRequired,
-  userRecord: PropTypes.object.isRequired
+  user: PropTypes.object
 };
 
 export default App;

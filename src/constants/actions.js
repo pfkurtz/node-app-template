@@ -10,4 +10,6 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
 export const LOGOUT = 'LOGOUT';
 
+export const SET_USER_STATUS = 'SET_USER_STATUS';
+
 export const UPDATE_USER = 'UPDATE_USER_LOCAL';

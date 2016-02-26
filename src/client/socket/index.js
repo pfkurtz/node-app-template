@@ -17,12 +17,13 @@ scSocket.on(SOCKET_CONNECT, () => {
   forEach(listeners, listener => {
     scSocket.on(listener.ACTION, (data, res) => {
       console.log("NEW DATA", data);
-      dispatch(listener.action(data));
+      //dispatch(listener.action(data));
     });
   });
 });
 
 scSocket.on(SOCKET_ERROR, (err) => {
+  scSocket.deauthenticate();
   throw 'scSocket error - !' + err;
 });
 

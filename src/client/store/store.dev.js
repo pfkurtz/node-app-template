@@ -1,3 +1,5 @@
+import { map } from 'lodash';
+
 import {
   createStore,
   applyMiddleware,
@@ -10,16 +12,16 @@ import { browserHistory } from 'react-router';
 import { syncHistory, routeReducer } from 'react-router-redux';
 
 import * as reducers from '../reducers';
+import * as sagas from '../sagas';
 import DevTools from '../components/App/DevTools';
 
-import userSaga from '../sagas/user';
 
 /**
  * Wrapper for `createStore`
  */
 const finalCreateStore = compose(
   applyMiddleware(
-    createSagaMiddleware(userSaga),
+    createSagaMiddleware(...map(sagas)),
     syncHistory(browserHistory)
   ),
   DevTools.instrument(),

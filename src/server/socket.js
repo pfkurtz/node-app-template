@@ -18,9 +18,7 @@ export default function socket(scSocket) {
   // Initialize all the event listeners for the scSocket
   // @TODO own module
   forEach(listeners, listener => {
-    scSocket.on(listener.action, (data, res) => {
-
-    });
+    scSocket.on(listener.action, listener(scSocket));
   });
 
   // @TODO own module

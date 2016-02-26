@@ -1,2 +1,4 @@
-export count from './count';
-export userRecord from './userRecord';
+export counter from './counterReducer';
+export user from './userReducer';
+export userStatus from './userStatusReducer';
+export users from './usersReducer';

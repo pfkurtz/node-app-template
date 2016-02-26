@@ -9,9 +9,8 @@ import store from '../client/store';
 
 function userProps(state) {
   return {
-    user: state.userRecord.user,
-    currentUsername: state.userRecord.user ?
-      state.userRecord.user.username : null
+    user: state.user,
+    currentUsername: state.user ? state.user.username : null
   };
 }
 

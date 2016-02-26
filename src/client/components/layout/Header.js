@@ -9,8 +9,8 @@ const logoutStyle = {
 
 const Header = props => (
   <header>
-    <If condition={props.userRecord.user}>
-      <strong>Welcome, {props.userRecord.user.username}!</strong>
+    <If condition={props.user}>
+      <strong>Welcome, {props.user.username}!</strong>
 
       <div style={logoutStyle}>
         <Logout />
@@ -23,7 +23,7 @@ const Header = props => (
 );
 
 Header.propTypes = {
-  userRecord: PropTypes.object.isRequired
+  user: PropTypes.object
 };
 
 export default Header;

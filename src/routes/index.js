@@ -10,7 +10,7 @@ function appProps(state) {
   return {
     count: state.count,
     location: state.routing.location,
-    userRecord: state.userRecord
+    user: state.user
   };
 }
 

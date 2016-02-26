@@ -9,10 +9,10 @@ import { browserHistory } from 'react-router';
 import { syncHistory, routeReducer } from 'react-router-redux';
 
 import * as reducers from '../reducers';
-import userSaga from '../sagas/user';
+import * as sagas from '../sagas';
 
 const finalCreateStore = compose(applyMiddleware(
-  createSagaMiddleware(userSaga),
+  createSagaMiddleware(...saga),
   syncHistory(browserHistory)
 ))(createStore);
 
