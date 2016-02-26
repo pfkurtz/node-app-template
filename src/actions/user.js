@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import { PROD } from '../constants/env';
 
+import expectString from '../expectations/expectString';
+
 import {
   CHECK_FOR_SIGNED_JWT,
   LOGIN_REQUEST,
@@ -8,6 +10,7 @@ import {
   LOGIN_FAILURE_CREDENTIALS,
   LOGIN_SUCCESS,
   LOGOUT,
+  SET_USER_STATUS,
   UPDATE_USER
 } from '../constants/actions';
 
@@ -81,5 +84,13 @@ export function updateUser(userInfo) {
   return {
     type: UPDATE_USER,
     payload: userInfo
+  };
+}
+
+export function setUserStatus(status) {
+  if (process.env.NODE_ENV !== 'production') expectString(status);
+  return {
+    type: SET_USER_STATUS,
+    payload: status
   };
 }

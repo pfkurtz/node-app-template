@@ -1,7 +1,7 @@
-import envIsProduction from '../../../utils/envIsProduction';
-import expectUserCredentials from '../../../expectations/expectUserCredentials';
+import { LOGIN_SUCCESS } from '../../../constants/actions';
 import { SOCKET_LOGIN } from '../../../constants/sockets';
 import { SOCKET_EMIT_ERROR } from '../../../constants/errors';
+import expectUserCredentials from '../../../expectations/expectUserCredentials';
 
 /**
  * Return a 'login' handler with `scSocket` dependecy injected.
@@ -10,26 +10,29 @@ import { SOCKET_EMIT_ERROR } from '../../../constants/errors';
  * @return {function} event handler
  */
 export default function emitLogin(scSocket) {
-  /* @TODO if (!envIsProduction()) {
-    expectScSocket(scSocket);
-  } */
+  if (process.env.NODE_ENV !== 'production') {
+    const expect = require('chai').expect;
+    expect(scSocket).to.be.an('object').to.have.property('emit');
+    expect(scSocket.emit).to.be.a('function');
+  }
 
   /**
-   * Emits SocketCluster 'login' event and awaits response.
+   * Returns Promise for SocketCluster 'login' response.
    * @param  {object} credentials { username, password } or `null`
-   * @return {string|true} failure string or true
+   * @return {Promise} resolves to string or true
    */
-  return async function handler(credentials) {
-    if (!envIsProduction()) {
+  return function handler(credentials) {
+    if (process.env.NODE_ENV !== 'production') {
+      // const path = ;
+      // const expectUserCredentials = require('../../../expectations/expectUserCredentials');
       expectUserCredentials(credentials);
     }
 
-    try {
-      return await scSocket.emit(SOCKET_LOGIN, credentials);
-
-    } catch (err) {
-      console.warn(err);
-      return SOCKET_EMIT_ERROR;
-    }
+    return new Promise((accept, reject) => {
+      scSocket.emit(SOCKET_LOGIN, credentials, (err, res) => {
+        if (err) accept(err);
+        accept(LOGIN_SUCCESS);
+      });
+    });
   }
 }

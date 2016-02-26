@@ -3,10 +3,7 @@ import readUser from '../../data/readUser'
 import envIsProduction from '../../utils/envIsProduction';
 import expectUserCredentials from '../../expectations/expectUserCredentials';
 
-import {
-  LOGIN_FAILURE_CREDENTIALS,
-  LOGIN_FAILURE_ERROR
-} from '../../constants/failures';
+import { LOGIN_FAILURE } from '../../constants/failures';
 
 import {
   MISSING_VALUE,
@@ -33,7 +30,7 @@ function login(scSocket) {
   return async function handler(credentials, respond) {
     if (!envIsProduction()) {
       expectUserCredentials(credentials);
-      //expect respond function
+      // @TODO expect respond function
     }
 
     const authToken = scSocket.getAuthToken();
@@ -41,13 +38,16 @@ function login(scSocket) {
     if (authToken) {
       // Normal client interactions shouldn't get here,
       // so if it does it should set off alarms, or at least error logging.
-      return respond(USER_ALREADY_LOGGED_IN);
+      console.log("BAD: USER TRIED TO LOG IN WHILE LOGGED IN");
+      scSocket.deauthenticate();
+      return respond(LOGIN_FAILURE);
     }
 
     try {
       const results = await readUser(credentials.username, true);
       const user = results[0];
 
+      /* @TODO obviously, we need to call crypto here */
       if (credentials.password === user.password) {
         console.log(`${user.username} authenticated`);
 
@@ -57,13 +57,15 @@ function login(scSocket) {
         return respond();
 
       } else {
-        console.log(`Login failed for ${user.username}`);
-        return respond(LOGIN_FAILURE_CREDENTIALS);
+        console.log(`${LOGIN_FAILURE} for ${user.username}`);
+        return respond(LOGIN_FAILURE);
       }
 
     } catch (err) {
       console.log("readUser error:", err);
-      return respond(LOGIN_FAILURE_ERROR);
+      // @TODO we could return LOGIN_ERROR if readUser fails for some reason
+      // other than no username
+      return respond(LOGIN_FAILURE);
     }
   }
 }
