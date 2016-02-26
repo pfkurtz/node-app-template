@@ -68,6 +68,6 @@ function login(scSocket) {
   }
 }
 
-login.eventName = SOCKET_LOGIN;
+login.action = SOCKET_LOGIN;
 
 export default login;
