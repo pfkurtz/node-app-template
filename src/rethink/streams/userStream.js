@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import r from './index';
+import r from '../';
 import { USERS_TABLE } from '../../constants/tables';
 import { PROD } from '../../constants/env';
 

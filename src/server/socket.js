@@ -1,13 +1,13 @@
 import { forEach } from 'lodash';
 import * as listeners from './listeners';
+import * as streams from '../data/streams';
 
-import getUsersStream from '../data/getUsersStream';
 import { UPDATE_USER } from '../constants/actions';
 
 /**
  * Sets up a scSocket instance.
  * @TODO unit tests with mocks.
- * @param  {object} scSocket -
+ * @param  {object} scSocket - SocketCluster server socket instance
  * @return {undefined} NA
  */
 export default function socket(scSocket) {
@@ -16,32 +16,29 @@ export default function socket(scSocket) {
     initialAuthToken.username : " Somebodye, dunnowhoo");
 
   // Initialize all the event listeners for the scSocket
+  // @TODO own module
   forEach(listeners, listener => {
     scSocket.on(listener.eventName, listener(scSocket));
   });
 
-  getUsersStream()
-  .then(cursor => {
-    console.log("here", JSON.stringify(cursor._data[0]));
+  // @TODO own module
+  // this architecture will be in flux as use cases explored
+  // but at least the streams are subscribed-to
+  forEach(streams, stream => {
+    // We use Promise syntax to handle because these are RethinkDB changefeeds
+    // @TODO we really want to add/remove from a list of streams,
+    // as requested, provided authentication
+    stream()
+    .then(cursor => cursor.each(handleCursorLookup))
+    .catch(err => console.log(err));
 
-    return cursor.each((err, item) => {
-      if (err) console.warn(err);
-      return emitIt(item.new_val);
-    });
-  })
-  .catch(err => {
-    console.log(err);
+    function handleCursorLookup(err, data) {
+      if (err) console.error(err);
+      console.log("DATA", data.new_val);
+      scSocket.emit(stream.action, data.new_val);
+    }
   });
 
-  function emitIt(data) {
-    console.log("EMIT IT:", data);
-    scSocket.emit(UPDATE_USER, data);
-  }
-
-  // @TODO
-  // database streams
-  // channels (chat)
+  // channels (chat) (own module)
 
 }
-
-// import { map } from 'lodash';
