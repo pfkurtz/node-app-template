@@ -35,10 +35,7 @@ export default function user(state = null, action) {
 
     case UPDATE_USER:
       /* @TODO own module */
-      if (!state) {
-        throw new Error(NO_USER_RECORD +
-          "trying to update local user record")
-      }
+      if (!state) return null
 
       /* @TODO validate payload here? */
 
