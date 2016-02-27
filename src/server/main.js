@@ -1,8 +1,8 @@
-import { SocketCluster } from 'socketcluster';
-import { DEV } from '../constants/env';
+import { SocketCluster } from 'socketcluster'
+import { DEV } from '../constants/env'
 
 // RethinkDB is running, this call probably won't stay here
-import '../rethink';
+import '../rethink'
 
 const cluster = new SocketCluster({
   workers: process.env.NUMBER_WORKERS || 1,
@@ -13,15 +13,15 @@ const cluster = new SocketCluster({
   brokerController: `${__dirname}/broker.js`,
   socketChannelLimit: process.env.SOCKET_CHANNEL_LIMIT || 1000,
   rebootWorkerOnCrash: true
-});
+})
 
 if (process.env.NODE_ENV = DEV) {
   // This allows cluster to restart with nodemon
   process.on('SIGUSR2', () => {
-    cluster.killWorkers();
-    cluster.killBrokers();
+    cluster.killWorkers()
+    cluster.killBrokers()
     // amazingly this step allows for a smooth restart
     // hacky, but fine for this purpose
-    throw new Error("*** RESTARTING SOCKETCLUSTER (not a real Error) ***");
-  });
+    throw new Error("*** RESTARTING SOCKETCLUSTER (not a real Error) ***")
+  })
 }

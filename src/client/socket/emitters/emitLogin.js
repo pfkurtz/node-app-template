@@ -1,7 +1,7 @@
-import { LOGIN_SUCCESS } from '../../../constants/actions';
-import { SOCKET_LOGIN } from '../../../constants/sockets';
-import { SOCKET_EMIT_ERROR } from '../../../constants/errors';
-import expectUserCredentials from '../../../expectations/expectUserCredentials';
+import { LOGIN_SUCCESS } from '../../../constants/actions'
+import { SOCKET_LOGIN } from '../../../constants/sockets'
+import { SOCKET_EMIT_ERROR } from '../../../constants/errors'
+import expectUserCredentials from '../../../expectations/expectUserCredentials'
 
 /**
  * Return a 'login' handler with `scSocket` dependecy injected.
@@ -11,9 +11,9 @@ import expectUserCredentials from '../../../expectations/expectUserCredentials';
  */
 export default function emitLogin(scSocket) {
   if (process.env.NODE_ENV !== 'production') {
-    const expect = require('chai').expect;
-    expect(scSocket).to.be.an('object').to.have.property('emit');
-    expect(scSocket.emit).to.be.a('function');
+    const expect = require('chai').expect
+    expect(scSocket).to.be.an('object').to.have.property('emit')
+    expect(scSocket.emit).to.be.a('function')
   }
 
   /**
@@ -23,16 +23,16 @@ export default function emitLogin(scSocket) {
    */
   return function handler(credentials) {
     if (process.env.NODE_ENV !== 'production') {
-      // const path = ;
-      // const expectUserCredentials = require('../../../expectations/expectUserCredentials');
-      expectUserCredentials(credentials);
+      // const path = 
+      // const expectUserCredentials = require('../../../expectations/expectUserCredentials')
+      expectUserCredentials(credentials)
     }
 
     return new Promise((accept, reject) => {
       scSocket.emit(SOCKET_LOGIN, credentials, (err, res) => {
-        if (err) accept(err);
-        accept(LOGIN_SUCCESS);
-      });
-    });
+        if (err) accept(err)
+        accept(LOGIN_SUCCESS)
+      })
+    })
   }
 }

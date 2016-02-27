@@ -1,11 +1,11 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
-import Login from '../User/Login';
-import Logout from '../User/Logout';
+import Login from '../User/Login'
+import Logout from '../User/Logout'
 
 const logoutStyle = {
   float: 'right'
-};
+}
 
 const Header = props => (
   <header>
@@ -20,10 +20,10 @@ const Header = props => (
       <Login />
     </If>
   </header>
-);
+)
 
 Header.propTypes = {
   user: PropTypes.object
-};
+}
 
-export default Header;
+export default Header

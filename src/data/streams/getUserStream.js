@@ -1,6 +1,6 @@
-import userStream from '../../rethink/streams/userStream';
-import envIsProduction from '../../utils/envIsProduction';
-import expectString from '../../expectations/expectString';
+import userStream from '../../rethink/streams/userStream'
+import envIsProduction from '../../utils/envIsProduction'
+import expectString from '../../expectations/expectString'
 
 /**
  * Promise to get a user document from rethink with changes().
@@ -9,7 +9,7 @@ import expectString from '../../expectations/expectString';
  */
 export default function getUserStream(identifier) {
   if (!envIsProduction()) {
-    expectString(identifier);
+    expectString(identifier)
   }
-  return userStream(identifier);
+  return userStream(identifier)
 }

@@ -1,2 +1,2 @@
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const NO_USER_RECORD = 'NO_USER_RECORD';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+export const NO_USER_RECORD = 'NO_USER_RECORD'

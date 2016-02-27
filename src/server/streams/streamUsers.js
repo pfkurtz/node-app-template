@@ -1,5 +1,5 @@
-import getUsersStream from '../../data/getUsersStream';
+import getUsersStream from '../../data/getUsersStream'
 
 export default function streamUsers() {
-  return getUsersStream();
+  return getUsersStream()
 }

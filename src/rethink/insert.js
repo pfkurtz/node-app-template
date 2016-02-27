@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import r from './index';
+import { expect } from 'chai'
+import r from './index'
 
 /**
  * Promise for a document deletion in RethinkDB.
@@ -10,10 +10,10 @@ import r from './index';
 export default function insert(table, doc) {
   return r.table(table)
     .insert(doc)
-    .run();
+    .run()
 }
 
 // insert('users', {
 //   username: 'pat',
 //   password: 'polgara'
-// });
+// })

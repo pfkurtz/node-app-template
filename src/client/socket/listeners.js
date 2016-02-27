@@ -1,11 +1,20 @@
 import {
-  UPDATE_USER
-} from '../../constants/actions';
+  UPDATE_USER,
+  UPDATE_USERS
+} from '../../constants/actions'
 
-import { updateUser } from '../../actions/user';
+import {
+  updateUser,
+  updateUsers
+} from '../../actions/user'
 
 export const updateUserListener = {
-  ACTION: UPDATE_USER,
+  actionType: UPDATE_USER,
   action: updateUser,
   // validation: validateUserDoc
-};
+}
+
+export const updateUsers = {
+  actionType: UPDATE_USERS,
+  action: updateUsers
+}

@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import { dispatch } from '../../store';
-import { increment } from '../../../actions/increment';
+import { dispatch } from '../../store'
+import { increment } from '../../../actions/increment'
 
 const Counter = props => (
   <div>
@@ -14,10 +14,10 @@ const Counter = props => (
       Times Pushed: {props.count}
     </button>
   </div>
-);
+)
 
 Counter.propTypes =  {
   count: PropTypes.number.isRequired
-};
+}
 
-export default Counter;
+export default Counter

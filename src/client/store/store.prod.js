@@ -3,23 +3,23 @@ import {
   applyMiddleware,
   compose,
   combineReducers
-} from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import { browserHistory } from 'react-router';
-import { syncHistory, routeReducer } from 'react-router-redux';
+} from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import { browserHistory } from 'react-router'
+import { syncHistory, routeReducer } from 'react-router-redux'
 
-import * as reducers from '../reducers';
-import * as sagas from '../sagas';
+import * as reducers from '../reducers'
+import * as sagas from '../sagas'
 
 const finalCreateStore = compose(applyMiddleware(
   createSagaMiddleware(...saga),
   syncHistory(browserHistory)
-))(createStore);
+))(createStore)
 
 const reducer = combineReducers({
   ...reducers,
   routing: routeReducer
-});
+})
 
 /**
  * Initial state of the Redux store.
@@ -29,17 +29,17 @@ const reducer = combineReducers({
  *
  * @type {Object}
  */
-const initialState = {};
+const initialState = {}
 
 /**
  * Redux store.
  * @type {Object}
  */
-const store = finalCreateStore(reducer, initialState);
-export default store;
+const store = finalCreateStore(reducer, initialState)
+export default store
 
 /**
  * For ease of access from components, etc.
  * @type {function}
  */
-export const dispatch = store.dispatch;
+export const dispatch = store.dispatch

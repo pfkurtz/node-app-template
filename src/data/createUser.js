@@ -1,15 +1,15 @@
-import { expect } from 'chai';
+import { expect } from 'chai'
 
-import insert from '../rethink/insert';
+import insert from '../rethink/insert'
 
-import { USERS_TABLE } from '../constants/tables';
-import { PROD } from '../constants/env';
+import { USERS_TABLE } from '../constants/tables'
+import { PROD } from '../constants/env'
 import {
   PASSWORD_VALIDATION_ERROR,
   PASSWORD_VALIDATION_PATTERN,
   USERNAME_VALIDATION_ERROR,
   USERNAME_VALIDATION_PATTERN
-} from '../constants/validation';
+} from '../constants/validation'
 
 /**
  * Validate new user data and return promise from  rethink api,
@@ -19,19 +19,19 @@ import {
  */
 export default function createUser(userData) {
   if (process.env.NODE_ENV !== PROD) {
-    expect(userData).to.be.an('object');
+    expect(userData).to.be.an('object')
     expect(userData).to.have.property('username')
-      .to.be.a('string');
+      .to.be.a('string')
     expect(userData).to.have.property('password')
-      .to.be.a('string');
+      .to.be.a('string')
   }
 
   // validation @TODO own module
   if (!userData.username.match(USERNAME_VALIDATION_PATTERN)) {
-    return Promise.resolve(USERNAME_VALIDATION_ERROR);
+    return Promise.resolve(USERNAME_VALIDATION_ERROR)
 
   } else if (!userData.password.match(PASSWORD_VALIDATION_PATTERN)) {
-    return Promise.resolve(PASSWORD_VALIDATION_ERROR);
+    return Promise.resolve(PASSWORD_VALIDATION_ERROR)
   }
 
   /* @TODO check for uniqueness of username, email */
@@ -39,7 +39,7 @@ export default function createUser(userData) {
   const userDoc = {
     username: userData.username,
     password: userData.password
-  };
+  }
 
-  return insert(USERS_TABLE, userDoc);
+  return insert(USERS_TABLE, userDoc)
 }

@@ -1,1 +1,1 @@
-export streamUsers from './streamUsers';
+export streamUsers from './streamUsers'

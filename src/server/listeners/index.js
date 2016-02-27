@@ -1,1 +1,1 @@
-export loginListener from './loginListener';
+export loginListener from './loginListener'

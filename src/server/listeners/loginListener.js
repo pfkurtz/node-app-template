@@ -1,16 +1,16 @@
 import readUser from '../../data/readUser'
 
-import envIsProduction from '../../utils/envIsProduction';
-import expectUserCredentials from '../../expectations/expectUserCredentials';
+import envIsProduction from '../../utils/envIsProduction'
+import expectUserCredentials from '../../expectations/expectUserCredentials'
 
-import { LOGIN_FAILURE } from '../../constants/failures';
+import { LOGIN_FAILURE } from '../../constants/failures'
 
 import {
   MISSING_VALUE,
   USER_ALREADY_LOGGED_IN
-} from '../../constants/errors';
+} from '../../constants/errors'
 
-import { SOCKET_LOGIN } from '../../constants/sockets';
+import { SOCKET_LOGIN } from '../../constants/sockets'
 
 /**
  * Return a 'login' handler with `scSocket` dependecy injected.
@@ -29,47 +29,47 @@ function login(scSocket) {
    */
   return async function handler(credentials, respond) {
     if (!envIsProduction()) {
-      expectUserCredentials(credentials);
+      expectUserCredentials(credentials)
       // @TODO expect respond function
     }
 
-    const authToken = scSocket.getAuthToken();
+    const authToken = scSocket.getAuthToken()
 
     if (authToken) {
       // Normal client interactions shouldn't get here,
       // so if it does it should set off alarms, or at least error logging.
-      console.log("BAD: USER TRIED TO LOG IN WHILE LOGGED IN");
-      scSocket.deauthenticate();
-      return respond(LOGIN_FAILURE);
+      console.log("BAD: USER TRIED TO LOG IN WHILE LOGGED IN")
+      scSocket.deauthenticate()
+      return respond(LOGIN_FAILURE)
     }
 
     try {
-      const results = await readUser(credentials.username, true);
-      const user = results[0];
+      const results = await readUser(credentials.username, true)
+      const user = results[0]
 
       /* @TODO obviously, we need to call crypto here */
       if (credentials.password === user.password) {
-        console.log(`${user.username} authenticated`);
+        console.log(`${user.username} authenticated`)
 
         scSocket.setAuthToken({
           username: user.username
-        });
-        return respond();
+        })
+        return respond()
 
       } else {
-        console.log(`${LOGIN_FAILURE} for ${user.username}`);
-        return respond(LOGIN_FAILURE);
+        console.log(`${LOGIN_FAILURE} for ${user.username}`)
+        return respond(LOGIN_FAILURE)
       }
 
     } catch (err) {
-      console.log("readUser error:", err);
+      console.log("readUser error:", err)
       // @TODO we could return LOGIN_ERROR if readUser fails for some reason
       // other than no username
-      return respond(LOGIN_FAILURE);
+      return respond(LOGIN_FAILURE)
     }
   }
 }
 
-login.action = SOCKET_LOGIN;
+login.action = SOCKET_LOGIN
 
-export default login;
+export default login

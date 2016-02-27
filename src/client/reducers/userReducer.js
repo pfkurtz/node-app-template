@@ -5,9 +5,9 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   UPDATE_USER
-} from '../../constants/actions';
+} from '../../constants/actions'
 
-import { NO_USER_RECORD } from '../../constants/failures';
+import { NO_USER_RECORD } from '../../constants/failures'
 
 /*
  * Reducer for the `user` store, ie, the current logged-in user, or null.
@@ -19,33 +19,33 @@ export default function user(state = null, action) {
   switch (action.type) {
 
     case LOGIN_REQUEST:
-      return null;
+      return null
 
     case LOGIN_FAILURE_ERROR:
-      return null;
+      return null
 
     case LOGIN_FAILURE_CREDENTIALS:
-      return null;
+      return null
 
     case LOGIN_SUCCESS:
-      return action.payload;
+      return action.payload
 
     case LOGOUT:
-      return null;
+      return null
 
     case UPDATE_USER:
       /* @TODO own module */
       if (!state) {
         throw new Error(NO_USER_RECORD +
-          "trying to update local user record");
+          "trying to update local user record")
       }
 
       /* @TODO validate payload here? */
 
       // create fresh, updated user record
-      return Object.assign({}, state, action.payload);
+      return Object.assign({}, state, action.payload)
 
     default:
-      return state;
+      return state
   }
 }

@@ -1,7 +1,7 @@
-import usersStream from '../../rethink/streams/usersStream';
-import envIsProduction from '../../utils/envIsProduction';
-import expectString from '../../expectations/expectString';
-import { UPDATE_USER } from '../../constants/actions';
+import usersStream from '../../rethink/streams/usersStream'
+import envIsProduction from '../../utils/envIsProduction'
+import expectString from '../../expectations/expectString'
+import { UPDATE_USER } from '../../constants/actions'
 
 /**
  * Promise to get a user document from rethink with changes().
@@ -9,7 +9,7 @@ import { UPDATE_USER } from '../../constants/actions';
  * @return {Promise} Promise for user doc
  */
 export default function getUsersStream() {
-  return usersStream();
+  return usersStream()
 }
 
-getUsersStream.action = UPDATE_USER;
+getUsersStream.action = UPDATE_USER

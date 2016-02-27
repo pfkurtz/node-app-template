@@ -1,8 +1,8 @@
-import { forEach } from 'lodash';
-import * as listeners from './listeners';
-import * as streams from '../data/streams';
+import { forEach } from 'lodash'
+import * as listeners from './listeners'
+import * as streams from '../data/streams'
 
-import { UPDATE_USER } from '../constants/actions';
+import { UPDATE_USER } from '../constants/actions'
 
 /**
  * Sets up a scSocket instance.
@@ -11,15 +11,15 @@ import { UPDATE_USER } from '../constants/actions';
  * @return {undefined} NA
  */
 export default function socket(scSocket) {
-  const initialAuthToken = scSocket.getAuthToken();
+  const initialAuthToken = scSocket.getAuthToken()
   console.log("got a connection:", initialAuthToken ?
-    initialAuthToken.username : " Somebodye, dunnowhoo");
+    initialAuthToken.username : " Somebodye, dunnowhoo")
 
   // Initialize all the event listeners for the scSocket
   // @TODO own module
   forEach(listeners, listener => {
-    scSocket.on(listener.action, listener(scSocket));
-  });
+    scSocket.on(listener.action, listener(scSocket))
+  })
 
   // @TODO own module
   // this architecture will be in flux as use cases explored
@@ -30,14 +30,14 @@ export default function socket(scSocket) {
     // as requested, provided authentication
     stream()
     .then(cursor => cursor.each(handleCursorLookup))
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
 
     function handleCursorLookup(err, data) {
-      if (err) console.error(err);
-      console.log("DATA", data.new_val);
-      scSocket.emit(stream.action, data.new_val);
+      if (err) console.error(err)
+      console.log("DATA", data.new_val)
+      scSocket.emit(stream.actionType, data.new_val)
     }
-  });
+  })
 
   // channels (chat) (own module)
 

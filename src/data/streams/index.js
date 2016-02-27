@@ -1,1 +1,1 @@
-export getUsersStream from './getUsersStream';
+export getUsersStream from './getUsersStream'
