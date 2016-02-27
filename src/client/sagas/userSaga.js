@@ -1,4 +1,4 @@
-import { call, put, take } from 'redux-saga'
+import { call, put, race, take } from 'redux-saga'
 
 import {
   CHECK_FOR_SIGNED_JWT,
@@ -15,6 +15,7 @@ import {
   loginFailureCredentials,
   loginFailureError,
   logout,
+  updateUser,
   setUserStatus
 } from '../../actions/user'
 
@@ -48,48 +49,57 @@ export default function* userSaga() {
 
       /* @TODO own module logoutSaga */
       // wait for a logout event
-      // @TODO race for LOGOUT or UPDATE_USER
-      yield take(LOGOUT)
-      // server logout resolves itself asynchronously
-      emitLogout()
-      // logout client
-      yield put(logout())
-      yield put(setUserStatus(LOGOUT))
 
-      username = null
+      const { logoutAction, updateAction } = yield race({
+        logoutAction: take(LOGOUT),
+        updateAction: take(UPDATE_USER)
+      })
+
+      if (logoutAction) {
+        // server logout resolves itself asynchronously
+        emitLogout()
+        // logout client
+        yield put(logout())
+        yield put(setUserStatus(LOGOUT))
+
+        username = null
+      }
+
+      if (updateAction && updateAction.payload.username === username) {
+        console.log("was it here?")
+        yield put(updateUser(updateAction.payload))
+      }
 
     } else {
       /* @TODO own module loginSaga */
 
       // OK, no user, wait for a LOGIN_REQUEST
       const { payload } = yield take(LOGIN_REQUEST)
-      console.log("payload", payload)
 
-      // call socket.login, which should return a promise
-
+      // emit login request and await response code
       const loginResponse = yield call(emitLogin, payload)
-      console.log("emitLogin yield", loginResponse)
 
-      /* @TODO make this not ugly */
-      if (loginResponse === LOGIN_SUCCESS) {
-        username = payload.username
-        yield put(loginSuccess({ username }))
-        yield put(setUserStatus(LOGIN_SUCCESS))
+      switch (loginResponse) {
 
-      } else if (loginResponse === LOGIN_FAILURE) {
-        yield put(loginFailureCredentials())
-        yield put(setUserStatus(LOGOUT))
+        case LOGIN_SUCCESS:
+          username = payload.username
+          yield put(loginSuccess({ username }))
+          yield put(setUserStatus(LOGIN_SUCCESS))
+          break
 
-      // } else if (loginResponse === LOGIN_ERROR) {
-      //   yield put(loginFailureError())
-      //   yield put(setUserStatus(LOGOUT))
+        case LOGIN_FAILURE:
+          yield put(loginFailureCredentials())
+          yield put(setUserStatus(LOGOUT))
+          break
 
-      } else {
-        throw new Error(MISSING_VALUE)
+        default:
+          // this might only be for dev,
+          // not sure if we need other kinds of failure
+          // in which case this could simplify to if/else (with bool res)
+          throw new Error(`${MISSING_VALUE}: no recognized response code`)
       }
     }
 
     firstLoop = false
   }
-
 }

@@ -19,7 +19,6 @@ const App = props => (
 
 // Most of these will be names of top-level reducers
 App.propTypes = {
-  location: PropTypes.object.isRequired,
   user: PropTypes.object
 }
 
