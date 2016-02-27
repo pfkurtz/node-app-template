@@ -18,7 +18,8 @@ scSocket.on(SOCKET_CONNECT, () => {
   const authToken = scSocket.getAuthToken()
   dispatch(checkForSignedJWT(authToken))
 
-  // listeners
+  // listeners dispatch actions when new data arrives
+  // these are server-initiated so we don't need to handler
   forEach(listeners, listener => {
     scSocket.on(listener.actionType, (data, res) => {
       dispatch(listener.action(data))
