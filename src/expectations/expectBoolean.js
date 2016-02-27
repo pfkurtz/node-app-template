@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect } from 'chai'
 
 /**
  * Expect a boolean, return true if passes.
@@ -6,6 +6,6 @@ import { expect } from 'chai';
  * @return {boolean} `boolean` is a 'boolean'
  */
 export default function expectString(boolean) {
-  expect(boolean).to.be.a('boolean');
-  return true;
+  expect(boolean).to.be.a('boolean')
+  return true
 }

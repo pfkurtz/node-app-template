@@ -1,25 +1,27 @@
+import { map } from 'lodash'
+
 import {
   createStore,
   applyMiddleware,
   compose,
   combineReducers
-} from 'redux';
-import { persistState } from 'redux-devtools';
-import createSagaMiddleware from 'redux-saga';
-import { browserHistory } from 'react-router';
-import { syncHistory, routeReducer } from 'react-router-redux';
+} from 'redux'
+import { persistState } from 'redux-devtools'
+import createSagaMiddleware from 'redux-saga'
+import { browserHistory } from 'react-router'
+import { syncHistory, routeReducer } from 'react-router-redux'
 
-import * as reducers from '../reducers';
-import DevTools from '../components/App/DevTools';
+import * as reducers from '../reducers'
+import * as sagas from '../sagas'
+import DevTools from '../components/App/DevTools'
 
-import userSaga from '../sagas/user';
 
 /**
  * Wrapper for `createStore`
  */
 const finalCreateStore = compose(
   applyMiddleware(
-    createSagaMiddleware(userSaga),
+    createSagaMiddleware(...map(sagas)),
     syncHistory(browserHistory)
   ),
   DevTools.instrument(),
@@ -29,19 +31,19 @@ const finalCreateStore = compose(
   // need to comment out `DevTools.instrument()` above
   // and remove DevTools component from App.dev
   //window.devToolsExtension ? window.devToolsExtension() : f => f
-)(createStore);
+)(createStore)
 
 // cf Redux DevTools documentation
 function getSessionDebugKey() {
-  const debugQuerystring = /[?&]debug_session=([^&]+)\b/;
-  const matches = window.location.href.match(debugQuerystring);
-  return (matches && matches.length > 0) ? matches[1] : null;
+  const debugQuerystring = /[?&]debug_session=([^&]+)\b/
+  const matches = window.location.href.match(debugQuerystring)
+  return (matches && matches.length > 0) ? matches[1] : null
 }
 
 const reducer = combineReducers({
   ...reducers,
   routing: routeReducer
-});
+})
 
 /**
  * Initial state of the Redux store.
@@ -51,17 +53,17 @@ const reducer = combineReducers({
  *
  * @type {Object}
  */
-const initialState = {};
+const initialState = {}
 
 /**
  * Redux store.
  * @type {Object}
  */
-const store = finalCreateStore(reducer, initialState);
-export default store;
+const store = finalCreateStore(reducer, initialState)
+export default store
 
 /**
  * For ease of access from components, etc.
  * @type {function}
  */
-export const dispatch = store.dispatch;
+export const dispatch = store.dispatch

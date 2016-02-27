@@ -1,5 +1,4 @@
-import _count from './count';
-export const count = _count;
-
-import _userRecord from './userRecord';
-export const userRecord = _userRecord;
+export count from './counterReducer'
+export user from './userReducer'
+export userStatus from './userStatusReducer'
+export users from './usersReducer'

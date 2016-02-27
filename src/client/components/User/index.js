@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
-import CurrentUserProfile from './CurrentUserProfile';
-import UserProfile from './UserProfile';
-import UserNotFound from '../errors/UserNotFound';
+import CurrentUserProfile from './CurrentUserProfile'
+import UserProfile from './UserProfile'
+import UserNotFound from '../errors/UserNotFound'
 
 const User = props => (
   <div>
@@ -21,11 +21,11 @@ const User = props => (
       </Otherwise>
     </Choose>
   </div>
-);
+)
 
 User.propTypes = {
   user: PropTypes.object,
   currentUsername: PropTypes.string
-};
+}
 
-export default User;
+export default User

@@ -1,6 +1,6 @@
-import r from './index';
-import envIsProduction from '../utils/envIsProduction';
-import expectString from '../expectations/expectString';
+import r from './index'
+import envIsProduction from '../utils/envIsProduction'
+import expectString from '../expectations/expectString'
 
 /**
  * Promise for a document get in RethinkDB.
@@ -10,16 +10,16 @@ import expectString from '../expectations/expectString';
  */
 export default function get(table, id) {
   if (!envIsProduction()) {
-    expectString(table);
-    expectString(id);
+    expectString(table)
+    expectString(id)
   }
 
   return r.table(table)
     .get(id)
-    .run();
+    .run()
 }
 
 // get('users',  "6cf2a892-616f-4822-823f-5a17c74c7f02")
 // .then(result => {
-//   console.log("get result", result);
-// });
+//   console.log("get result", result)
+// })

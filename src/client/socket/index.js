@@ -1,18 +1,35 @@
-import { checkForSignedJWT } from '../../actions/user';
-import { dispatch } from '../store';
+import { forEach } from 'lodash'
+
+import { dispatch } from '../store'
+import * as listeners from './listeners'
+
+import { checkForSignedJWT } from '../../actions/user'
+
+import {
+  SOCKET_CONNECT,
+  SOCKET_ERROR
+} from '../../constants/sockets'
 
 // This is how we connect to the server.
-const scSocket = socketCluster.connect();
+const scSocket = socketCluster.connect()
 
-scSocket.on('connect', () => {
+scSocket.on(SOCKET_CONNECT, () => {
   // First step in the user saga
-  const authToken = scSocket.getAuthToken();
-  dispatch(checkForSignedJWT(authToken));
-});
+  const authToken = scSocket.getAuthToken()
+  dispatch(checkForSignedJWT(authToken))
 
-scSocket.on('error', (err) => {
-  throw 'scSocket error - !' + err;
-});
+  // listeners
+  forEach(listeners, listener => {
+    scSocket.on(listener.actionType, (data, res) => {
+      dispatch(listener.action(data))
+    })
+  })
+})
+
+scSocket.on(SOCKET_ERROR, err => {
+  scSocket.deauthenticate()
+  throw 'scSocket error - !' + err
+})
 
 /* @TODO set up on all listeners */
 
@@ -21,7 +38,7 @@ scSocket.on('error', (err) => {
  * @return {object|null} JWT
  */
 export function getAuthToken() {
-  return scSocket.getAuthToken();
+  return scSocket.getAuthToken()
 }
 
 /**
@@ -29,7 +46,7 @@ export function getAuthToken() {
  * @return {undefined} NA
  */
 export function emitLogout() {
-  scSocket.deauthenticate();
+  scSocket.deauthenticate()
 }
 
 /**
@@ -42,5 +59,5 @@ export function emitLogout() {
  * with the added complexity of dependency injection.
  */
 
-import _emitLogin from './emitters/emitLogin';
-export const emitLogin = _emitLogin(scSocket);
+import _emitLogin from './emitters/emitLogin'
+export const emitLogin = _emitLogin(scSocket)

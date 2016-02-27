@@ -1,5 +1,5 @@
-import app from './app';
-import socket from './socket';
+import app from './app'
+import socket from './socket'
 
 /**
  * SocketCluster worker.
@@ -8,9 +8,9 @@ import socket from './socket';
  * @return {undefined} NA
  */
 export function run(worker) {
-  console.log(`   >> SC Worker PID: ${process.pid}`);
+  console.log(`   >> SC Worker PID: ${process.pid}`)
 
   // NB call `app`, but pass in `socket` to be called.
-  worker.httpServer.on('request', app());
-  worker.scServer.on('connection', socket);
+  worker.httpServer.on('request', app())
+  worker.scServer.on('connection', socket)
 }

@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect } from 'chai'
 
 /**
  * Expect user credentials.
@@ -6,10 +6,10 @@ import { expect } from 'chai';
  * @return {boolean} true if all expectations pass
  */
 export default function expectUserCredentials(credentials) {
-  expect(credentials).to.be.an('object');
-  expect(credentials).to.have.property('username');
-  expect(credentials.username).to.be.a('string');
-  expect(credentials).to.have.property('password');
-  expect(credentials.password).to.be.a('string');
-  return true;
+  expect(credentials).to.be.an('object')
+  expect(credentials).to.have.property('username')
+  expect(credentials.username).to.be.a('string')
+  expect(credentials).to.have.property('password')
+  expect(credentials.password).to.be.a('string')
+  return true
 }

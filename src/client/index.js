@@ -1,12 +1,12 @@
 // for async/generator support
-import 'babel-polyfill';
+import 'babel-polyfill'
 
 // Initialize SocketCluster connection
-import './socket';
+import './socket'
 
 // UI (React)
-import ui from './ui';
+import ui from './ui'
 
 document.addEventListener('DOMContentLoaded', () => {
-  ui(document.getElementById('app'));
-});
+  ui(document.getElementById('app'))
+})

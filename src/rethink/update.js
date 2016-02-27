@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import r from './index';
+import { expect } from 'chai'
+import r from './index'
 
  /**
   * Promise for a document update in RethinkDB.
@@ -12,15 +12,15 @@ export default function update(table, id, data) {
   return r.table(table)
     .get(id)
     .update(data)
-    .run();
+    .run()
 }
 
 // update('users', "6cf2a892-616f-4822-823f-5a17c74c7f02", {
 //   password: "belgarath"
 // })
 // .then(result => {
-//   console.log("UPDATE RESULT", result);
+//   console.log("UPDATE RESULT", result)
 // })
 // .catch(err => {
-//   console.log("UPDATE ERROR", err);
-// });
+//   console.log("UPDATE ERROR", err)
+// })

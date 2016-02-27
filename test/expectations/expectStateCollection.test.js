@@ -14,4 +14,4 @@ describe('TEST_UTIL: expectStateCollection', () => {
     expect(() => expectStateCollection(42)).to.throw(AssertionError);
     expect(() => expectStateCollection(true)).to.throw(AssertionError);
   });
-})
+});

@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
-import getFormData from 'get-form-data';
+import React, { PropTypes } from 'react'
+import getFormData from 'get-form-data'
 
-import { dispatch } from '../../store';
-import { LOGIN_REQUEST } from '../../../constants/actions';
-import { loginRequest } from '../../../actions/user';
+import { dispatch } from '../../store'
+import { LOGIN_REQUEST } from '../../../constants/actions'
+import { loginRequest } from '../../../actions/user'
 
 /**
  * Handles the onSubmit event for the form,
@@ -15,18 +15,19 @@ import { loginRequest } from '../../../actions/user';
  * @return {Object} dispatches loginRequest with formData
  */
 export function handleLogin(e) {
-  e.preventDefault();
-  e.stopPropagation();
+  e.preventDefault()
+  e.stopPropagation()
 
   // Get the data from the form
-  const form = e.currentTarget;
-  const formData = getFormData(form, { trim: true });
+  const form = e.currentTarget
+  const formData = getFormData(form, { trim: true })
 
   /* @TODO validation */
   // just "required" in the HTML right now
 
   // update the app state
-  return dispatch(loginRequest(formData));
+  console.log(formData)
+  return dispatch(loginRequest(formData))
 }
 
 const Login = props => (
@@ -37,10 +38,10 @@ const Login = props => (
       required />
     <button type="submit">Login</button>
   </form>
-);
+)
 
 // Login.propTypes = {
 //
-// };
+// }
 
-export default Login;
+export default Login
