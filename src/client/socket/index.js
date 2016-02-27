@@ -1,9 +1,14 @@
 import { forEach } from 'lodash'
 
-import { checkForSignedJWT } from '../../actions/user'
 import { dispatch } from '../store'
 import * as listeners from './listeners'
-import { SOCKET_CONNECT, SOCKET_ERROR } from '../../constants/sockets'
+
+import { checkForSignedJWT } from '../../actions/user'
+
+import {
+  SOCKET_CONNECT,
+  SOCKET_ERROR
+} from '../../constants/sockets'
 
 // This is how we connect to the server.
 const scSocket = socketCluster.connect()
@@ -15,14 +20,13 @@ scSocket.on(SOCKET_CONNECT, () => {
 
   // listeners
   forEach(listeners, listener => {
-    scSocket.on(listener.ACTION, (data, res) => {
-      console.log("NEW DATA", data)
-      //dispatch(listener.action(data))
+    scSocket.on(listener.actionType, (data, res) => {
+      dispatch(listener.action(data))
     })
   })
 })
 
-scSocket.on(SOCKET_ERROR, (err) => {
+scSocket.on(SOCKET_ERROR, err => {
   scSocket.deauthenticate()
   throw 'scSocket error - !' + err
 })

@@ -1,3 +1,5 @@
+import { UPDATE_USERS } from '../../constants/actions';
+
 export default function(userDoc) {
   // expect object
 

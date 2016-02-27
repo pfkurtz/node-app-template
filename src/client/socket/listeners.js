@@ -3,10 +3,8 @@ import {
   UPDATE_USERS
 } from '../../constants/actions'
 
-import {
-  updateUser,
-  updateUsers
-} from '../../actions/user'
+import { updateUser } from '../../actions/user'
+import updateUsers from '../../actions/users/updateUsers'
 
 export const updateUserListener = {
   actionType: UPDATE_USER,

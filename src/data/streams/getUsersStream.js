@@ -1,7 +1,7 @@
 import usersStream from '../../rethink/streams/usersStream'
 import envIsProduction from '../../utils/envIsProduction'
 import expectString from '../../expectations/expectString'
-import { UPDATE_USER } from '../../constants/actions'
+import { UPDATE_USERS } from '../../constants/actions'
 
 /**
  * Promise to get a user document from rethink with changes().
@@ -12,4 +12,4 @@ export default function getUsersStream() {
   return usersStream()
 }
 
-getUsersStream.action = UPDATE_USER
+getUsersStream.actionType = UPDATE_USERS

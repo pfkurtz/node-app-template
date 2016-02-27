@@ -1,13 +1,16 @@
+import { keyBy } from 'lodash'
+
 import {
   UPDATE_USERS
-} from '../../constants/actionsb'
+} from '../../constants/actions'
 
 export default function usersReducer(state = {}, action = { type: undefined }) {
   switch (action.type) {
     case UPDATE_USERS:
-      // const
-      // return Object.assign({}, state, )
-  }
+      const userData = keyBy([action.payload], 'id')
+      return Object.assign({}, state, userData)
 
-  return state
+    default:
+      return state
+  }
 }

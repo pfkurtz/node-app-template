@@ -2,8 +2,6 @@ import { forEach } from 'lodash'
 import * as listeners from './listeners'
 import * as streams from '../data/streams'
 
-import { UPDATE_USER } from '../constants/actions'
-
 /**
  * Sets up a scSocket instance.
  * @TODO unit tests with mocks.
