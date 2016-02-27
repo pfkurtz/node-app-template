@@ -14,7 +14,7 @@ export const updateUserListener = {
   // validation: validateUserDoc
 }
 
-export const updateUsers = {
+export const updateUsersListener = {
   actionType: UPDATE_USERS,
   action: updateUsers
 }

@@ -1,1 +1,1 @@
-console.error("TypeError: /home/pfk/Work/app-template/src/client/socket/listeners.js: Duplicate declaration \"updateUsers\" while parsing file: /home/pfk/Work/app-template/src/client/socket/listeners.js");
+console.error("Error: Cannot find module '../../constants/actionsb' from '/home/pfk/Work/app-template/src/client/reducers'");
