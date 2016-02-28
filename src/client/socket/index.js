@@ -2,7 +2,6 @@ import { forEach } from 'lodash'
 
 import { dispatch } from '../store'
 import * as listeners from './listeners'
-
 import { checkForSignedJWT } from '../../actions/user'
 
 import {
