@@ -30,7 +30,7 @@ import {
  * @TODO tests
  * @return {undefined} NA
  */
-export default function* userSaga() {
+export default function* currentUserSaga() {
   const { payload } = yield take(CHECK_FOR_SIGNED_JWT)
   let username = payload ? payload.username : null
   // console.log("saga USERNAME:", username)
@@ -48,7 +48,7 @@ export default function* userSaga() {
       }
 
       /* @TODO own module logoutSaga */
-      // wait for a logout event
+      // wait for a logout or update event
 
       const { logoutAction, updateAction } = yield race({
         logoutAction: take(LOGOUT),
@@ -65,9 +65,10 @@ export default function* userSaga() {
         username = null
       }
 
-      if (updateAction && updateAction.payload.username === username) {
-        console.log("was it here?")
-        yield put(updateUser(updateAction.payload))
+      if (updateAction) {
+        if (updateAction.payload.username === username) {
+          yield put(updateUser(updateAction.payload))
+        }
       }
 
     } else {
@@ -89,7 +90,7 @@ export default function* userSaga() {
 
         case LOGIN_FAILURE:
           yield put(loginFailureCredentials())
-          yield put(setUserStatus(LOGOUT))
+          yield put(setUserStatus(LOGIN_FAILURE))
           break
 
         default:

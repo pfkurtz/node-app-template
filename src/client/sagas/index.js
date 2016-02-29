@@ -1,2 +1,2 @@
-export userSaga from './userSaga'
-export usersSaga from './usersSaga'
+export currentUser from './currentUser'
+export usersStore from './usersStore'

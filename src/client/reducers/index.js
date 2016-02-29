@@ -1,4 +1,4 @@
 export count from './counterReducer'
-export user from './userReducer'
-export userStatus from './userStatusReducer'
-export users from './usersReducer'
+export user from './currentUser'
+export userStatus from './currentUserStatus'
+export users from './usersStore'
