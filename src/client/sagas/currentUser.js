@@ -90,7 +90,7 @@ export default function* currentUserSaga() {
 
         case LOGIN_FAILURE:
           yield put(loginFailureCredentials())
-          yield put(setUserStatus(LOGOUT))
+          yield put(setUserStatus(LOGIN_FAILURE))
           break
 
         default:

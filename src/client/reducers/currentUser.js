@@ -1,12 +1,10 @@
 import {
   LOGIN_REQUEST,
-  LOGIN_FAILURE_ERROR,
-  LOGIN_FAILURE_CREDENTIALS,
   LOGIN_SUCCESS,
   LOGOUT,
   UPDATE_USER
 } from '../../constants/actions'
-
+import { LOGIN_FAILURE } from '../../constants/failures'
 import { NO_USER_RECORD } from '../../constants/failures'
 
 /*
@@ -14,17 +12,13 @@ import { NO_USER_RECORD } from '../../constants/failures'
  * Actions' payloads should always be undefined,
  * or objects with user record properties.
  */
-export default function user(state = null, action) {
-  // Each imported action is a case
+export default function currentUserReducer(state = null, action = {}) {
   switch (action.type) {
 
     case LOGIN_REQUEST:
       return null
 
-    case LOGIN_FAILURE_ERROR:
-      return null
-
-    case LOGIN_FAILURE_CREDENTIALS:
+    case LOGIN_FAILURE:
       return null
 
     case LOGIN_SUCCESS:
