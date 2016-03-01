@@ -51,16 +51,10 @@ describe('REDUCER: currentUser', () => {
     })
   })
 
-  badStates.forEach(state => {
-    it(`should throw AssertionError for ${LOGIN_SUCCESS} with a bad state param`, () => {
-      expect(() => SUT(state, goodLoginSuccessAction)).to.throw(AssertionError)
-    })
-  })
-
   goodUpdateStates.forEach(state => {
     // NB badStates includes badUpdataPayloads
     badStates.forEach(payload => {
-      it(`should throw AssertionError for ${LOGIN_SUCCESS} with an invalid payload`, () => {
+      it(`should throw AssertionError for ${LOGIN_SUCCESS} with invalid payload ${JSON.stringify({payload})}`, () => {
         expect(() => SUT(state, { type: LOGIN_SUCCESS, payload }))
           .to.throw(AssertionError)
       })
@@ -72,5 +66,5 @@ describe('REDUCER: currentUser', () => {
       .to.equal(goodLoginState)
   })
 
-
+  /* @TODO props from new userDoc copied extended over old userDoc onto {} */
 })

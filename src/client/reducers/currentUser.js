@@ -1,3 +1,5 @@
+import { expect } from 'chai'
+
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -5,7 +7,6 @@ import {
   UPDATE_USER
 } from '../../constants/actions'
 import { LOGIN_FAILURE } from '../../constants/failures'
-import { NO_USER_RECORD } from '../../constants/failures'
 
 /*
  * Reducer for the `user` store, ie, the current logged-in user, or null.
@@ -13,6 +14,8 @@ import { NO_USER_RECORD } from '../../constants/failures'
  * or objects with user record properties.
  */
 export default function currentUserReducer(state = null, action = {}) {
+  /* @TODO expect FSA? */
+
   switch (action.type) {
 
     case LOGIN_REQUEST:
@@ -21,16 +24,22 @@ export default function currentUserReducer(state = null, action = {}) {
       return null
 
     case LOGIN_SUCCESS:
-      if (process.env.NODE_ENV === 'production') {
-        /* @TODO expect valid payload { username } */
+      if (process.env.NODE_ENV !== 'production') {
+        /* @TODO own module */
+        expect(action.payload).to.be.an('object')
+          .to.have.property('username')
+        expect(action.payload.username).to.be.a('string')
       }
       return action.payload
 
     case UPDATE_USER:
       if (!state) return null
 
-      if (process.env.NODE_ENV === 'production') {
-      /* @TODO expect valid payload { userDoc }*/
+      if (process.env.NODE_ENV !== 'production') {
+        expect(action.payload).to.be.an('object')
+          .to.have.property('username')
+        expect(action.payload.username).to.be.a('string')
+        /* @TODO own module, expect nothing but valid client-ok user fields */
       }
 
       // create fresh, updated user record
