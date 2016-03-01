@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 
-import Counter from '../Counter'
 import DevTools from './DevTools'
 import Header from '../layout/Header'
 

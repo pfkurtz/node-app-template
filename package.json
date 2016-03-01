@@ -17,7 +17,7 @@
     "start": "node node_modules/parallelshell 'npm run watch' 'npm run livereload' 'npm run start:dev'",
     "prestart": "export NODE_ENV=development; export PORT=3000; echo '*** STARTING APPLICATION ***\n'",
     "start:dev": "node node_modules/nodemon/bin/nodemon -q -e js -w src/common -w src/server -w src/data -w src/rethink -w package.json -w public/index.html -x 'npm run node:dev --'",
-    "test": "NODE_ENV=test node node_modules/mocha/bin/mocha --full-trace --recursive --compilers js:babel-core/register",
+    "test": "NODE_ENV=test node node_modules/mocha/bin/mocha -R progress --recursive --compilers js:babel-core/register",
     "validate-html": "node node_modules/html-validator-cli --file=src/public/index.html",
     "watch": "node node_modules/parallelshell 'npm run watch:js' 'npm run watch:html'",
     "watch:js": "node node_modules/nodemon/bin/nodemon -q -e js -w src/common -w src/client -x 'npm run compile:js'",

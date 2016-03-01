@@ -16,22 +16,22 @@ export default function currentUserReducer(state = null, action = {}) {
   switch (action.type) {
 
     case LOGIN_REQUEST:
-      return null
-
     case LOGIN_FAILURE:
-      return null
-
-    case LOGIN_SUCCESS:
-      return action.payload
-
     case LOGOUT:
       return null
 
+    case LOGIN_SUCCESS:
+      if (process.env.NODE_ENV === 'production') {
+        /* @TODO expect valid payload { username } */
+      }
+      return action.payload
+
     case UPDATE_USER:
-      /* @TODO own module */
       if (!state) return null
 
-      /* @TODO validate payload here? */
+      if (process.env.NODE_ENV === 'production') {
+      /* @TODO expect valid payload { userDoc }*/
+      }
 
       // create fresh, updated user record
       return Object.assign({}, state, action.payload)

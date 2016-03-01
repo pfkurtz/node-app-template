@@ -5,3 +5,4 @@ npm-debug.*
 public/index.*
 rethinkdb_data
 .tern-project
+test/report*
