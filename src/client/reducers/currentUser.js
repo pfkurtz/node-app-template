@@ -5,7 +5,8 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGOUT,
-  UPDATE_USER
+  UPDATE_USER,
+  emptyFSA
 } from '../../constants/actions'
 import { LOGIN_FAILURE } from '../../constants/failures'
 
@@ -14,7 +15,7 @@ import { LOGIN_FAILURE } from '../../constants/failures'
  * Actions' payloads should always be undefined,
  * or objects with user record properties.
  */
-export default function currentUserReducer(state = null, action = {}) {
+export default function currentUserReducer(state = null, action = emptyFSA) {
   if (process.env.NODE_ENV !== 'production') {
     expect(isFSA(action)).to.be.true
   }

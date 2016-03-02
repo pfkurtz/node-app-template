@@ -6,13 +6,12 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGOUT,
-  SET_USER_STATUS
+  SET_USER_STATUS,
+  emptyFSA
 } from '../../constants/actions'
 import { LOGIN_FAILURE } from '../../constants/failures'
 
-const defaultAction = { type: "" }
-
-export default function(state = LOGOUT, action = defaultAction) {
+export default function(state = LOGOUT, action = emptyFSA) {
   if (process.env.NODE_ENV !== 'production') {
     expect(state).to.be.a('string')
     expect(isFSA(action)).to.be.true

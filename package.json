@@ -84,6 +84,7 @@
   "keywords": [
     "babel",
     "browserify",
+    "istanbul",
     "livereloadx",
     "mocha",
     "nodemon",

@@ -28,7 +28,8 @@ describe("REDUCER: currentUserStatus", () => {
     payload
   }))
 
-  const invalidStates = [-1,0,1,9999999999999999999999.999999,NaN,true,false,null,()=>({}),{},validPayloads,[]]
+  const invalidStates = [-1,0,1,9999999999999999999999.999999,NaN,true,false,null,
+    ()=>({}),{},validPayloads,[]]
 
   const invalidPayloads = [...invalidStates,undefined,'OTHER_STRING',
     'AND_ANOTHER_ONE','free form string!']

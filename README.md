@@ -3,8 +3,10 @@
 ### Installation
 `npm install`
 
-### Test
-`npm test`
+### Testing
+`npm test` to run the Mocha unit test suite.
+
+`npm run test-cover` to generate Istanbul coverage reports in `coverage/`.
 
 ### Run (dev)
 `npm start`
