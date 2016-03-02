@@ -11,8 +11,8 @@ describe("DATA API: getUserStream", () => {
       return Promise.resolve({});
     });
 
-    getUserStream = proxyquire('../../src/data/getUserStream', {
-      '../rethink/streams/userStream': {
+    getUserStream = proxyquire('../../../src/data/streams/getUserStream', {
+      '../../rethink/streams/userStream': {
         __esModule: true,
         '@noCallThru': true,
         default: userStream
