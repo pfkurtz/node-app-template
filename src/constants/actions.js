@@ -14,3 +14,5 @@ export const SET_USER_STATUS = 'SET_USER_STATUS'
 
 export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_USERS = 'UPDATE_USERS'
+
+export const emptyFSA = Object.freeze({ type: '' })

@@ -1,5 +1,4 @@
 import userStream from '../../rethink/streams/userStream'
-import envIsProduction from '../../utils/envIsProduction'
 import expectString from '../../expectations/expectString'
 
 /**
@@ -8,7 +7,7 @@ import expectString from '../../expectations/expectString'
  * @return {Promise} Promise for user doc
  */
 export default function getUserStream(identifier) {
-  if (!envIsProduction()) {
+  if (process.env.NODE_ENV !== 'production') {
     expectString(identifier)
   }
   return userStream(identifier)

@@ -1,37 +1,50 @@
+import { expect } from 'chai'
+import { isFSA } from 'flux-standard-action'
+
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGOUT,
-  UPDATE_USER
+  UPDATE_USER,
+  emptyFSA
 } from '../../constants/actions'
 import { LOGIN_FAILURE } from '../../constants/failures'
-import { NO_USER_RECORD } from '../../constants/failures'
 
 /*
  * Reducer for the `user` store, ie, the current logged-in user, or null.
  * Actions' payloads should always be undefined,
  * or objects with user record properties.
  */
-export default function currentUserReducer(state = null, action = {}) {
+export default function currentUserReducer(state = null, action = emptyFSA) {
+  if (process.env.NODE_ENV !== 'production') {
+    expect(isFSA(action)).to.be.true
+  }
+
   switch (action.type) {
 
     case LOGIN_REQUEST:
-      return null
-
     case LOGIN_FAILURE:
-      return null
-
-    case LOGIN_SUCCESS:
-      return action.payload
-
     case LOGOUT:
       return null
 
+    case LOGIN_SUCCESS:
+      if (process.env.NODE_ENV !== 'production') {
+        /* @TODO own module, only username (once validation functions written) */
+        expect(action.payload).to.be.an('object')
+          .to.have.property('username')
+        expect(action.payload.username).to.be.a('string')
+      }
+      return action.payload
+
     case UPDATE_USER:
-      /* @TODO own module */
       if (!state) return null
 
-      /* @TODO validate payload here? */
+      if (process.env.NODE_ENV !== 'production') {
+        expect(action.payload).to.be.an('object')
+          .to.have.property('username')
+        expect(action.payload.username).to.be.a('string')
+        /* @TODO own module, expect nothing but valid client-ok user fields */
+      }
 
       // create fresh, updated user record
       return Object.assign({}, state, action.payload)
