@@ -25,8 +25,10 @@
   },
   "main": "src/server/main.js",
   "dependencies": {
+    "chai": "^3.5.0",
     "connect": "^3.4.1",
     "express": "^4.13.4",
+    "flux-standard-action": "^0.6.1",
     "get-form-data": "^1.2.5",
     "lodash": "^4.5.1",
     "react": "^0.14.7",
@@ -52,7 +54,6 @@
     "babel-runtime": "^6.5.0",
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
-    "chai": "^3.5.0",
     "envify": "^3.4.0",
     "html-validator-cli": "^2.0.0",
     "jsx-control-statements": "^3.1.0",

@@ -1,4 +1,5 @@
 import { expect } from 'chai'
+import { isFSA } from 'flux-standard-action'
 
 import {
   LOGIN_REQUEST,
@@ -14,7 +15,9 @@ import { LOGIN_FAILURE } from '../../constants/failures'
  * or objects with user record properties.
  */
 export default function currentUserReducer(state = null, action = {}) {
-  /* @TODO expect FSA? */
+  if (process.env.NODE_ENV !== 'production') {
+    expect(isFSA(action)).to.be.true
+  }
 
   switch (action.type) {
 
@@ -25,7 +28,7 @@ export default function currentUserReducer(state = null, action = {}) {
 
     case LOGIN_SUCCESS:
       if (process.env.NODE_ENV !== 'production') {
-        /* @TODO own module */
+        /* @TODO own module, only username (once validation functions written) */
         expect(action.payload).to.be.an('object')
           .to.have.property('username')
         expect(action.payload.username).to.be.a('string')
