@@ -19,6 +19,7 @@
     "start:dev": "node node_modules/nodemon/bin/nodemon -q -e js -w src/common -w src/server -w src/data -w src/rethink -w package.json -w public/index.html -x 'npm run node:dev --'",
     "test": "NODE_ENV=test node node_modules/mocha/bin/mocha -R progress --recursive --compilers js:babel-core/register",
     "validate-html": "node node_modules/html-validator-cli --file=src/public/index.html",
+    "test-cover": "node node_modules/babel-cli/bin/babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --recursive --reporter progress",
     "watch": "node node_modules/parallelshell 'npm run watch:js' 'npm run watch:html'",
     "watch:js": "node node_modules/nodemon/bin/nodemon -q -e js -w src/common -w src/client -x 'npm run compile:js'",
     "watch:html": "node node_modules/nodemon/bin/nodemon -q -e html -w client -x 'npm run compile:html'"
@@ -56,6 +57,7 @@
     "browserify": "^13.0.0",
     "envify": "^3.4.0",
     "html-validator-cli": "^2.0.0",
+    "istanbul": "^1.0.0-alpha",
     "jsx-control-statements": "^3.1.0",
     "livereloadx": "^0.3.9",
     "mocha": "^2.4.5",
