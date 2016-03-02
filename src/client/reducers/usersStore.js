@@ -21,10 +21,19 @@ export default function usersStoreReducer(state = {}, action = emptyFSA) {
   switch (action.type) {
 
     case UPDATE_USERS:
-      // expect user doc
+      if (process.env.NODE_ENV !== 'production') {
+        expect(action.payload).to.be.an('object')
+          .to.have.property('username')
+        /* @TODO when validation functions */
+      }
 
       // probably the only document type where we won't use `id` as key in store
-      const userData = keyBy([action.payload], 'username')
+
+      const extendedUserData = Object.assign(
+        {}, state[action.payload.username], action.payload
+      )
+      const userData = keyBy([extendedUserData], 'username')
+      
       return Object.assign({}, state, userData)
 
     default:
