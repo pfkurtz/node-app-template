@@ -1,8 +1,5 @@
-if (process.env.NODE_ENV !== 'test') {
-  require('babel-polyfill')
-}
 // for async/generator support
-// import 'babel-polyfill'
+import 'babel-polyfill'
 
 // Initialize SocketCluster connection
 import './socket'
